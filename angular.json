@@ -2,7 +2,8 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "pnpm"
+    "packageManager": "pnpm",
+    "analytics": "041b07b1-e83a-4f36-8f3b-49044ef85912"
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -74,6 +75,24 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "to-do:build",
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "to-do:build",
+            "compodoc": false,
+            "outputDir": "storybook-static"
+          }
         }
       }
     }
