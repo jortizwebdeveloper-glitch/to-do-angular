@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "Trabajo", "color": "blue" },
+  { "id": 2, "name": "Hogar", "color": "amber" },
+  { "id": 3, "name": "Salud y Bienestar", "color": "pink" },
+  { "id": 4, "name": "Finanzas", "color": "green" },
+  { "id": 5, "name": "Educación", "color": "purple" },
+  { "id": 6, "name": "Compras", "color": "orange" },
+  { "id": 7, "name": "Ocio", "color": "sky" },
+  { "id": 8, "name": "Proyectos", "color": "indigo" }
+]

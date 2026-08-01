@@ -1,0 +1,56 @@
+@let $el = data();
+@let $tag = type() == 'tag';
+<nav>
+  <ul class="flex flex-wrap" [class]="$tag ? ' gap-2.5' : 'gap-0.5'">
+    <li class="px-2 pt-2 pb-1 -mb-0.5 w-full">
+      <p class="text-sm font-medium uppercase tracking-widest text-neutral-500">{{ $el.title }}</p>
+    </li>
+    @for (item of list(); track `item-nav-${$index}-${item.id}`) {
+      <li [class]="$tag ? '' : 'w-full'">
+        <a [routerLink]="[]" [queryParams]="item.link?.query" queryParamsHandling="merge">
+          @if ($tag) {
+            <app-tag
+              [color]="item.color.key"
+              size="sm"
+              routerLinkActive
+              #rla="routerLinkActive"
+              [active]="rla.isActive"
+            >
+              {{ item.name }}
+            </app-tag>
+          } @else {
+            <span
+              [routerLinkActive]="[item.color['bg'], 'query-active']"
+              [class]="item.color['hover:bg']"
+              class="group/item p-2 flex items-center gap-3 rounded-lg transition"
+            >
+              @if (item.icon) {
+                <app-icon
+                  class="size-5 block group-hover/item:text-white group-[.query-active]/item:text-white transition"
+                  [class]="item.color['text']"
+                  [name]="item.icon"
+                ></app-icon>
+              } @else {
+                <i class="size-5 rounded block content-center">
+                  <span
+                    class="block group-hover/item:bg-white group-[.query-active]/item:bg-white size-3 rounded m-auto"
+                    [class]="item.color['bg']"
+                  >
+                  </span>
+                </i>
+              }
+              <span
+                class="w-1 grow group-hover/item:text-white group-[.query-active]/item:text-white"
+                >{{ item.name }}</span
+              >
+              <span
+                class="text-neutral-500 group-hover/item:text-white group-[.query-active]/item:text-white transition"
+                >6</span
+              >
+            </span>
+          }
+        </a>
+      </li>
+    }
+  </ul>
+</nav>

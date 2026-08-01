@@ -1,0 +1,202 @@
+[
+    {
+      "id": 1,
+      "title": "Preparar presentación trimestral",
+      "description": "Armar el deck con resultados de ventas y proyecciones para la reunión con el equipo directivo.",
+      "categoria": 1,
+      "tags": [1, 3],
+      "status": "en_curso",
+      "dueDate": "2026-07-18",
+      "priority": "alta"
+    },
+    {
+      "id": 2,
+      "title": "Pagar factura de electricidad",
+      "description": "Revisar el monto y realizar el pago antes de la fecha de corte para evitar recargos.",
+      "categoria": 4,
+      "tags": [6, 4],
+      "status": "pendiente",
+      "dueDate": "2026-07-20",
+      "priority": "media"
+    },
+    {
+      "id": 3,
+      "title": "Cita con el dentista",
+      "description": "Control semestral de rutina y limpieza dental.",
+      "categoria": 3,
+      "tags": [5],
+      "status": "pendiente",
+      "dueDate": "2026-07-25",
+      "priority": "baja"
+    },
+    {
+      "id": 4,
+      "title": "Comprar víveres de la semana",
+      "description": "Lista de compras: frutas, verduras, lácteos y productos de limpieza.",
+      "categoria": 6,
+      "tags": [8, 4],
+      "status": "completada",
+      "dueDate": "2026-07-13",
+      "priority": "media"
+    },
+    {
+      "id": 5,
+      "title": "Terminar curso de React avanzado",
+      "description": "Completar los últimos 3 módulos sobre hooks personalizados y optimización de rendimiento.",
+      "categoria": 5,
+      "tags": [7],
+      "status": "en_curso",
+      "dueDate": "2026-08-01",
+      "priority": "alta"
+    },
+    {
+      "id": 6,
+      "title": "Organizar el armario",
+      "description": "Separar ropa de temporada y donar prendas que ya no se usan.",
+      "categoria": 2,
+      "tags": [4],
+      "status": "pendiente",
+      "dueDate": "2026-07-27",
+      "priority": "baja"
+    },
+    {
+      "id": 7,
+      "title": "Revisar contrato con proveedor",
+      "description": "Analizar cláusulas de renovación y condiciones de pago antes de firmar.",
+      "categoria": 1,
+      "tags": [1, 3],
+      "status": "en_curso",
+      "dueDate": "2026-07-16",
+      "priority": "alta"
+    },
+    {
+      "id": 8,
+      "title": "Planificar cumpleaños familiar",
+      "description": "Coordinar lugar, comida y lista de invitados para la celebración.",
+      "categoria": 7,
+      "tags": [9],
+      "status": "pendiente",
+      "dueDate": "2026-08-05",
+      "priority": "media"
+    },
+    {
+      "id": 9,
+      "title": "Actualizar hoja de vida",
+      "description": "Incluir los proyectos recientes y certificaciones obtenidas este año.",
+      "categoria": 5,
+      "tags": [7, 2],
+      "status": "completada",
+      "dueDate": "2026-07-10",
+      "priority": "baja"
+    },
+    {
+      "id": 10,
+      "title": "Revisar presupuesto mensual",
+      "description": "Comparar gastos reales contra lo presupuestado y ajustar categorías.",
+      "categoria": 4,
+      "tags": [6],
+      "status": "en_curso",
+      "dueDate": "2026-07-19",
+      "priority": "media"
+    },
+    {
+      "id": 11,
+      "title": "Rutina de ejercicio semanal",
+      "description": "Definir plan de entrenamiento de 4 días combinando cardio y fuerza.",
+      "categoria": 3,
+      "tags": [5, 2],
+      "status": "en_curso",
+      "dueDate": "2026-07-21",
+      "priority": "media"
+    },
+    {
+      "id": 12,
+      "title": "Enviar reporte de gastos",
+      "description": "Consolidar los recibos del último viaje de trabajo y enviarlos a contabilidad.",
+      "categoria": 1,
+      "tags": [1, 3, 6],
+      "status": "pendiente",
+      "dueDate": "2026-07-17",
+      "priority": "alta"
+    },
+    {
+      "id": 13,
+      "title": "Leer libro de productividad",
+      "description": "Terminar los capítulos pendientes y anotar ideas clave para aplicar.",
+      "categoria": 5,
+      "tags": [7, 10],
+      "status": "en_curso",
+      "dueDate": "2026-08-10",
+      "priority": "baja"
+    },
+    {
+      "id": 14,
+      "title": "Reparar grifo de la cocina",
+      "description": "Contactar al plomero y coordinar visita para arreglar la fuga.",
+      "categoria": 2,
+      "tags": [4, 3],
+      "status": "pendiente",
+      "dueDate": "2026-07-22",
+      "priority": "media"
+    },
+    {
+      "id": 15,
+      "title": "Comprar regalo de aniversario",
+      "description": "Buscar opciones y elegir un regalo especial para la fecha.",
+      "categoria": 6,
+      "tags": [8, 9],
+      "status": "completada",
+      "dueDate": "2026-07-09",
+      "priority": "baja"
+    },
+    {
+      "id": 16,
+      "title": "Diseñar wireframes de la app",
+      "description": "Bocetar las pantallas principales del proyecto nuevo antes de pasar a desarrollo.",
+      "categoria": 8,
+      "tags": [1, 10],
+      "status": "en_curso",
+      "dueDate": "2026-07-24",
+      "priority": "alta"
+    },
+    {
+      "id": 17,
+      "title": "Renovar seguro del auto",
+      "description": "Comparar cotizaciones y renovar la póliza antes del vencimiento.",
+      "categoria": 4,
+      "tags": [6, 3],
+      "status": "pendiente",
+      "dueDate": "2026-07-30",
+      "priority": "media"
+    },
+    {
+      "id": 18,
+      "title": "Planificar viaje de fin de año",
+      "description": "Investigar destinos, comparar precios de vuelos y armar itinerario tentativo.",
+      "categoria": 7,
+      "tags": [2, 10],
+      "status": "pendiente",
+      "dueDate": "2026-08-15",
+      "priority": "baja"
+    },
+    {
+      "id": 19,
+      "title": "Backup de archivos importantes",
+      "description": "Respaldar documentos y fotos en la nube y en disco externo.",
+      "categoria": 8,
+      "tags": [1],
+      "status": "completada",
+      "dueDate": "2026-07-08",
+      "priority": "media"
+    },
+    {
+      "id": 20,
+      "title": "Sesión de control médico anual",
+      "description": "Agendar exámenes de rutina y revisar resultados con el médico general.",
+      "categoria": 3,
+      "tags": [5],
+      "status": "pendiente",
+      "dueDate": "2026-08-03",
+      "priority": "alta"
+    }
+  ]

@@ -1,0 +1,41 @@
+@let $data = data();
+@let $status = status($data.status);
+@let $colorStatus = color($status.color); 
+<article
+  [class]="$colorStatus.border"
+  class="flex gap-4 px-4 py-3 bg-white rounded-xl shadow-md border-l-4"
+>
+  <div class="self-center">
+    <span class="size-7 block">
+      @if ($data.status == 'completada') {
+        <app-icon name="circle-check" [class]="$colorStatus.text"></app-icon>
+      } @else if ($data.status == 'en_curso') {
+        <app-icon name="circle-fading-arrow-up" [class]="$colorStatus.text"></app-icon>
+      } @else {
+        <app-icon name="circle" [class]="$colorStatus.text"></app-icon>
+      }
+    </span>
+  </div>
+  <div class="flex flex-col gap-3 w-1 grow min-w-xs">
+    <div class="flex gap-2 items-start">
+      <h2 class="w-1 grow overflow-hidden whitespace-nowrap text-ellipsis text-xl font-medium">
+        {{ $data.title }}
+      </h2>
+      @let $priority = priority($data.priority);
+      <app-badge [color]="$priority.color"> {{ $priority.label }} </app-badge>
+    </div>
+    <div class="flex gap-4 items-end justify-between">
+      <div class="items-center text-stone-500 text-sm flex flex-wrap gap-2">
+        <app-icon-text [color]="$data.categoria.color">
+          {{ $data.categoria.name }}
+        </app-icon-text>
+        <app-icon-text color="red" icon="calendar"> Ayer </app-icon-text>
+      </div>
+      <div class="flex flex-wrap gap-3 justify-end">
+        @for (tag of $data.tags; track tag.id) {
+          <app-tag [color]="tag.color"> {{ tag.name }} </app-tag>
+        }
+      </div>
+    </div>
+  </div>
+</article>

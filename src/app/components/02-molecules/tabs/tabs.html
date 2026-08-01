@@ -1,0 +1,19 @@
+<ul
+  class="h-full z-10 relative rounded-lg grid grid-cols-4 shadow-md bg-stone-200 text-neutral-500"
+>
+  <span
+    [style]="{ transform: `translateX(${100 * position()}%)` }"
+    class="transition-transform duration-500 ease-in-out -z-10 top-0 absolute w-1/4 h-full rounded-lg border-2 border-stone-200 bg-white"
+  >
+  </span>
+  @for (item of items(); track `tab-${$index}-${item.value}`) {
+    <li [class]="{ active: value() == item.value}" class="group/active">
+      <button
+        (click)="onSetCurrent({ index: $index, value: item.value })"
+        class="whitespace-nowrap h-full text-ellipsis overflow-hidden transition-color duration-500 ease-in-out cursor-pointer group-[.active]/active:text-black group-[.active]/active:font-medium block content-center w-full leading-none px-4 py-2 text-center"
+      >
+        {{ item.label }}
+      </button>
+    </li>
+  }
+</ul>

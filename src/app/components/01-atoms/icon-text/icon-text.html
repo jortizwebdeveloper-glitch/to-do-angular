@@ -1,0 +1,12 @@
+@let $icon = icon();
+@let $color = setColor();
+<div class="flex gap-2 items-center">
+  @if ($icon) {
+    <span [class]="$color.text" class="size-[1em]">
+      <app-icon [name]="$icon"></app-icon>
+    </span>
+  } @else {
+    <span [class]="$color.bg" class="size-2 block rounded-[3px]"> </span>
+  }
+  <span [class]="setTextColor()"> <ng-content /> </span>
+</div>

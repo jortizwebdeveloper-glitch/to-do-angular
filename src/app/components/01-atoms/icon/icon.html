@@ -1,0 +1,6 @@
+@if (icon.value()) {
+  <i [innerHTML]="icon.value()" aria-hidden="true"></i>
+}
+@if (icon.error()) {
+  <!-- fallback silencioso, podés poner un placeholder -->
+}
