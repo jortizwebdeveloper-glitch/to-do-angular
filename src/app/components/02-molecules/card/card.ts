@@ -1,10 +1,11 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { Tag } from '@components/01-atoms/tag/tag';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
-import { getPriority, getStatus, TTask } from '@/types/task.type';
+import { DATE_COLOR, DATE_TASK, getPriority, getStatus, TTask } from '@/types/task.type';
 import { getColor } from '@/shared/theme/color.registry';
 import { Icon } from '../../01-atoms/icon/icon';
+import { keyDate } from '@/shared/utils/date';
 
 @Component({
   selector: 'app-card',
@@ -14,7 +15,17 @@ import { Icon } from '../../01-atoms/icon/icon';
 })
 export class Card {
   data = input.required<TTask>();
-  priority = getPriority
-  status = getStatus
-  color = getColor
+  priority = getPriority;
+  status = getStatus;
+  color = getColor;
+  keyDate = keyDate;
+
+  date = computed(() => {
+    const date = this.data().dueDate;
+    const key = this.keyDate(date);
+    return {
+      color: key ? getColor(DATE_COLOR[key]) : null,
+      label: key ? DATE_TASK[key] : date,
+    };
+  });
 }

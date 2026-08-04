@@ -4,7 +4,9 @@ import { Tabs, type TOutputOnChangeTabs, TTabs } from '../../02-molecules/tabs/t
 import { Input } from '../../01-atoms/input/input';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { TaskService } from '@/app/services/task.service';
-import { STATUS_TASK } from '@/types/task.type';
+import { STATUS_TASK, TTask } from '@/types/task.type';
+import { filterByDate } from '@/shared/utils/date';
+import { NavService } from '@/app/services/nav.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,26 +16,55 @@ import { STATUS_TASK } from '@/types/task.type';
 })
 export class Dashboard {
   private taskService = inject(TaskService);
+  private navService = inject(NavService);
   private router = inject(Router);
 
-  categoria = input();
-  tag = input();
-  estado = input();
-  search = input();
+  categoria = input<string>();
+  tag = input<string>();
+  estado = input<string>();
+  search = input<string>();
+  fecha = input<string>();
 
-  tasks = computed(() =>
-    this.taskService
-      .tasks()
-      .filter(
-        (item) =>
-          (this.categoria() != 'all' ? item.categoria.id == this.categoria() : true) &&
-          (this.tag() != 'all' ? item.tags.find((t) => t.id == this.tag()) : true) &&
-          (this.estado() != 'all' ? item.status == this.estado() : true) &&
-          (this.search()
-            ? this.onNormalize(item.title).includes(this.onNormalize(this.search() as string))
-            : true),
-      ),
-  );
+  tasks = computed(() => {
+    const fechas: Record<string, number> = {};
+    const categorias: Record<string, number> = {};
+    const tasks: TTask[] = [];
+
+    for (const item of this.taskService.tasks()) {
+      const cat = this.categoria();
+      const catID = item.categoria.id;
+      const categoria = cat != 'all' ? catID == Number(cat) : true;
+
+      const tag = this.tag() != 'all' ? item.tags.find((t) => t.id == Number(this.tag())) : true;
+      const estado = this.estado() != 'all' ? item.status == this.estado() : true;
+      const search = this.search()
+        ? this.onNormalize(item.title).includes(this.onNormalize(this.search() as string))
+        : true;
+      const keyFecha = filterByDate(item.dueDate, item.status == 'completada');
+      const fecha = this.fecha() == keyFecha;
+
+      if (!fechas[keyFecha]) fechas[keyFecha] = 0;
+      fechas[keyFecha]++;
+
+      if (fecha) {
+        if (!categorias[catID]) categorias[catID] = 0;
+        categorias[catID]++;
+      }
+
+      if (categoria && tag && estado && search && fecha) {
+        tasks.push(item);
+      }
+    }
+
+    Object.keys(fechas).forEach((key) => {
+      const items = this.navService.date_menu().items;
+      if (!Array.isArray(items)) {
+        items[key].count = fechas[key];
+      }
+    });
+
+    return tasks;
+  });
 
   statusList: TTabs[] = [
     {
@@ -48,10 +79,6 @@ export class Dashboard {
       label: STATUS_TASK['en_curso'],
       value: 'en_curso',
     },
-    {
-      label: STATUS_TASK['completada'],
-      value: 'completada',
-    },
   ];
 
   onNormalize(value: string) {
@@ -59,7 +86,7 @@ export class Dashboard {
   }
 
   onChangeSearch(search: string) {
-    console.log(search)
+    console.log(search);
     this.router.navigate([], {
       queryParams: {
         search,

@@ -43,10 +43,12 @@
                 class="w-1 grow group-hover/item:text-white group-[.query-active]/item:text-white"
                 >{{ item.name }}</span
               >
-              <span
-                class="text-neutral-500 group-hover/item:text-white group-[.query-active]/item:text-white transition"
-                >6</span
-              >
+              @if (item.count) {
+                <span
+                  class="text-neutral-500 group-hover/item:text-white group-[.query-active]/item:text-white transition"
+                  >{{ item.count }}</span
+                >
+              }
             </span>
           }
         </a>

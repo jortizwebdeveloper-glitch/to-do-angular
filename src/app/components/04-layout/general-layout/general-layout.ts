@@ -1,86 +1,19 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navaside } from '@components/02-molecules/navaside/navaside';
-import { CategoryService, TagService } from '@/app/services/task.service';
-import { TNavaside } from '@/types/nav.type';
+import { NavService } from '@/app/services/nav.service';
+import { Icon } from '../../01-atoms/icon/icon';
 
 @Component({
   selector: 'app-general-layout',
-  imports: [RouterOutlet, Navaside],
+  imports: [RouterOutlet, Navaside, Icon],
   templateUrl: './general-layout.html',
   styleUrl: './general-layout.css',
 })
 export class GeneralLayout {
-  categoriesService = inject(CategoryService);
-  tagsService = inject(TagService);
-  main_menu: TNavaside = {
-    title: 'Visita',
-    items: [
-      {
-        id: 1,
-        icon: 'clock',
-        name: 'Hoy',
-        color: 'orange',
-        link: {
-          query: {
-            fecha: 'hoy',
-          },
-        },
-      },
-      {
-        id: 1,
-        icon: 'calendar',
-        name: 'Proximas',
-        color: 'red',
-        link: {
-          query: {
-            fecha: 'proximas',
-          },
-        },
-      },
-      {
-        id: 1,
-        icon: 'circle-check',
-        name: 'Finalizadas',
-        color: 'emerald',
-        link: {
-          query: {
-            fecha: 'finalizadas',
-          },
-        },
-      },
-    ],
-  };
-  categories_menu = signal<TNavaside>({
-    title: 'Categorías',
-    items: [
-      {
-        id: 0,
-        name: 'Todas las categorias',
-        color: 'blue',
-        link: {
-          query: {
-            categoria: 'all',
-          },
-        },
-      },
-      ...this.categoriesService.categories(),
-    ],
-  });
-  tags_menu = signal<TNavaside>({
-    title: 'Tags',
-    items: [
-      {
-        id: 0,
-        name: 'Todo',
-        color: 'neutral',
-        link: {
-          query: {
-            tag: 'all',
-          },
-        },
-      },
-      ...this.tagsService.tags(),
-    ],
-  });
+  private navService = inject(NavService);
+
+  date_menu = this.navService.date_menu;
+  categories_menu = this.navService.categories_menu;
+  tags_menu = this.navService.tags_menu;
 }

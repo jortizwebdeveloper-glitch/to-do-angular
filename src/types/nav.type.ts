@@ -1,8 +1,8 @@
-import { IconName } from "@/app/components/01-atoms/icon/icon.registry";
-import { TColors } from "@/shared/theme/color.registry";
+import { IconName } from '@/app/components/01-atoms/icon/icon.registry';
+import { TColors } from '@/shared/theme/color.registry';
 
-export type TNavasideItems = {
-  id: number;
+export type TNavasideItem = {
+  id: number | string;
   icon?: IconName;
   name: string;
   color: TColors;
@@ -10,9 +10,10 @@ export type TNavasideItems = {
     path?: string;
     query?: Record<string, string> | null;
   };
+  count?: number;
 };
 
 export type TNavaside = {
   title: string;
-  items: TNavasideItems[];
+  items: TNavasideItem[] | Record<string, TNavasideItem>;
 };

@@ -3,13 +3,14 @@ import type { TTask } from '@/types/task.type';
 import tasks from '@public/tasks.json';
 import categories from '@public/categorias.json';
 import tags from '@public/tags.json';
-import { TNavasideItems } from '@/types/nav.type';
+import { TNavasideItem } from '@/types/nav.type';
 
 @Service()
 export class TaskService {
   private _tasks = signal<TTask[]>(
-    tasks.map((item) => ({
+    tasks.map((item, id) => ({
       ...item,
+      id: id + 1,
       categoria: categories.find((c) => c.id == item.categoria),
       tags: item.tags.map((t) => tags.find((tt) => tt.id == t)),
     })) as Array<TTask>,
@@ -26,10 +27,16 @@ export class TaskService {
 @Service()
 export class CategoryService {
   private _categories = signal(
-    categories.map((item) => ({
-      ...item,
-      link: { query: { categoria: String(item.id) } },
-    })) as TNavasideItems[],
+    Object.fromEntries(
+      categories.map((item) => [
+        item.id,
+        {
+          ...item,
+          link: { query: { categoria: String(item.id) } },
+          count: 0,
+        },
+      ]),
+    ),
   );
   readonly categories = this._categories.asReadonly();
 }
@@ -40,7 +47,7 @@ export class TagService {
     tags.map((item) => ({
       ...item,
       link: { query: { tag: String(item.id) } },
-    })) as TNavasideItems[]
-  )
+    })) as TNavasideItem[],
+  );
   readonly tags = this._tags.asReadonly();
 }

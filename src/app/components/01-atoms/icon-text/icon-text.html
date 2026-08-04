@@ -2,11 +2,11 @@
 @let $color = setColor();
 <div class="flex gap-2 items-center">
   @if ($icon) {
-    <span [class]="$color.text" class="size-[1em]">
+    <span [class]="$color.text" class="size-[1.2em] shrink-0">
       <app-icon [name]="$icon"></app-icon>
     </span>
   } @else {
-    <span [class]="$color.bg" class="size-2 block rounded-[3px]"> </span>
+    <span [class]="$color.bg" class="size-2 block rounded-[3px] shrink-0"> </span>
   }
   <span [class]="setTextColor()"> <ng-content /> </span>
 </div>

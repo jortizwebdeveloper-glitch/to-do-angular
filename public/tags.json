@@ -1,5 +1,5 @@
 [
-    { "id": 1, "name": "Trabajo", "color": "blue" },
+    { "id": 1, "name": "Trabajo", "color": "cyan" },
     { "id": 2, "name": "Personal", "color": "emerald" },
     { "id": 3, "name": "Urgente", "color": "red" },
     { "id": 4, "name": "Hogar", "color": "amber" },

@@ -9,7 +9,7 @@ export enum STATUS_TASK {
 export enum STATUS_COLOR {
   completada = 'green',
   en_curso = 'blue',
-  pendiente = 'orange',
+  pendiente = 'yellow',
 }
 export type TStatusTask = keyof typeof STATUS_TASK;
 
@@ -17,6 +17,26 @@ export function getStatus(key: TStatusTask) {
   return {
     color: STATUS_COLOR[key],
     label: STATUS_TASK[key],
+  };
+}
+
+export enum DATE_TASK {
+  yesterday = 'Ayer',
+  today = 'Hoy',
+  tomorrow = 'Mañana',
+}
+
+export enum DATE_COLOR {
+  yesterday = 'rose',
+  today = 'blue',
+  tomorrow = 'amber',
+}
+export type TDateTask = keyof typeof DATE_TASK;
+
+export function getDate(key: TDateTask) {
+  return {
+    color: DATE_COLOR[key],
+    label: DATE_TASK[key],
   };
 }
 

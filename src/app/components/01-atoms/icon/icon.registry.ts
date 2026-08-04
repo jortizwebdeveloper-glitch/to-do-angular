@@ -3,7 +3,11 @@
 const ICON_REGISTRY = {
   list: () => import('./lucide/list'),
   clock: () => import('./lucide/clock'),
+  check: () => import('./lucide/check'),
   calendar: () => import('./lucide/calendar'),
+  'calendar-1': () => import('./lucide/calendar-1'),
+  'calendar-x-2': () => import('./lucide/calendar-x-2'),
+  'calendar-check-2': () => import('./lucide/calendar-check-2'),
   search: () => import('./lucide/search'),
   folder: () => import('./lucide/folder'),
   circle: () => import('./lucide/circle'),

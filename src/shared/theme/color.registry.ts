@@ -55,12 +55,26 @@ export const COLORS_THEME = {
     border: 'border-pink-500',
     text: 'text-pink-500',
   },
+  rose: {
+    key: "rose",
+    bg: 'bg-rose-500',
+    'hover:bg': 'hover:bg-rose-500',
+    border: 'border-rose-500',
+    text: 'text-rose-500',
+  },
   neutral: {
     key: "neutral",
     bg: 'bg-neutral-500',
     'hover:bg': 'hover:bg-neutral-500',
     border: 'border-neutral-500',
     text: 'text-neutral-500',
+  },
+  slate: {
+    key: "slate",
+    bg: 'bg-slate-500',
+    'hover:bg': 'hover:bg-slate-500',
+    border: 'border-slate-500',
+    text: 'text-slate-500',
   },
   purple: {
     key: "purple",
@@ -89,6 +103,13 @@ export const COLORS_THEME = {
     'hover:bg': 'hover:bg-sky-500',
     border: 'border-sky-500',
     text: 'text-sky-500',
+  },
+  cyan: {
+    key: "cyan",
+    bg: 'bg-cyan-500',
+    'hover:bg': 'hover:bg-cyan-500',
+    border: 'border-cyan-500',
+    text: 'text-cyan-500',
   },
 } as const;
 
