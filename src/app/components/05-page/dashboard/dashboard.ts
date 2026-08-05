@@ -6,7 +6,6 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { TaskService } from '@/app/services/task.service';
 import { STATUS_TASK, TTask } from '@/types/task.type';
 import { filterByDate } from '@/shared/utils/date';
-import { NavService } from '@/app/services/nav.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +15,6 @@ import { NavService } from '@/app/services/nav.service';
 })
 export class Dashboard {
   private taskService = inject(TaskService);
-  private navService = inject(NavService);
   private router = inject(Router);
 
   categoria = input<string>();
@@ -55,14 +53,6 @@ export class Dashboard {
         tasks.push(item);
       }
     }
-
-    Object.keys(fechas).forEach((key) => {
-      const items = this.navService.date_menu().items;
-      if (!Array.isArray(items)) {
-        items[key].count = fechas[key];
-      }
-    });
-
     return tasks;
   });
 

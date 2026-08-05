@@ -1,9 +1,10 @@
-import { computed, Service, signal } from '@angular/core';
+import { computed, inject, Service, signal } from '@angular/core';
 import type { TTask } from '@/types/task.type';
 import tasks from '@public/tasks.json';
 import categories from '@public/categorias.json';
 import tags from '@public/tags.json';
-import { TNavasideItem } from '@/types/nav.type';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { TaskRepository } from '../repository/task.repository';
 
 @Service()
 export class TaskService {
@@ -22,32 +23,10 @@ export class TaskService {
   getTask(id: number) {
     return this.tasks().find((t) => t.id == id);
   }
-}
 
-@Service()
-export class CategoryService {
-  private _categories = signal(
-    Object.fromEntries(
-      categories.map((item) => [
-        item.id,
-        {
-          ...item,
-          link: { query: { categoria: String(item.id) } },
-          count: 0,
-        },
-      ]),
-    ),
-  );
-  readonly categories = this._categories.asReadonly();
-}
-
-@Service()
-export class TagService {
-  private _tags = signal(
-    tags.map((item) => ({
-      ...item,
-      link: { query: { tag: String(item.id) } },
-    })) as TNavasideItem[],
-  );
-  readonly tags = this._tags.asReadonly();
+  private taskRepository = inject(TaskRepository);
+  private taskResource = rxResource({
+    stream: () => this.taskRepository.getTasks(),
+  });
+  $tasks = computed(() => this.taskResource.value());
 }

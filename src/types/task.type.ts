@@ -60,7 +60,7 @@ export function getPriority(key: TProrityTask) {
   };
 }
 
-export type TType = {
+export type TTag = {
   id: number;
   name: string;
   color: TColors;
@@ -77,7 +77,7 @@ export type TTask = {
   title: string;
   description: string;
   categoria: TCategory;
-  tags: Array<TType>;
+  tags: Array<TTag>;
   status: TStatusTask;
   dueDate: string;
   priority: TProrityTask;

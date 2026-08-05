@@ -1,6 +1,7 @@
 import { TNavaside } from '@/types/nav.type';
-import { inject, Service, signal } from '@angular/core';
-import { CategoryService, TagService } from './task.service';
+import { computed, inject, Service, signal } from '@angular/core';
+import { CategoryService } from './category.service';
+import { TagService } from './tag.service';
 
 @Service()
 export class NavService {
@@ -61,10 +62,10 @@ export class NavService {
     },
   });
 
-  categories_menu = signal<TNavaside>({
+  categories_menu = computed<TNavaside>(() => ({
     title: 'Categorías',
-    items: {
-      '0': {
+    items: [
+      {
         id: 0,
         name: 'Todas las categorias',
         color: 'blue',
@@ -73,13 +74,19 @@ export class NavService {
             categoria: 'all',
           },
         },
-        count: 0,
       },
-      ...structuredClone(this.categoriesService.categories()),
-    },
-  });
+      ...(this.categoriesService.$categories()?.map((cat) => ({
+        ...cat,
+        link: {
+          query: {
+            categoria: String(cat.id),
+          },
+        },
+      })) ?? []),
+    ],
+  }));
 
-  tags_menu = signal<TNavaside>({
+  tags_menu = computed<TNavaside>(() => ({
     title: 'Tags',
     items: [
       {
@@ -92,7 +99,14 @@ export class NavService {
           },
         },
       },
-      ...this.tagsService.tags(),
+      ...(this.tagsService.$tags()?.map((tag) => ({
+        ...tag,
+        link: {
+          query: {
+            tag: String(tag.id),
+          },
+        },
+      })) ?? []),
     ],
-  });
+  }));
 }
