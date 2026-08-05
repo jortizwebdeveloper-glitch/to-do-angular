@@ -1,18 +1,18 @@
 @let $items = items();
 <ul
-  [style]="{gridTemplateColumns: `repeat(${$items.length}, 1fr)`}"
-  class="h-full z-10 relative rounded-lg grid shadow-md bg-stone-200 text-neutral-500"
+  [style]="{ gridTemplateColumns: `repeat(${$items.length}, 1fr)` }"
+  class="h-full z-10 relative rounded-lg grid shadow-md bg-stone-200 dark:bg-slate-800"
 >
   <span
     [style]="{ transform: `translateX(${100 * position()}%)`, width: 100 / $items.length + '%' }"
-    class="transition-transform duration-500 ease-in-out -z-10 top-0 absolute h-full rounded-lg border-2 border-stone-200 bg-white"
+    class="transition-transform duration-500 ease-in-out -z-10 top-0 absolute h-full rounded-lg border-2 border-stone-200 bg-white dark:bg-slate-900 dark:border-slate-800"
   >
   </span>
   @for (item of $items; track `tab-${$index}-${item.value}`) {
-    <li [class]="{ active: value() == item.value}" class="group/active">
+    <li [class]="{ active: value() == item.value }" class="group/active">
       <button
         (click)="onSetCurrent({ index: $index, value: item.value })"
-        class="whitespace-nowrap h-full text-ellipsis overflow-hidden transition-color duration-500 ease-in-out cursor-pointer group-[.active]/active:text-black group-[.active]/active:font-medium block content-center w-full leading-none px-4 py-2 text-center"
+        class="whitespace-nowrap h-full text-ellipsis overflow-hidden transition-color duration-500 ease-in-out cursor-pointer group-[.active]/active:opacity-100 opacity-50 group-[.active]/active:font-medium block content-center w-full leading-none px-4 py-2 text-center"
       >
         {{ item.label }}
       </button>

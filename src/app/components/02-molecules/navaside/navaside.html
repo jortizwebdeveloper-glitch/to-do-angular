@@ -3,7 +3,7 @@
 <nav>
   <ul class="flex flex-wrap" [class]="$tag ? ' gap-2.5' : 'gap-0.5'">
     <li class="px-2 pt-2 pb-1 -mb-0.5 w-full">
-      <p class="text-sm font-medium uppercase tracking-widest text-neutral-500">{{ $el.title }}</p>
+      <p class="text-sm font-medium uppercase tracking-widest opacity-75">{{ $el.title }}</p>
     </li>
     @for (item of list(); track `item-nav-${$index}-${item.id}`) {
       <li [class]="$tag ? '' : 'w-full'">

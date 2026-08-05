@@ -6,17 +6,18 @@ import { getColor } from '@/shared/theme/color.registry';
 import { getPriority, getStatus } from '@/types/task.type';
 import { TaskService } from '@/app/services/task.service';
 import { RouterLink } from '@angular/router';
+import { Icon } from '../../01-atoms/icon/icon';
 
 @Component({
   selector: 'app-item-list',
   template:
-    '<li class="py-3 border-b border-stone-300 flex justify-between gap-2 text-sm"><ng-content/></li>',
+    '<li class="py-3 border-b border-stone-300 dark:border-slate-700 flex justify-between gap-2 text-sm"><ng-content/></li>',
 })
 export class ItemList {}
 
 @Component({
   selector: 'app-tasks',
-  imports: [Badge, IconText, ItemList, Tag, RouterLink],
+  imports: [Icon, Badge, IconText, ItemList, Tag, RouterLink],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
 })

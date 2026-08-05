@@ -13,6 +13,7 @@ const ICON_REGISTRY = {
   circle: () => import('./lucide/circle'),
   'circle-fading-arrow-up': () => import('./lucide/circle-fading-arrow-up'),
   'circle-check': () => import('./lucide/circle-check'),
+  'chevron-left': () => import('./lucide/chevron-left'),
 } as const;
 
 export type IconName = keyof typeof ICON_REGISTRY;

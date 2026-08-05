@@ -7,9 +7,9 @@ export enum STATUS_TASK {
 }
 
 export enum STATUS_COLOR {
-  completada = 'green',
-  en_curso = 'blue',
-  pendiente = 'yellow',
+  completada = 'emerald',
+  en_curso = 'indigo',
+  pendiente = 'amber',
 }
 export type TStatusTask = keyof typeof STATUS_TASK;
 
