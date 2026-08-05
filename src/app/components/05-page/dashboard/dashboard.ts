@@ -6,6 +6,7 @@ import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { TaskService } from '@/app/services/task.service';
 import { STATUS_TASK, TTask } from '@/types/task.type';
 import { filterByDate } from '@/shared/utils/date';
+import { strNormalize } from '@/shared/utils/string';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +29,7 @@ export class Dashboard {
     const iCat = this.categoria();
     const iTag = this.tag();
     const iEst = this.estado();
-    const iSearch = this.onNormalize(String(this.search()) as string);
+    const iSearch = strNormalize((this.search() ?? '') as string);
     const iFecha = this.fecha();
 
     const tasks: TTask[] = [];
@@ -37,7 +38,7 @@ export class Dashboard {
       if (iTag != 'all' && !task.tags.some((t) => t.id === Number(iTag))) continue;
       if (iEst != 'all' && task.status !== iEst) continue;
       if (iFecha !== filterByDate(task.dueDate, task.status === 'completada')) continue;
-      if (iSearch && !this.onNormalize(task.title).includes(iSearch)) continue;
+      if (iSearch && !strNormalize(task.title).includes(iSearch)) continue;
 
       tasks.push(task);
     }
@@ -59,11 +60,7 @@ export class Dashboard {
       value: 'en_curso',
     },
   ];
-
-  onNormalize(value: string) {
-    return value.toLowerCase().replaceAll(' ', '');
-  }
-
+  
   onChangeSearch(search: string) {
     this.router.navigate([], {
       queryParams: {
