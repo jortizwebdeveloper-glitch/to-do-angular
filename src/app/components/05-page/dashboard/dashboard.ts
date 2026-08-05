@@ -24,35 +24,24 @@ export class Dashboard {
   fecha = input<string>();
 
   tasks = computed(() => {
-    const fechas: Record<string, number> = {};
-    const categorias: Record<string, number> = {};
+    const $tasks = this.taskService.$tasks();
+    const iCat = this.categoria();
+    const iTag = this.tag();
+    const iEst = this.estado();
+    const iSearch = this.onNormalize(String(this.search()) as string);
+    const iFecha = this.fecha();
+
     const tasks: TTask[] = [];
+    for (const [_, task] of $tasks) {
+      if (iCat != 'all' && task.categoria.id != Number(iCat)) continue;
+      if (iTag != 'all' && !task.tags.some((t) => t.id === Number(iTag))) continue;
+      if (iEst != 'all' && task.status !== iEst) continue;
+      if (iFecha !== filterByDate(task.dueDate, task.status === 'completada')) continue;
+      if (iSearch && !this.onNormalize(task.title).includes(iSearch)) continue;
 
-    for (const item of this.taskService.tasks()) {
-      const cat = this.categoria();
-      const catID = item.categoria.id;
-      const categoria = cat != 'all' ? catID == Number(cat) : true;
-
-      const tag = this.tag() != 'all' ? item.tags.find((t) => t.id == Number(this.tag())) : true;
-      const estado = this.estado() != 'all' ? item.status == this.estado() : true;
-      const search = this.search()
-        ? this.onNormalize(item.title).includes(this.onNormalize(this.search() as string))
-        : true;
-      const keyFecha = filterByDate(item.dueDate, item.status == 'completada');
-      const fecha = this.fecha() == keyFecha;
-
-      if (!fechas[keyFecha]) fechas[keyFecha] = 0;
-      fechas[keyFecha]++;
-
-      if (fecha) {
-        if (!categorias[catID]) categorias[catID] = 0;
-        categorias[catID]++;
-      }
-
-      if (categoria && tag && estado && search && fecha) {
-        tasks.push(item);
-      }
+      tasks.push(task);
     }
+
     return tasks;
   });
 
@@ -76,7 +65,6 @@ export class Dashboard {
   }
 
   onChangeSearch(search: string) {
-    console.log(search);
     this.router.navigate([], {
       queryParams: {
         search,

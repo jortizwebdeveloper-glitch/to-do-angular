@@ -1,32 +1,48 @@
 import { computed, inject, Service, signal } from '@angular/core';
 import type { TTask } from '@/types/task.type';
-import tasks from '@public/tasks.json';
-import categories from '@public/categorias.json';
-import tags from '@public/tags.json';
 import { rxResource } from '@angular/core/rxjs-interop';
-import { TaskRepository } from '../repository/task.repository';
+import { TaskRepository } from '../repository/task/task.repository';
+import { CategoryRepository } from '../repository/category/category.repository';
+import { TagRepository } from '../repository/tag/tag.repository';
 
 @Service()
 export class TaskService {
-  private _tasks = signal<TTask[]>(
-    tasks.map((item, id) => ({
-      ...item,
-      id: id + 1,
-      categoria: categories.find((c) => c.id == item.categoria),
-      tags: item.tags.map((t) => tags.find((tt) => tt.id == t)),
-    })) as Array<TTask>,
-  );
-  readonly tasks = this._tasks.asReadonly();
-  getTasks() {
-    return computed(() => this.tasks());
-  }
-  getTask(id: number) {
-    return this.tasks().find((t) => t.id == id);
-  }
-
   private taskRepository = inject(TaskRepository);
+  private categoryRepository = inject(CategoryRepository);
+  private tagRepository = inject(TagRepository);
+
   private taskResource = rxResource({
     stream: () => this.taskRepository.getTasks(),
   });
-  $tasks = computed(() => this.taskResource.value());
+  private categoryResource = rxResource({
+    stream: () => this.categoryRepository.getCategories(),
+  });
+  private tagResource = rxResource({
+    stream: () => this.tagRepository.getTags(),
+  });
+
+  $categories = computed(
+    () => new Map((this.categoryResource.value() ?? []).map((cat) => [cat!.id, cat!])),
+  );
+  $tags = computed(() => new Map((this.tagResource.value() ?? []).map((tag) => [tag!.id, tag!])));
+  $tasks = computed(() => {
+    const categories = this.$categories();
+    const tags = this.$tags();
+    return new Map(
+      (this.taskResource.value() ?? []).map((task) => [
+        task.id,
+        {
+          ...task,
+          categoria: categories.get(task.categoria),
+          tags: task.tags.map((t) => tags.get(t)),
+        } as TTask,
+      ]),
+    );
+  });
+  getTaskById(id: number) {
+    const task = this.$tasks().get(id);
+    if (!task) return;
+
+    return task;
+  }
 }

@@ -1,5 +1,5 @@
+import { APP_DB } from '@/app/db/db.provider';
 import { inject, Service } from '@angular/core';
-import { APP_DB } from '../db/db.provider';
 import { liveQuery } from 'dexie';
 import { from } from 'rxjs';
 

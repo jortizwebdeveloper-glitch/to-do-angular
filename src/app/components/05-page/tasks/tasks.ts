@@ -5,7 +5,7 @@ import { Tag } from '@components/01-atoms/tag/tag';
 import { getColor } from '@/shared/theme/color.registry';
 import { getPriority, getStatus } from '@/types/task.type';
 import { TaskService } from '@/app/services/task.service';
-import { RouterLink } from "@angular/router";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-item-list',
@@ -26,5 +26,5 @@ export class Tasks {
   priority = getPriority;
   status = getStatus;
   taskService = inject(TaskService);
-  task = computed(() => this.taskService.getTask(this.id()));
+  task = computed(() => this.taskService.getTaskById(Number(this.id())));
 }
