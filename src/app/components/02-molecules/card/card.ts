@@ -6,23 +6,24 @@ import { DATE_COLOR, DATE_TASK, getPriority, getStatus, TTask } from '@/types/ta
 import { getColor } from '@/shared/theme/color.registry';
 import { Icon } from '../../01-atoms/icon/icon';
 import { keyDate } from '@/shared/utils/date';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-card',
-  imports: [Tag, Badge, IconText, Icon],
+  imports: [Tag, Badge, IconText, Icon, RouterLinkActive],
   templateUrl: './card.html',
   styleUrl: './card.css',
 })
 export class Card {
   data = input.required<TTask>();
+  active = input<boolean>();
   priority = getPriority;
   status = getStatus;
   color = getColor;
-  keyDate = keyDate;
 
   date = computed(() => {
     const date = this.data().dueDate;
-    const key = this.keyDate(date);
+    const key = keyDate(date);
     return {
       color: key ? getColor(DATE_COLOR[key]) : null,
       label: key ? DATE_TASK[key] : date,

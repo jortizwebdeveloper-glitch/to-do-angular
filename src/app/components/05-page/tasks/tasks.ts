@@ -2,11 +2,15 @@ import { Component, computed, inject, input } from '@angular/core';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
-import { getColor } from '@/shared/theme/color.registry';
-import { getPriority, getStatus } from '@/types/task.type';
+import { getColor, TColors } from '@/shared/theme/color.registry';
+import { DATE_COLOR, DATE_TASK, getPriority, getStatus } from '@/types/task.type';
 import { TaskService } from '@/app/services/task.service';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../01-atoms/icon/icon';
+import { TagService } from '@/app/services/tag.service';
+import { CategoryService } from '@/app/services/category.service';
+import { TaskRow } from '@/app/db/schema/task.schema';
+import { keyDate, overDue } from '@/shared/utils/date';
 
 @Component({
   selector: 'app-item-list',
@@ -27,5 +31,39 @@ export class Tasks {
   priority = getPriority;
   status = getStatus;
   taskService = inject(TaskService);
+  tagService = inject(TagService);
+  categoryService = inject(CategoryService);
   task = computed(() => this.taskService.getTaskById(Number(this.id())));
+  date = computed(() => {
+    const date = this.task()?.dueDate;
+    const key = keyDate(date ?? '');
+    const over = overDue(date ?? '');
+    return {
+      overDue: over,
+      color: over ? getColor('red') : key ? getColor(DATE_COLOR[key]) : null,
+      label: key ? DATE_TASK[key] : date,
+    };
+  });
+
+  onSubmit(event: SubmitEvent) {
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+    const body: Record<string, any> = {};
+    for (const [key, value] of formData.entries()) {
+      switch (key) {
+        case 'dueDate':
+          body['dueDate'] = String(value).replaceAll('-', '/');
+          break;
+        case 'tags':
+          if (!body['tags']) body['tags'] = [];
+
+          body['tags'] = [...body['tags'], Number(value)];
+          break;
+        default:
+          body[key] = value;
+      }
+    }
+
+    this.taskService.updateTaskById(this.id(), body);
+  }
 }

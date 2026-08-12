@@ -2,6 +2,7 @@
 @if ($task) {
   @let $priority = priority($task.priority);
   @let $status = status($task.status);
+  @let $date = date();
   <div
     class="max-xl:w-full w-96 max-w-96 bg-white dark:bg-slate-900 h-screen shadow-md max-xl:fixed inset-y-0 right-0 z-10"
   >
@@ -44,10 +45,13 @@
             </app-item-list>
             <app-item-list>
               <app-icon-text color="red" icon="calendar"> Fecha límite </app-icon-text>
-              <div [class]="color('red').text">
-                <span>Ayer</span>
-                ·
-                <span>vencida</span>
+
+              <div [class]="$date.color?.text">
+                <span>{{ $date.label }}</span>
+                @if ($date.overDue) {
+                  ·
+                  <span>Vencida</span>
+                }
               </div>
             </app-item-list>
           </ul>
@@ -64,7 +68,45 @@
       <div class="sticky bottom-0">
         <div class="h-4 bg-linear-to-t from-white dark:from-slate-900 to-transparent"></div>
 
-        <div class="px-6 pb-5"></div>
+        <div class="px-6 pb-5">
+          <form (submit)="onSubmit($event)" class="flex flex-col gap-2">
+            <input
+              [value]="$task.title"
+              name="title"
+              type="text"
+              class="bg-slate-800 p-2 border border-slate-700"
+            />
+            <select name="categoria" class="bg-slate-800 p-2 border border-slate-700">
+              <option value="" disabled>Categoria</option>
+              @for (item of categoryService.$categories(); track item.id) {
+                <option [selected]="$task.categoria.id == item.id" [value]="item.id">
+                  {{ item.name }}
+                </option>
+              }
+            </select>
+            <input
+              [value]="$task.dueDate.replaceAll('/', '-')"
+              type="date"
+              name="dueDate"
+              class="bg-slate-800 p-2 border border-slate-700"
+            />
+            <div class="flex flex-wrap gap-3">
+              @for (tag of tagService.$tags(); track `input-tag-${tag.id}-${$index}`) {
+                <label [for]="`input-tag-${tag.id}-${$index}`">
+                  <input
+                    [id]="`input-tag-${tag.id}-${$index}`"
+                    type="checkbox"
+                    name="tags"
+                    [checked]="$task.tags.some((i) => i.id == tag.id)"
+                    [value]="tag.id"
+                  />
+                  {{ tag.name }}
+                </label>
+              }
+            </div>
+            <button tyope="submit">SUBMIT</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

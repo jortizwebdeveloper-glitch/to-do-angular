@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, model, signal } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { Card } from '../../02-molecules/card/card';
 import { Tabs, type TOutputOnChangeTabs, TTabs } from '../../02-molecules/tabs/tabs';
 import { Input } from '../../01-atoms/input/input';
@@ -60,7 +60,7 @@ export class Dashboard {
       value: 'en_curso',
     },
   ];
-  
+
   onChangeSearch(search: string) {
     this.router.navigate([], {
       queryParams: {

@@ -4,6 +4,7 @@ import { rxResource } from '@angular/core/rxjs-interop';
 import { TaskRepository } from '../repository/task/task.repository';
 import { CategoryRepository } from '../repository/category/category.repository';
 import { TagRepository } from '../repository/tag/tag.repository';
+import { TaskRow } from '../db/schema/task.schema';
 
 @Service()
 export class TaskService {
@@ -12,7 +13,7 @@ export class TaskService {
   private tagRepository = inject(TagRepository);
 
   private taskResource = rxResource({
-    stream: () => this.taskRepository.getTasks(),
+    stream: () => this.taskRepository.getAll(),
   });
   private categoryResource = rxResource({
     stream: () => this.categoryRepository.getCategories(),
@@ -44,5 +45,13 @@ export class TaskService {
     if (!task) return;
 
     return task;
+  }
+  async updateTaskById(id: number, body: Partial<Omit<TaskRow, 'id'>>) {
+    await this.taskRepository.update(Number(id), {
+      title: body.title,
+      categoria: Number(body.categoria),
+      dueDate: body.dueDate,
+      tags: body.tags?.length ? body.tags : [],
+    });
   }
 }

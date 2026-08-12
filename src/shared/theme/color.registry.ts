@@ -4,6 +4,7 @@ export const COLORS_THEME = {
     bg: 'bg-blue-500',
     'hover:bg': 'hover:bg-blue-500',
     border: 'border-blue-500',
+    outline: 'outline-blue-500',
     text: 'text-blue-500',
   },
   orange: {
@@ -11,6 +12,7 @@ export const COLORS_THEME = {
     bg: 'bg-orange-500',
     'hover:bg': 'hover:bg-orange-500',
     border: 'border-orange-500',
+    outline: 'outline-orange-500',
     text: 'text-orange-500',
   },
   red: {
@@ -18,6 +20,7 @@ export const COLORS_THEME = {
     bg: 'bg-red-500',
     'hover:bg': 'hover:bg-red-500',
     border: 'border-red-500',
+    outline: 'outline-red-500',
     text: 'text-red-500',
   },
   green: {
@@ -25,6 +28,7 @@ export const COLORS_THEME = {
     bg: 'bg-green-500',
     'hover:bg': 'hover:bg-green-500',
     border: 'border-green-500',
+    outline: 'outline-green-500',
     text: 'text-green-500',
   },
   emerald: {
@@ -32,6 +36,7 @@ export const COLORS_THEME = {
     bg: 'bg-emerald-500',
     'hover:bg': 'hover:bg-emerald-500',
     border: 'border-emerald-500',
+    outline: 'outline-emerald-500',
     text: 'text-emerald-500',
   },
   yellow: {
@@ -39,6 +44,7 @@ export const COLORS_THEME = {
     bg: 'bg-yellow-500',
     'hover:bg': 'hover:bg-yellow-500',
     border: 'border-yellow-500',
+    outline: 'outline-yellow-500',
     text: 'text-yellow-500',
   },
   amber: {
@@ -46,6 +52,7 @@ export const COLORS_THEME = {
     bg: 'bg-amber-500',
     'hover:bg': 'hover:bg-amber-500',
     border: 'border-amber-500',
+    outline: 'outline-amber-500',
     text: 'text-amber-500',
   },
   pink: {
@@ -53,6 +60,7 @@ export const COLORS_THEME = {
     bg: 'bg-pink-500',
     'hover:bg': 'hover:bg-pink-500',
     border: 'border-pink-500',
+    outline: 'outline-pink-500',
     text: 'text-pink-500',
   },
   rose: {
@@ -60,6 +68,7 @@ export const COLORS_THEME = {
     bg: 'bg-rose-500',
     'hover:bg': 'hover:bg-rose-500',
     border: 'border-rose-500',
+    outline: 'outline-rose-500',
     text: 'text-rose-500',
   },
   neutral: {
@@ -67,6 +76,7 @@ export const COLORS_THEME = {
     bg: 'bg-neutral-500',
     'hover:bg': 'hover:bg-neutral-500',
     border: 'border-neutral-500',
+    outline: 'outline-neutral-500',
     text: 'text-neutral-500',
   },
   slate: {
@@ -74,6 +84,7 @@ export const COLORS_THEME = {
     bg: 'bg-slate-500',
     'hover:bg': 'hover:bg-slate-500',
     border: 'border-slate-500',
+    outline: 'outline-slate-500',
     text: 'text-slate-500',
   },
   purple: {
@@ -81,6 +92,7 @@ export const COLORS_THEME = {
     bg: 'bg-purple-500',
     'hover:bg': 'hover:bg-purple-500',
     border: 'border-purple-500',
+    outline: 'outline-purple-500',
     text: 'text-purple-500',
   },
   indigo: {
@@ -88,6 +100,7 @@ export const COLORS_THEME = {
     bg: 'bg-indigo-500',
     'hover:bg': 'hover:bg-indigo-500',
     border: 'border-indigo-500',
+    outline: 'outline-indigo-500',
     text: 'text-indigo-500',
   },
   violet: {
@@ -95,6 +108,7 @@ export const COLORS_THEME = {
     bg: 'bg-violet-500',
     'hover:bg': 'hover:bg-violet-500',
     border: 'border-violet-500',
+    outline: 'outline-violet-500',
     text: 'text-violet-500',
   },
   sky: {
@@ -102,6 +116,7 @@ export const COLORS_THEME = {
     bg: 'bg-sky-500',
     'hover:bg': 'hover:bg-sky-500',
     border: 'border-sky-500',
+    outline: 'outline-sky-500',
     text: 'text-sky-500',
   },
   cyan: {
@@ -109,6 +124,7 @@ export const COLORS_THEME = {
     bg: 'bg-cyan-500',
     'hover:bg': 'hover:bg-cyan-500',
     border: 'border-cyan-500',
+    outline: 'outline-cyan-500',
     text: 'text-cyan-500',
   },
 } as const;
@@ -116,5 +132,5 @@ export const COLORS_THEME = {
 export type TColors = keyof typeof COLORS_THEME;
 
 export function getColor(key: TColors) {
-  return COLORS_THEME[key];
+  return COLORS_THEME[key] ?? null;
 }

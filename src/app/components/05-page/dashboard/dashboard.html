@@ -14,7 +14,7 @@
         ></app-tabs>
       }
     </div>
-    <div class="flex flex-col gap-4 overflow-auto h-1 grow">
+    <div class="flex flex-col gap-4 overflow-auto h-1 grow p-4 -m-4">
       @for (item of tasks(); track `card-${$index}-${item.id}`) {
         <a [routerLink]="['task', item.id]" queryParamsHandling="preserve">
           <app-card [data]="item"></app-card>

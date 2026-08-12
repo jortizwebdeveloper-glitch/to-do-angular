@@ -1,3 +1,4 @@
+
 function resetTime(date: string | number) {
   const $date = new Date(date);
   $date.setHours(0, 0, 0, 0);
@@ -15,6 +16,17 @@ export function filterByDate(date: string, status: boolean) {
       : status
         ? 'finalizadas'
         : 'hoy';
+}
+
+export function overDue(date:string){
+  const $date = resetTime(date);
+  const $now = resetTime(Date.now());
+
+  const msPerDay = 24 * 60 * 60 * 1000;
+  const diffInDays = Math.round(($date.getTime() - $now.getTime()) / msPerDay);
+
+  return diffInDays < 0;
+
 }
 
 export function keyDate(date: string) {

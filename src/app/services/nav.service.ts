@@ -55,6 +55,7 @@ export class NavService {
         link: {
           query: {
             fecha: 'finalizadas',
+            estado: 'all',
           },
         },
         count: 0,
