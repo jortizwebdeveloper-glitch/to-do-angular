@@ -1,6 +1,5 @@
 import { Component, input, output } from '@angular/core';
-
-import { Icon } from '../icon/icon';
+import { Icon } from '@components/01-atoms/icon/icon';
 
 @Component({
   selector: 'app-input',

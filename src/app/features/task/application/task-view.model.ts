@@ -1,5 +1,5 @@
-import type { CategoryViewModel } from '../../category';
-import type { TagViewModel } from '../../tag';
+import type { CategoryViewModel } from '@app/features/category';
+import type { TagViewModel } from '@app/features/tag';
 
 export enum STATUS_TASK {
   completada = 'Completada',

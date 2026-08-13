@@ -1,11 +1,12 @@
 // @ts-check
-const eslint = require('@eslint/js');
-const { defineConfig } = require('eslint/config');
-const tseslint = require('typescript-eslint');
-const angular = require('angular-eslint');
-const simpleImportSort = require('eslint-plugin-simple-import-sort');
+import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
+import tseslint from 'typescript-eslint';
+import angular from 'angular-eslint';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import importAlias from '@dword-design/eslint-plugin-import-alias';
 
-module.exports = defineConfig([
+export default defineConfig([
   {
     files: ['**/*.ts'],
     extends: [
@@ -13,6 +14,7 @@ module.exports = defineConfig([
       tseslint.configs.recommended,
       tseslint.configs.stylistic,
       angular.configs.tsRecommended,
+      importAlias.configs.recommended,
     ],
     processor: angular.processInlineTemplates,
     plugins: { 'simple-import-sort': simpleImportSort },
@@ -46,6 +48,7 @@ module.exports = defineConfig([
       'simple-import-sort/exports': 'error',
       'sort-imports': 'off',
       'import/order': 'off',
+      '@dword-design/import-alias/prefer-alias': 'error',
     },
   },
   {

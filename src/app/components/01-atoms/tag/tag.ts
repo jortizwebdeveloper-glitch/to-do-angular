@@ -1,6 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-
-import { getColor, type TColor } from '../../../core/shared/theme/color.registry';
+import { getColor, type TColor } from '@app/core/shared/theme/color.registry';
 
 @Component({
   selector: 'app-tag',

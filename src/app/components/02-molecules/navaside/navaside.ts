@@ -1,12 +1,11 @@
 import { Component, computed, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Icon } from '@components/01-atoms/icon/icon';
+import type { IconName } from '@components/01-atoms/icon/icon.registry';
+import { Tag } from '@components/01-atoms/tag/tag';
 
 import type { TColor } from '@/app/core/shared/theme/color.registry';
 import { getColor } from '@/app/core/shared/theme/color.registry';
-
-import { Icon } from '../../01-atoms/icon/icon';
-import type { IconName } from '../../01-atoms/icon/icon.registry';
-import { Tag } from '../../01-atoms/tag/tag';
 
 export interface TNavasideItem {
   id: number | string;

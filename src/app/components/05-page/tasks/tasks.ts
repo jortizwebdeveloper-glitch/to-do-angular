@@ -1,6 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Badge } from '@components/01-atoms/badge/badge';
+import { Icon } from '@components/01-atoms/icon/icon';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
 
@@ -9,8 +10,6 @@ import { DATE_COLOR, DATE_TASK, keyDate, overDue } from '@/app/core/shared/utils
 import { CategoryService } from '@/app/features/category';
 import { TagService } from '@/app/features/tag';
 import { getPriority, getStatus, TaskService } from '@/app/features/task';
-
-import { Icon } from '../../01-atoms/icon/icon';
 
 @Component({
   selector: 'app-item-list',

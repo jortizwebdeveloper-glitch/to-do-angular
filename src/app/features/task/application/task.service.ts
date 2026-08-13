@@ -1,10 +1,10 @@
 import { computed, inject, Service } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { CategoryService } from '@app/features/category';
+import { TagService } from '@app/features/tag';
+import type { TaskEntity } from '@app/features/task/domine/task.entity';
+import { TaskRepository } from '@app/features/task/infraestruture/task.repository.dexie';
 
-import { CategoryService } from '../../category';
-import { TagService } from '../../tag';
-import type { TaskEntity } from '../domine/task.entity';
-import { TaskRepository } from '../infraestruture/task.repository.dexie';
 import type { TaskViewModel } from './task-view.model';
 
 @Service()

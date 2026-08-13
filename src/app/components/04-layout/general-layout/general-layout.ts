@@ -1,11 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Icon } from '@components/01-atoms/icon/icon';
+import { Navaside, type TNavaside } from '@components/02-molecules/navaside/navaside';
 
 import { CategoryService } from '@/app/features/category';
 import { TagService } from '@/app/features/tag';
-
-import { Icon } from '../../01-atoms/icon/icon';
-import { Navaside, type TNavaside } from '../../02-molecules/navaside/navaside';
 
 @Component({
   selector: 'app-general-layout',
