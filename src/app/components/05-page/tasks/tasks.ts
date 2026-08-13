@@ -2,15 +2,13 @@ import { Component, computed, inject, input } from '@angular/core';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
-import { getColor, TColors } from '@/shared/theme/color.registry';
-import { DATE_COLOR, DATE_TASK, getPriority, getStatus } from '@/types/task.type';
-import { TaskService } from '@/app/services/task.service';
+import { getColor } from '@/app/core/shared/theme/color.registry';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../01-atoms/icon/icon';
-import { TagService } from '@/app/services/tag.service';
-import { CategoryService } from '@/app/services/category.service';
-import { TaskRow } from '@/app/db/schema/task.schema';
-import { keyDate, overDue } from '@/shared/utils/date';
+import { DATE_COLOR, DATE_TASK, keyDate, overDue } from '@/app/core/shared/utils/date';
+import { getPriority, getStatus, TaskService } from '@/app/features/task';
+import { TagService } from '@/app/features/tag';
+import { CategoryService } from '@/app/features/category';
 
 @Component({
   selector: 'app-item-list',
@@ -30,9 +28,11 @@ export class Tasks {
   color = getColor;
   priority = getPriority;
   status = getStatus;
+
   taskService = inject(TaskService);
   tagService = inject(TagService);
   categoryService = inject(CategoryService);
+
   task = computed(() => this.taskService.getTaskById(Number(this.id())));
   date = computed(() => {
     const date = this.task()?.dueDate;

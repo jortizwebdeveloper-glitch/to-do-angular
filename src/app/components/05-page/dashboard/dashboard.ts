@@ -1,12 +1,11 @@
-import { Component, computed, effect, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { Card } from '../../02-molecules/card/card';
 import { Tabs, type TOutputOnChangeTabs, TTabs } from '../../02-molecules/tabs/tabs';
 import { Input } from '../../01-atoms/input/input';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
-import { TaskService } from '@/app/services/task.service';
-import { STATUS_TASK, TTask } from '@/types/task.type';
-import { filterByDate } from '@/shared/utils/date';
-import { strNormalize } from '@/shared/utils/string';
+import { filterByDate } from '@/app/core/shared/utils/date';
+import { strNormalize } from '@/app/core/shared/utils/string';
+import { STATUS_TASK, TaskService, TaskViewModel } from '@/app/features/task';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +31,7 @@ export class Dashboard {
     const iSearch = strNormalize((this.search() ?? '') as string);
     const iFecha = this.fecha();
 
-    const tasks: TTask[] = [];
+    const tasks: TaskViewModel[] = [];
     for (const [_, task] of $tasks) {
       if (iCat != 'all' && task.categoria.id != Number(iCat)) continue;
       if (iTag != 'all' && !task.tags.some((t) => t.id === Number(iTag))) continue;

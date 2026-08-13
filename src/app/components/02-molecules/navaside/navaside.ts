@@ -1,9 +1,26 @@
 import { Component, computed, Input, input, TemplateRef } from '@angular/core';
 import { Icon } from '../../01-atoms/icon/icon';
-import { getColor } from '@/shared/theme/color.registry';
+import { getColor, TColor } from '@/app/core/shared/theme/color.registry';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { TNavaside, TNavasideItem } from '@/types/nav.type';
 import { Tag } from '../../01-atoms/tag/tag';
+import { IconName } from '../../01-atoms/icon/icon.registry';
+
+export type TNavasideItem = {
+  id: number | string;
+  icon?: IconName;
+  name: string;
+  color: TColor;
+  link?: {
+    path?: string;
+    query?: Record<string, string> | null;
+  };
+  count?: number;
+};
+
+export type TNavaside = {
+  title: string;
+  items: TNavasideItem[] | Record<string, TNavasideItem>;
+};
 
 @Component({
   selector: 'app-navaside',

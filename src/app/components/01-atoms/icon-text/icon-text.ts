@@ -1,7 +1,7 @@
 import { Component, computed, input } from '@angular/core';
 import { IconName } from '../icon/icon.registry';
 import { Icon } from '../icon/icon';
-import { getColor, TColors } from '../../../../shared/theme/color.registry';
+import { getColor, type TColor } from '../../../core/shared/theme/color.registry';
 
 @Component({
   selector: 'app-icon-text',
@@ -12,7 +12,7 @@ import { getColor, TColors } from '../../../../shared/theme/color.registry';
 export class IconText {
   icon = input<IconName>();
   textColor = input<boolean>(false);
-  color = input<TColors>('neutral');
+  color = input<TColor>('neutral');
   setColor = computed(() => getColor(this.color()));
   setTextColor = computed(() => {
     const key = getColor(this.color()).text;

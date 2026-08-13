@@ -3,7 +3,7 @@ import { Home } from './components/05-page/home/home';
 import { Dashboard } from './components/05-page/dashboard/dashboard';
 import { Tasks } from './components/05-page/tasks/tasks';
 import { GeneralLayout } from './components/04-layout/general-layout/general-layout';
-import { taxonomyGuard } from './guards/taxonomy.guard';
+import { taxonomyGuard } from './core/guards/taxonomy.guard';
 
 export const routes: Routes = [
   {

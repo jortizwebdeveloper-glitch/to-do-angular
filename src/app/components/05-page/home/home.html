@@ -1,1 +1,6 @@
-<p>home works!</p>
+<form (submit)="onSubmit($event)
+">
+<input type="text" [formField]="form.email" placeholder="Email">
+<input type="text" [formField]="form.password" placeholder="Password">
+<button type="submit">SEND</button>
+</form>

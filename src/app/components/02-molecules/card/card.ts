@@ -2,11 +2,11 @@ import { Component, computed, input } from '@angular/core';
 import { Tag } from '@components/01-atoms/tag/tag';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
-import { DATE_COLOR, DATE_TASK, getPriority, getStatus, TTask } from '@/types/task.type';
-import { getColor } from '@/shared/theme/color.registry';
+import { getColor } from '@/app/core/shared/theme/color.registry';
 import { Icon } from '../../01-atoms/icon/icon';
-import { keyDate } from '@/shared/utils/date';
+import { DATE_COLOR, DATE_TASK, keyDate } from '@/app/core/shared/utils/date';
 import { RouterLinkActive } from '@angular/router';
+import { getPriority, getStatus, TaskViewModel } from '@/app/features/task';
 
 @Component({
   selector: 'app-card',
@@ -15,7 +15,7 @@ import { RouterLinkActive } from '@angular/router';
   styleUrl: './card.css',
 })
 export class Card {
-  data = input.required<TTask>();
+  data = input.required<TaskViewModel>();
   active = input<boolean>();
   priority = getPriority;
   status = getStatus;

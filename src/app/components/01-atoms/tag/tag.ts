@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { getColor, TColors } from '../../../../shared/theme/color.registry';
+import { getColor, type TColor } from '../../../core/shared/theme/color.registry';
 
 @Component({
   selector: 'app-tag',
@@ -8,7 +8,7 @@ import { getColor, TColors } from '../../../../shared/theme/color.registry';
   styleUrl: './tag.css',
 })
 export class Tag {
-  color = input<TColors>('neutral');
+  color = input<TColor>('neutral');
   active = input<boolean>(false);
   size = input<'xs' | 'sm'>('xs');
   className = computed(() => {
