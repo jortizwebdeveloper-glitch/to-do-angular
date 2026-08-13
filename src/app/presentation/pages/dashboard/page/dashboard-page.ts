@@ -1,5 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { Router,RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Input } from '@components/01-atoms/input/input';
 import { Card } from '@components/02-molecules/card/card';
 import type { TTabs } from '@components/02-molecules/tabs/tabs';
@@ -13,10 +13,9 @@ import { STATUS_TASK, TaskService } from '@/app/features/task';
 @Component({
   selector: 'app-dashboard',
   imports: [Card, Tabs, Input, RouterOutlet, RouterLink],
-  templateUrl: './dashboard.html',
-  styleUrl: './dashboard.css',
+  templateUrl: './dashboard-page.html',
 })
-export class Dashboard {
+export class DashboardPage {
   private taskService = inject(TaskService);
   private router = inject(Router);
 

@@ -1,18 +1,17 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Icon } from '@components/01-atoms/icon/icon';
 import { Navaside, type TNavaside } from '@components/02-molecules/navaside/navaside';
 
 import { CategoryService } from '@/app/features/category';
 import { TagService } from '@/app/features/tag';
+import { GeneralLayout } from '@/app/presentation/components/ui/04-layout/general-layout/general-layout';
 
 @Component({
-  selector: 'app-general-layout',
-  imports: [RouterOutlet, Navaside, Icon],
-  templateUrl: './general-layout.html',
-  styleUrl: './general-layout.css',
+  selector: 'app-dashboard-layout',
+  imports: [RouterOutlet, Navaside, GeneralLayout],
+  templateUrl: './dashboard-layout.html',
 })
-export class GeneralLayout {
+export class DashboardLayout {
   private categoriesService = inject(CategoryService);
   private tagsService = inject(TagService);
   date_menu = signal<TNavaside>({

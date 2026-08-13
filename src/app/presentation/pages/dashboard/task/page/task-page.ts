@@ -21,10 +21,9 @@ export class ItemList {}
 @Component({
   selector: 'app-tasks',
   imports: [Icon, Badge, IconText, ItemList, Tag, RouterLink],
-  templateUrl: './tasks.html',
-  styleUrl: './tasks.css',
+  templateUrl: './task-page.html',
 })
-export class Tasks {
+export class TaskPage {
   id = input.required<number>();
   color = getColor;
   priority = getPriority;

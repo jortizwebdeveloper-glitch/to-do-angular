@@ -1,30 +1,29 @@
 import type { Routes } from '@angular/router';
 
-import { GeneralLayout } from './components/04-layout/general-layout/general-layout';
-import { Dashboard } from './components/05-page/dashboard/dashboard';
-import { Home } from './components/05-page/home/home';
-import { Tasks } from './components/05-page/tasks/tasks';
 import { taxonomyGuard } from './core/guards/taxonomy.guard';
+import { DashboardLayout, DashboardPage } from './presentation/pages/dashboard';
+import { TaskPage } from './presentation/pages/dashboard/task';
+import { HomePage } from './presentation/pages/home';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home,
+    component: HomePage,
   },
   {
     path: 'dashboard',
-    component: GeneralLayout,
+    component: DashboardLayout,
     children: [
       {
         path: '',
-        component: Dashboard,
+        component: DashboardPage,
         canActivate: [taxonomyGuard],
         children: [
           {
             path: 'task/:id',
-            component: Tasks,
+            component: TaskPage,
           },
-        ]
+        ],
       },
     ],
   },

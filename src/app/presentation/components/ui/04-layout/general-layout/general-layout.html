@@ -7,18 +7,10 @@
       <header class="font-semibold text-xl tracking-tight">TaskFlow</header>
     </div>
     <div class="py-3 px-2 flex flex-col gap-2 h-1 grow overflow-y-auto">
-      @let first = date_menu();
-      <app-navaside [data]="first"></app-navaside>
-      @let second = categories_menu();
-      <app-navaside [data]="second"></app-navaside>
-      
-      @let third = tags_menu();
-      @if (third.items?.length) {
-        <app-navaside [data]="third" type="tag"> </app-navaside>
-      }
+      <ng-content select="[aside-content]"></ng-content>
     </div>
   </aside>
   <main class="bg-zinc-200/50 dark:bg-slate-950 w-1 grow">
-    <router-outlet class="none" />
+    <ng-content select="[main-content]"></ng-content>
   </main>
 </section>

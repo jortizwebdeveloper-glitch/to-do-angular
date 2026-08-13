@@ -17,7 +17,8 @@
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
       "@public/*": ["./public/*"],
-      "@components/*": ["./src/app/components/*"]
+      "@components/*": ["./src/app/presentation/components/ui/*"],
+      "@pages/*": ["./src/app/presentation/pages/*"]
     }
   },
   "angularCompilerOptions": {

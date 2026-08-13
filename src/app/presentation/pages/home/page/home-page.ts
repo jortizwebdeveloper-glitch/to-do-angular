@@ -12,18 +12,16 @@ type TLogin = z.infer<typeof loginSchema>;
 @Component({
   selector: 'app-home',
   imports: [FormField],
-  templateUrl: './home.html',
-  styleUrl: './home.css',
+  templateUrl: './home-page.html',
 })
-export class Home {
+export class HomePage {
   fields = signal<TLogin>({ email: '', password: '' });
   form = form(this.fields, (f) => {
     validateStandardSchema(f, loginSchema);
   });
 
-  onSubmit(e:Event){
+  onSubmit(e: Event) {
     e.preventDefault();
-    console.log(this.form().valid(), this.form().value())
-
+    console.log(this.form().valid(), this.form().value());
   }
 }

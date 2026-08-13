@@ -1,0 +1,12 @@
+<app-general-layout>
+  @let first = date_menu();
+  <app-navaside aside-content [data]="first"></app-navaside>
+
+  @let second = categories_menu();
+  <app-navaside aside-content [data]="second"></app-navaside>
+
+  @let third = tags_menu();
+  <app-navaside aside-content [data]="third" type="tag"> </app-navaside>
+
+  <router-outlet main-content></router-outlet>
+</app-general-layout>
