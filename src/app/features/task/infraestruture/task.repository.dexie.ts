@@ -2,8 +2,8 @@ import { APP_DB } from '@/app/core/database/db.provider';
 import { inject, Service } from '@angular/core';
 import { liveQuery } from 'dexie';
 import { from } from 'rxjs';
-import { ITaskRepository } from '../domine/task.repository';
-import { TaskEntity } from '../domine/task.entity';
+import type { ITaskRepository } from '../domine/task.repository';
+import type { TaskEntity } from '../domine/task.entity';
 
 @Service()
 export class TaskRepository implements ITaskRepository {

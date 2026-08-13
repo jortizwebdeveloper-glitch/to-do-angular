@@ -1,5 +1,5 @@
 @let $el = data();
-@let $tag = type() == 'tag';
+@let $tag = type() === 'tag';
 <nav>
   <ul class="flex flex-wrap" [class]="$tag ? ' gap-2.5' : 'gap-0.5'">
     <li class="px-2 pt-2 pb-1 -mb-0.5 w-full">

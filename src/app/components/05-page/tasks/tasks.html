@@ -79,7 +79,7 @@
             <select name="categoria" class="bg-slate-800 p-2 border border-slate-700">
               <option value="" disabled>Categoria</option>
               @for (item of categoryService.$categoryArray(); track item.id) {
-                <option [selected]="$task.categoria.id == item.id" [value]="item.id">
+                <option [selected]="$task.categoria.id === item.id" [value]="item.id">
                   {{ item.name }}
                 </option>
               }
@@ -97,7 +97,7 @@
                     [id]="`input-tag-${tag.id}-${$index}`"
                     type="checkbox"
                     name="tags"
-                    [checked]="$task.tags.some((i) => i.id == tag.id)"
+                    [checked]="$task.tags.some((i) => i.id === tag.id)"
                     [value]="tag.id"
                   />
                   {{ tag.name }}

@@ -1,5 +1,5 @@
 import { APP_DB } from '@/app/core/database/db.provider';
-import { ITagRepository } from '../domine/tag.repository';
+import type { ITagRepository } from '../domine/tag.repository';
 import { inject, Service } from '@angular/core';
 import { from } from 'rxjs';
 import { liveQuery } from 'dexie';

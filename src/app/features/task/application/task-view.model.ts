@@ -1,5 +1,5 @@
-import { CategoryViewModel } from '../../category';
-import { TagViewModel } from '../../tag';
+import type { CategoryViewModel } from '../../category';
+import type { TagViewModel } from '../../tag';
 
 export enum STATUS_TASK {
   completada = 'Completada',
@@ -42,13 +42,13 @@ export function getPriority(key: TProrityTask) {
   };
 }
 
-export type TaskViewModel = {
+export interface TaskViewModel {
   id: number;
   title: string;
   description: string;
   categoria: CategoryViewModel;
-  tags: Array<TagViewModel>;
+  tags: TagViewModel[];
   status: TStatusTask;
   dueDate: string;
   priority: TProrityTask;
-};
+}

@@ -9,7 +9,7 @@
   >
   </span>
   @for (item of $items; track `tab-${$index}-${item.value}`) {
-    <li [class]="{ active: value() == item.value }" class="group/active">
+    <li [class]="{ active: key() === item.value }" class="group/active">
       <button
         (click)="onSetCurrent({ index: $index, value: item.value })"
         class="whitespace-nowrap h-full text-ellipsis overflow-hidden transition-color duration-500 ease-in-out cursor-pointer group-[.active]/active:opacity-100 opacity-50 group-[.active]/active:font-medium block content-center w-full leading-none px-4 py-2 text-center"

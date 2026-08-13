@@ -1,11 +1,15 @@
-import Dexie, { EntityTable } from 'dexie';
+import type { EntityTable } from 'dexie';
+import Dexie from 'dexie';
 
 import tasks from '@public/tasks.json';
 import categories from '@public/categorias.json';
 import tags from '@public/tags.json';
-import { TASK_INDEXED, TaskRow, TASKS_TABLE } from './schema/task.schema';
-import { CATEGORIES_TABLE, CATEGORY_INDEXED, CategoryRow } from './schema/category.schema';
-import { TAG_INDEXED, TagRow, TAGS_TABLE } from './schema/tags.schema';
+import type { TaskRow} from './schema/task.schema';
+import { TASK_INDEXED, TASKS_TABLE } from './schema/task.schema';
+import type { CategoryRow } from './schema/category.schema';
+import { CATEGORIES_TABLE, CATEGORY_INDEXED } from './schema/category.schema';
+import type { TagRow} from './schema/tags.schema';
+import { TAG_INDEXED, TAGS_TABLE } from './schema/tags.schema';
 
 export class AppTaskDataBase extends Dexie {
   tasks!: EntityTable<TaskRow, 'id'>;

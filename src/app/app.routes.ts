@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import type { Routes } from '@angular/router';
 import { Home } from './components/05-page/home/home';
 import { Dashboard } from './components/05-page/dashboard/dashboard';
 import { Tasks } from './components/05-page/tasks/tasks';

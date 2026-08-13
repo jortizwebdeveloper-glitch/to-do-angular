@@ -1,11 +1,12 @@
-import { Component, computed, Input, input, TemplateRef } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { Icon } from '../../01-atoms/icon/icon';
-import { getColor, TColor } from '@/app/core/shared/theme/color.registry';
+import type { TColor } from '@/app/core/shared/theme/color.registry';
+import { getColor } from '@/app/core/shared/theme/color.registry';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Tag } from '../../01-atoms/tag/tag';
-import { IconName } from '../../01-atoms/icon/icon.registry';
+import type { IconName } from '../../01-atoms/icon/icon.registry';
 
-export type TNavasideItem = {
+export interface TNavasideItem {
   id: number | string;
   icon?: IconName;
   name: string;
@@ -15,12 +16,12 @@ export type TNavasideItem = {
     query?: Record<string, string> | null;
   };
   count?: number;
-};
+}
 
-export type TNavaside = {
+export interface TNavaside {
   title: string;
   items: TNavasideItem[] | Record<string, TNavasideItem>;
-};
+}
 
 @Component({
   selector: 'app-navaside',

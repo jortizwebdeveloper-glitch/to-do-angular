@@ -11,9 +11,9 @@
   <div class="flex gap-4 px-4 py-3 bg-white dark:bg-slate-900 rounded-xl">
     <div class="self-center">
       <span class="size-7 block">
-        @if ($data.status == 'completada') {
+        @if ($data.status === 'completada') {
           <app-icon name="circle-check" [class]="$colorStatus.text"></app-icon>
-        } @else if ($data.status == 'en_curso') {
+        } @else if ($data.status === 'en_curso') {
           <app-icon name="circle-fading-arrow-up" [class]="$colorStatus.text"></app-icon>
         } @else {
           <app-icon name="circle" [class]="$colorStatus.text"></app-icon>

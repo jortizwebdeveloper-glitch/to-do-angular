@@ -1,15 +1,14 @@
-import { computeMsgId } from '@angular/compiler';
-import { afterEveryRender, Component, computed, input, model, output, signal } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 
-export type TTabs = {
+export interface TTabs {
   label: string;
   value: string;
-};
+}
 
-export type TOutputOnChangeTabs = {
+export interface TOutputOnChangeTabs {
   index: number;
   value: string;
-};
+}
 
 @Component({
   selector: 'app-tabs',
@@ -19,17 +18,17 @@ export type TOutputOnChangeTabs = {
 })
 export class Tabs {
   items = input.required<TTabs[]>();
-  key = input.required();
+  value = input.required();
 
-  value = computed(() => this.key());
+  key = computed(() => this.value());
   position = computed(() => {
-    const index = this.items().findIndex((i) => i.value == this.key());
+    const index = this.items().findIndex((i) => i.value == this.value());
     return index > 0 ? index : 0;
   });
 
-  onChange = output<TOutputOnChangeTabs>();
+  valueChange = output<TOutputOnChangeTabs>();
   onSetCurrent(event: TOutputOnChangeTabs) {
     const { index, value } = event;
-    this.onChange.emit({ index, value });
+    this.valueChange.emit({ index, value });
   }
 }

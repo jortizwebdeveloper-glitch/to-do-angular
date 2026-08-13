@@ -4,12 +4,12 @@
       <h1>Todas las tareas</h1>
     </div>
     <div class="flex gap-5 justify-between">
-      <app-input (onChange)="onChangeSearch($event)" [value]="search() ?? ''"></app-input>
-      @if (fecha() != 'finalizadas') {
+      <app-input (valueChange)="onChangeSearch($event)" [value]="search() ?? ''"></app-input>
+      @if (fecha() !== 'finalizadas') {
         <app-tabs
           [items]="statusList"
-          [key]="estado()"
-          (onChange)="onChangeStatus($event)"
+          [value]="estado()"
+          (valueChange)="onChangeStatus($event)"
           class="ml-auto"
         ></app-tabs>
       }

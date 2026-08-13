@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { IconName } from '../icon/icon.registry';
+import type { IconName } from '../icon/icon.registry';
 import { Icon } from '../icon/icon';
 import { getColor, type TColor } from '../../../core/shared/theme/color.registry';
 

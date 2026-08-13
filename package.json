@@ -9,7 +9,9 @@
     "test": "ng test",
     "serve:ssr:to-do": "node dist/to-do/server/server.mjs",
     "storybook": "ng run to-do:storybook",
-    "build-storybook": "ng run to-do:build-storybook"
+    "build-storybook": "ng run to-do:build-storybook",
+    "lint": "ng lint",
+    "lint:fix": "ng lint --fix"
   },
   "private": true,
   "packageManager": "pnpm@11.9.0",
@@ -32,22 +34,27 @@
     "@angular-devkit/architect": "^0.2200.0",
     "@angular-devkit/build-angular": "^22.0.0",
     "@angular-devkit/core": "^22.0.0",
+    "@angular-eslint/builder": "22.1.0",
     "@angular/build": "^22.0.4",
     "@angular/cli": "^22.0.4",
     "@angular/compiler-cli": "^22.0.0",
     "@angular/platform-browser-dynamic": "^22.0.0",
+    "@eslint/js": "^10.0.1",
     "@storybook/addon-a11y": "^10.4.6",
     "@storybook/addon-docs": "^10.4.6",
     "@storybook/angular": "^10.4.6",
     "@tailwindcss/postcss": "^4.1.12",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
+    "angular-eslint": "22.1.0",
+    "eslint": "^10.6.0",
     "jsdom": "^28.0.0",
     "postcss": "^8.5.3",
     "prettier": "^3.8.1",
     "storybook": "^10.4.6",
     "tailwindcss": "^4.1.12",
     "typescript": "~6.0.2",
+    "typescript-eslint": "8.62.1",
     "vitest": "^4.0.8"
   }
 }

@@ -5,8 +5,8 @@ import { TaskRepository } from '../infraestruture/task.repository.dexie';
 
 import { CategoryService } from '../../category';
 import { TagService } from '../../tag';
-import { TaskEntity } from '../domine/task.entity';
-import { TaskViewModel } from './task-view.model';
+import type { TaskEntity } from '../domine/task.entity';
+import type { TaskViewModel } from './task-view.model';
 
 @Service()
 export class TaskService {

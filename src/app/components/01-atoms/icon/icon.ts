@@ -1,7 +1,8 @@
 // icons/icon.component.ts
 import { Component, inject, input, resource } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ICON_REGISTRY, IconName } from './icon.registry';
+import type { IconName } from './icon.registry';
+import { ICON_REGISTRY } from './icon.registry';
 
 @Component({
   selector: 'app-icon',

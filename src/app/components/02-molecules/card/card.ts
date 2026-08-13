@@ -6,7 +6,8 @@ import { getColor } from '@/app/core/shared/theme/color.registry';
 import { Icon } from '../../01-atoms/icon/icon';
 import { DATE_COLOR, DATE_TASK, keyDate } from '@/app/core/shared/utils/date';
 import { RouterLinkActive } from '@angular/router';
-import { getPriority, getStatus, TaskViewModel } from '@/app/features/task';
+import type { TaskViewModel } from '@/app/features/task';
+import { getPriority, getStatus } from '@/app/features/task';
 
 @Component({
   selector: 'app-card',

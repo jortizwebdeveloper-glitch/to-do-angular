@@ -3,7 +3,8 @@
   "version": 1,
   "cli": {
     "packageManager": "pnpm",
-    "analytics": "041b07b1-e83a-4f36-8f3b-49044ef85912"
+    "analytics": "041b07b1-e83a-4f36-8f3b-49044ef85912",
+    "schematicCollections": ["angular-eslint"]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -25,9 +26,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "styles": ["src/styles.css"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "security": {
@@ -92,6 +91,12 @@
             "browserTarget": "to-do:build",
             "compodoc": false,
             "outputDir": "storybook-static"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
