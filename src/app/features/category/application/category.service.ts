@@ -2,7 +2,7 @@ import { computed, inject, Service } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CategoryRepository } from '@app/features/category/infraestructure/category.repository.dexie';
 
-import type { CategoryViewModel } from './category-view.model';
+import type { CategoryViewModel } from './category.view';
 
 @Service()
 export class CategoryService {

@@ -5,7 +5,7 @@ import { TagService } from '@app/features/tag';
 import type { TaskEntity } from '@app/features/task/domine/task.entity';
 import { TaskRepository } from '@app/features/task/infraestruture/task.repository.dexie';
 
-import type { TaskViewModel } from './task-view.model';
+import type { TaskViewModel } from './task.view';
 
 @Service()
 export class TaskService {

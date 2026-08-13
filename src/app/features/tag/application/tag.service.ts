@@ -2,7 +2,7 @@ import { computed, inject, Service } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { TagRepository } from '@app/features/tag/infraestructure/tag.repository.dexie';
 
-import type { TagViewModel } from './tag-view.model';
+import type { TagViewModel } from './tag.view';
 
 @Service()
 export class TagService {
