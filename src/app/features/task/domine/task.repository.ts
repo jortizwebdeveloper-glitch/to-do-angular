@@ -1,4 +1,5 @@
 import type { Observable } from 'rxjs';
+
 import type { TaskEntity } from './task.entity';
 
 export interface ITaskRepository {

@@ -1,9 +1,11 @@
 import { inject, Service } from '@angular/core';
-import type { ICategoryRepository } from '../domine/category.repository';
-import { APP_DB } from '@/app/core/database/db.provider';
-import { from, type Observable } from 'rxjs';
 import { liveQuery } from 'dexie';
+import { from, type Observable } from 'rxjs';
+
+import { APP_DB } from '@/app/core/database/db.provider';
+
 import type { CategoryEntity } from '../domine/category.entity';
+import type { ICategoryRepository } from '../domine/category.repository';
 
 @Service()
 export class CategoryRepository implements ICategoryRepository {

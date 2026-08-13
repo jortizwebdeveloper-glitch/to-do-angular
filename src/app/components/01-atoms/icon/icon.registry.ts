@@ -18,4 +18,4 @@ const ICON_REGISTRY = {
 
 export type IconName = keyof typeof ICON_REGISTRY;
 const ICON_LIST = Object.keys(ICON_REGISTRY) as IconName[];
-export { ICON_REGISTRY, ICON_LIST };
+export { ICON_LIST,ICON_REGISTRY };

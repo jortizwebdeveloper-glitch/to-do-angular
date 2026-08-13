@@ -1,4 +1,5 @@
 import { Component, input, output } from '@angular/core';
+
 import { Icon } from '../icon/icon';
 
 @Component({

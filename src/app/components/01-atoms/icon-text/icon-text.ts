@@ -1,7 +1,8 @@
 import { Component, computed, input } from '@angular/core';
-import type { IconName } from '../icon/icon.registry';
-import { Icon } from '../icon/icon';
+
 import { getColor, type TColor } from '../../../core/shared/theme/color.registry';
+import { Icon } from '../icon/icon';
+import type { IconName } from '../icon/icon.registry';
 
 @Component({
   selector: 'app-icon-text',

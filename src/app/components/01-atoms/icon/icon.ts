@@ -1,6 +1,7 @@
 // icons/icon.component.ts
 import { Component, inject, input, resource } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+
 import type { IconName } from './icon.registry';
 import { ICON_REGISTRY } from './icon.registry';
 
