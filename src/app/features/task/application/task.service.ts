@@ -32,16 +32,20 @@ export class TaskService {
       ]),
     );
   });
+
   getTaskById(id: number) {
+    return this.taskRepository.getById(id);
+  }
+  getTaskByIdWithRelation(id: number) {
     const task = this.$tasks().get(id);
     if (!task) return;
 
     return task;
   }
   async updateTaskById(id: number, body: Partial<Omit<TaskEntity, 'id'>>) {
-    await this.taskRepository.update(Number(id), {
+    await this.taskRepository.update(id, {
       title: body.title,
-      categoria: Number(body.categoria),
+      categoria: body.categoria,
       dueDate: body.dueDate,
       tags: body.tags?.length ? body.tags : [],
     });

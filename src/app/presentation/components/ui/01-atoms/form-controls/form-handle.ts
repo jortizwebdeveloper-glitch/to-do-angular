@@ -1,10 +1,10 @@
 import { Component, output } from '@angular/core';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form-control.html',
+  selector: 'app-form-handle',
+  templateUrl: './form-handle.html',
 })
-export class FormControl {
+export class FormHandle {
   submitHandle = output();
   
   onSubmit(e: Event) {

@@ -12,6 +12,9 @@ export class TaskRepository implements ITaskRepository {
   getAll() {
     return from(liveQuery(async () => (await this.db?.tasks.toArray()) ?? []));
   }
+  getById(id: number) {
+    return from(liveQuery(async () => await this.db?.tasks.get(id)));
+  }
   async update(id: number, body: Partial<Omit<TaskEntity, 'id'>>) {
     await this.db?.tasks.update(id, body).then((res) => {
       console.log(res);

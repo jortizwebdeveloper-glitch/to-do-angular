@@ -1,4 +1,4 @@
-<form (submit)="onSubmit($event)" class="p-6 flex flex-col gap-4">
+<app-form-handle (submitHandle)="onCreateSubmit()">
   <app-input-text label="Título" [formField]="formCreate.title"></app-input-text>
   <app-input-select
     label="Categoría"
@@ -15,12 +15,29 @@
     [formField]="formCreate.tags"
     [options]="tagOptions()"
   ></app-checkbox-list>
+  <button class="px-4 py-2 rounded-md bg-linear-to-t from-blue-800 to-blue-600" type="submit">
+    Enviar
+  </button>
+</app-form-handle>
+<hr />
+<app-form-handle (submitHandle)="onUpdateSubmit()">
+  <app-input-text label="Título" [formField]="formUpdate.title"></app-input-text>
+  <app-input-select
+    label="Categoría"
+    [formField]="formUpdate.categoria"
+    [options]="categoryOptions()"
+  ></app-input-select>
+  <app-input-select
+    label="Prioridad"
+    [formField]="formUpdate.priority"
+    [options]="priorityOptions()"
+  ></app-input-select>
   <app-checkbox-list
     label="Etiquetas"
-    [formField]="formCreate.tags"
+    [formField]="formUpdate.tags"
     [options]="tagOptions()"
   ></app-checkbox-list>
   <button class="px-4 py-2 rounded-md bg-linear-to-t from-blue-800 to-blue-600" type="submit">
     Enviar
   </button>
-</form>
+</app-form-handle>

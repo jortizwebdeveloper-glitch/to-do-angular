@@ -14,11 +14,11 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@/*": ["./src/*"],
-      "@app/*": ["./src/app/*"],
       "@public/*": ["./public/*"],
       "@components/*": ["./src/app/presentation/components/ui/*"],
-      "@pages/*": ["./src/app/presentation/pages/*"]
+      "@pages/*": ["./src/app/presentation/pages/*"],
+      "@app/*": ["./src/app/*"],
+      "@/*": ["./src/*"]
     }
   },
   "angularCompilerOptions": {

@@ -33,7 +33,7 @@ export class TaskPage {
   tagService = inject(TagService);
   categoryService = inject(CategoryService);
 
-  task = computed(() => this.taskService.getTaskById(Number(this.id())));
+  task = computed(() => this.taskService.getTaskByIdWithRelation(Number(this.id())));
   date = computed(() => {
     const date = this.task()?.dueDate;
     const key = keyDate(date ?? '');

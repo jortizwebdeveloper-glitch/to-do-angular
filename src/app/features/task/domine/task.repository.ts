@@ -4,5 +4,6 @@ import type { TaskEntity } from './task.entity';
 
 export interface ITaskRepository {
   getAll(): Observable<TaskEntity[]>;
+  getById(id: number): Observable<TaskEntity | undefined>;
   update(id: number, body: Partial<Omit<TaskEntity, 'id'>>): Promise<void>;
 }
