@@ -1,0 +1,16 @@
+@let $invalid = touched() && invalid();
+<app-input-label [label]="label()" [invalid]="$invalid" [errors]="errors()">
+  <select class="px-4 py-1.5 w-full" [name]="name()" [value]="value()" (blur)="onBlur()">
+    @for (option of options(); track $index) {
+      <option
+        (click)="onInput($event, option.value)"
+        class="text-white"
+        [disabled]="!option.value"
+        [value]="option.value"
+        [selected]="option.value === value()"
+      >
+        {{ option.label }}
+      </option>
+    }
+  </select>
+</app-input-label>

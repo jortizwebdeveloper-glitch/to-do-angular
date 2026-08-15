@@ -34,6 +34,7 @@ export enum PRIORITY_COLOR {
 }
 
 export type TProrityTask = keyof typeof PRIORITY_TASK;
+export const PRIORITY_TASK_VALUES = Object.keys(PRIORITY_TASK) as TProrityTask[];
 
 export function getPriority(key: TProrityTask) {
   return {

@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { inject, PLATFORM_ID } from '@angular/core';
-import type { CanActivateFn} from '@angular/router';
+import type { CanActivateFn } from '@angular/router';
 import { createUrlTreeFromSnapshot } from '@angular/router';
 
 const DEFAULT_QUERY_PARAMS: Record<string, string> = {

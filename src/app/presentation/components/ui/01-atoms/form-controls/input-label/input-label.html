@@ -1,0 +1,21 @@
+@let $invalid = invalid();
+<fieldset
+  [class]="$invalid ? 'border-red-500' : 'border-white/25'"
+  class="border bg-white/5"
+>
+  @let $label = label();
+  @if ($label) {
+    <legend class="mx-2 px-2">
+      {{ $label }}
+    </legend>
+  }
+  <ng-content></ng-content>
+
+  @if ($invalid) {
+    @for (error of errors(); track $index) {
+      <p class="px-4 pb-1.5 text-red-500">
+        {{ error.message }}
+      </p>
+    }
+  }
+</fieldset>

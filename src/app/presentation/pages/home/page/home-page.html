@@ -1,6 +1,26 @@
-<form (submit)="onSubmit($event)
-">
-<input type="text" [formField]="form.email" placeholder="Email">
-<input type="text" [formField]="form.password" placeholder="Password">
-<button type="submit">SEND</button>
+<form (submit)="onSubmit($event)" class="p-6 flex flex-col gap-4">
+  <app-input-text label="Título" [formField]="formCreate.title"></app-input-text>
+  <app-input-select
+    label="Categoría"
+    [formField]="formCreate.categoria"
+    [options]="categoryOptions()"
+  ></app-input-select>
+  <app-input-select
+    label="Prioridad"
+    [formField]="formCreate.priority"
+    [options]="priorityOptions()"
+  ></app-input-select>
+  <app-checkbox-list
+    label="Etiquetas"
+    [formField]="formCreate.tags"
+    [options]="tagOptions()"
+  ></app-checkbox-list>
+  <app-checkbox-list
+    label="Etiquetas"
+    [formField]="formCreate.tags"
+    [options]="tagOptions()"
+  ></app-checkbox-list>
+  <button class="px-4 py-2 rounded-md bg-linear-to-t from-blue-800 to-blue-600" type="submit">
+    Enviar
+  </button>
 </form>

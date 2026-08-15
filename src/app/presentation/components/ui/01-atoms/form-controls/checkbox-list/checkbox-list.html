@@ -1,0 +1,20 @@
+@let $invalid = touched() && invalid();
+<app-input-label [label]="label()" [invalid]="$invalid" [errors]="errors()">
+  <ul class="flex flex-wrap gap-4 px-4 py-1.5">
+    @for (option of options(); track $index) {
+      @let $id = `${name()}-${option.value}-${$index}`;
+      <li class="flex gap-2.5">
+        <input
+          [id]="$id"
+          type="checkbox"
+          (change)="onBlur()"
+          (input)="onInput( $event, option.value)"
+          [value]="option.value"
+          [checked]="value()?.some((v) => option.value === v)"
+        />
+        <label [for]="$id">{{ option.label }}</label>
+      </li>
+      <option class="text-white" [disabled]="!option.value" [value]="option.value"></option>
+    }
+  </ul>
+</app-input-label>
