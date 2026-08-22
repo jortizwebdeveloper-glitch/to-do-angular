@@ -14,6 +14,7 @@ const ICON_REGISTRY = {
   folder: () => import('./lucide/folder'),
   list: () => import('./lucide/list'),
   search: () => import('./lucide/search'),
+  x: () => import('./lucide/x'),
 } as const;
 
 export type IconName = keyof typeof ICON_REGISTRY;

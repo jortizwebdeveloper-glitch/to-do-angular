@@ -1,11 +1,11 @@
 @let $invalid = touched() && invalid();
 <app-input-label [label]="label()" [invalid]="$invalid" [errors]="errors()">
   <input
-    type="text"
+    type="date"
     class="px-4 py-1.5 w-full"
     [placeholder]="placeholder()"
     [name]="name()"
-    [value]="value()"
+    [value]="visibleValue()"
     (input)="onInput($event)"
     (blur)="onBlur()"
   />

@@ -1,6 +1,6 @@
 @let $invalid = touched() && invalid();
 <app-input-label [label]="label()" [invalid]="$invalid" [errors]="errors()">
-  <ul class="flex flex-wrap gap-4 px-4 py-1.5">
+  <ul class="flex flex-wrap gap-5 px-4 py-4">
     @for (option of options(); track $index) {
       @let $id = `${name()}-${option.value}-${$index}`;
       <li class="flex gap-2.5">
@@ -8,13 +8,13 @@
           [id]="$id"
           type="checkbox"
           (change)="onBlur()"
-          (input)="onInput( $event, option.value)"
+          (input)="onInput($event, option.value)"
           [value]="option.value"
           [checked]="value()?.some((v) => option.value === v)"
         />
-        <label [for]="$id">{{ option.label }}</label>
+        <span class="ng-checkbox mt-1"> </span>
+        <label class="cursor-pointer" [for]="$id">{{ option.label }}</label>
       </li>
-      <option class="text-white" [disabled]="!option.value" [value]="option.value"></option>
     }
   </ul>
 </app-input-label>

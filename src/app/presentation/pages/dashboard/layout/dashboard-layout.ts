@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { AppButton } from '@components/01-atoms/button/button.directive';
 import { Navaside, type TNavaside } from '@components/02-molecules/navaside/navaside';
 
 import { CategoryService } from '@/app/features/category';
@@ -8,7 +9,7 @@ import { GeneralLayout } from '@/app/presentation/components/ui/04-layout/genera
 
 @Component({
   selector: 'app-dashboard-layout',
-  imports: [RouterOutlet, Navaside, GeneralLayout],
+  imports: [RouterOutlet, Navaside, GeneralLayout, RouterLink, AppButton],
   templateUrl: './dashboard-layout.html',
 })
 export class DashboardLayout {

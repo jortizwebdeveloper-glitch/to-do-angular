@@ -1,13 +1,18 @@
 <section class="flex h-screen">
   <aside class="w-72 shadow-md bg-white dark:bg-slate-900 flex flex-col">
-    <div class="flex items-center gap-3 pt-4 px-4 pb-3">
-      <span class="block size-7 p-1.5 bg-blue-500 text-white rounded-lg">
-        <app-icon name="check"></app-icon>
-      </span>
-      <header class="font-semibold text-xl tracking-tight">TaskFlow</header>
+    <div class="pt-4 px-4 pb-3">
+      <div class="flex items-center gap-3">
+        <span class="block size-7 p-1.5 bg-blue-500 text-white rounded-lg">
+          <app-icon name="check"></app-icon>
+        </span>
+        <header class="font-semibold text-xl tracking-tight">TaskFlow</header>
+      </div>
     </div>
     <div class="py-3 px-2 flex flex-col gap-2 h-1 grow overflow-y-auto">
       <ng-content select="[aside-content]"></ng-content>
+    </div>
+    <div class="pt-3 px-4 pb-4">
+      <ng-content select="[aside-footer]"></ng-content>
     </div>
   </aside>
   <main class="bg-zinc-200/50 dark:bg-slate-950 w-1 grow">

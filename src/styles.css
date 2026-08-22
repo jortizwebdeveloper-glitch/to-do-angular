@@ -3,5 +3,36 @@
 @import 'tailwindcss';
 
 body {
-    font-family: 'Poppins';
+  font-family: 'Poppins';
+}
+@layer components {
+  input[type='checkbox'] {
+    display: none;
+    & + .ng-checkbox {
+      position: relative;
+      cursor: pointer;
+      display: block;
+      width: 1em;
+      height: 1em;
+      border-radius: var(--radius-sm);
+      background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
+      transition: 0.1s ease background-color;
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        filter: invert();
+        background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZWNrLWljb24gbHVjaWRlLWNoZWNrIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiLz48L3N2Zz4=')
+          center / contain;
+        opacity: 0;
+        transition: 0.1s ease opacity;
+      }
+    }
+    &:checked + .ng-checkbox {
+      background-color: var(--color-blue-500);
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
 }

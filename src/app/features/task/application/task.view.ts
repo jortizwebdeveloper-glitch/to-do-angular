@@ -13,6 +13,7 @@ export enum STATUS_COLOR {
   pendiente = 'amber',
 }
 export type TStatusTask = keyof typeof STATUS_TASK;
+export const STATU_TASK_VALUES = Object.keys(STATUS_TASK) as TStatusTask[];
 
 export function getStatus(key: TStatusTask) {
   return {

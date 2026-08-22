@@ -1,17 +1,17 @@
 import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { form, FormField, submit, validateStandardSchema } from '@angular/forms/signals';
-import { z } from 'zod';
-
-import { CategoryService } from '@/app/features/category';
-import { TagService } from '@/app/features/tag';
-import { PRIORITY_TASK, PRIORITY_TASK_VALUES, TaskService } from '@/app/features/task';
 import {
   CheckboxList,
   FormHandle,
   InputSelect,
   InputText,
 } from '@components/01-atoms/form-controls';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { z } from 'zod';
+
+import { CategoryService } from '@/app/features/category';
+import { TagService } from '@/app/features/tag';
+import { PRIORITY_TASK, PRIORITY_TASK_VALUES, TaskController } from '@/app/features/task';
 
 const formTaskSchema = z.object({
   title: z.string().min(4, 'El titulo debe ser minimo 4 caracteres'),
@@ -69,10 +69,10 @@ export class HomePage {
   }
 
   taskId = signal<number>(2);
-  taskService = inject(TaskService);
+  taskController = inject(TaskController);
   taskResource = rxResource({
     params: () => this.taskId(),
-    stream: (rsrc) => this.taskService.getTaskById(rsrc.params),
+    stream: (rsrc) => this.taskController.getTask(rsrc.params),
   });
   updateFields = linkedSignal<TaskCreateZod>(
     () =>

@@ -1,11 +1,11 @@
 @let $invalid = invalid();
 <fieldset
-  [class]="$invalid ? 'border-red-500' : 'border-white/25'"
-  class="border bg-white/5"
+  [class]="$invalid ? 'border-red-500' : 'border-white/15'"
+  class="border bg-black/15 rounded-lg w-ful"
 >
   @let $label = label();
   @if ($label) {
-    <legend class="mx-2 px-2">
+    <legend class="mx-2 px-2 leading-0">
       {{ $label }}
     </legend>
   }

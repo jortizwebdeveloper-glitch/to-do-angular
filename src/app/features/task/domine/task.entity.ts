@@ -4,7 +4,10 @@ export interface TaskEntity {
   description: string;
   categoria: number;
   tags: number[];
-  status: string;
+  status: 'en_curso' | 'pendiente' | 'completada';
+  priority: 'baja' | 'media' | 'alta';
   dueDate: string;
-  priority: string;
 }
+
+export type CreateTaskEntity = Omit<TaskEntity, 'id'>;
+export type UpdateTaskEntity = Partial<Omit<TaskEntity, 'id'>>;

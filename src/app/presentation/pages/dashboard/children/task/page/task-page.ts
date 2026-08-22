@@ -9,7 +9,7 @@ import { getColor } from '@/app/core/shared/theme/color.registry';
 import { DATE_COLOR, DATE_TASK, keyDate, overDue } from '@/app/core/shared/utils/date';
 import { CategoryService } from '@/app/features/category';
 import { TagService } from '@/app/features/tag';
-import { getPriority, getStatus, TaskService } from '@/app/features/task';
+import { getPriority, getStatus, TaskController } from '@/app/features/task';
 
 @Component({
   selector: 'app-item-list',
@@ -29,11 +29,11 @@ export class TaskPage {
   priority = getPriority;
   status = getStatus;
 
-  taskService = inject(TaskService);
+  taskController = inject(TaskController);
   tagService = inject(TagService);
   categoryService = inject(CategoryService);
 
-  task = computed(() => this.taskService.getTaskByIdWithRelation(Number(this.id())));
+  task = computed(() => this.taskController.getTaskWithRelation(this.id()));
   date = computed(() => {
     const date = this.task()?.dueDate;
     const key = keyDate(date ?? '');
@@ -51,9 +51,6 @@ export class TaskPage {
     const body: Record<string, any> = {};
     for (const [key, value] of formData.entries()) {
       switch (key) {
-        case 'dueDate':
-          body['dueDate'] = String(value).replaceAll('-', '/');
-          break;
         case 'tags':
           if (!body['tags']) body['tags'] = [];
 
@@ -63,7 +60,6 @@ export class TaskPage {
           body[key] = value;
       }
     }
-
-    this.taskService.updateTaskById(this.id(), body);
+    this.taskController.updateTask(this.id(), body);
   }
 }

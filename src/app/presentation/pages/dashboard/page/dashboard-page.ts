@@ -8,7 +8,7 @@ import { Tabs, type TOutputOnChangeTabs } from '@components/02-molecules/tabs/ta
 import { filterByDate } from '@/app/core/shared/utils/date';
 import { strNormalize } from '@/app/core/shared/utils/string';
 import type { TaskViewModel } from '@/app/features/task';
-import { STATUS_TASK, TaskService } from '@/app/features/task';
+import { STATUS_TASK, TaskController } from '@/app/features/task';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,7 +16,7 @@ import { STATUS_TASK, TaskService } from '@/app/features/task';
   templateUrl: './dashboard-page.html',
 })
 export class DashboardPage {
-  private taskService = inject(TaskService);
+  private taskController = inject(TaskController);
   private router = inject(Router);
 
   categoria = input<string>();
@@ -26,7 +26,7 @@ export class DashboardPage {
   fecha = input<string>();
 
   tasks = computed(() => {
-    const $tasks = this.taskService.$tasks();
+    const $tasks = this.taskController.getTasks();
     const iCat = this.categoria();
     const iTag = this.tag();
     const iEst = this.estado();

@@ -1,2 +1,2 @@
-export { TaskService } from './application/task.service';
-export * from "./application/task.view"
+export { TaskController } from './application/task.controller';
+export * from './application/task.view';
