@@ -113,7 +113,8 @@ export class CreateTaskPage implements OnDestroy {
   createTaskSubmit() {
     submit(this.createForm, async (fields) => {
       const $value = fields().value();
-      await this.taskController.createTask($value);
+      const res = await this.taskController.createTask($value);
+      console.log(res);
     });
   }
 }

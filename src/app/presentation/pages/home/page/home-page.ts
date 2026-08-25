@@ -7,6 +7,7 @@ import {
   InputSelect,
   InputText,
 } from '@components/01-atoms/form-controls';
+import {  of } from 'rxjs';
 import { z } from 'zod';
 
 import { CategoryService } from '@/app/features/category';
@@ -68,11 +69,14 @@ export class HomePage {
     });
   }
 
-  taskId = signal<number>(2);
+  taskId = signal(2);
   taskController = inject(TaskController);
   taskResource = rxResource({
     params: () => this.taskId(),
-    stream: (rsrc) => this.taskController.getTask(rsrc.params),
+    stream: ({ params: id }) => {
+      const res = this.taskController.getTask(id);
+      return res.ok ? res.data : of(undefined);
+    },
   });
   updateFields = linkedSignal<TaskCreateZod>(
     () =>

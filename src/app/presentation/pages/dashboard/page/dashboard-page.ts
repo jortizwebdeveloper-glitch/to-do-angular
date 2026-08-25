@@ -27,21 +27,23 @@ export class DashboardPage {
 
   tasks = computed(() => {
     const $tasks = this.taskController.getTasks();
-    const iCat = this.categoria();
-    const iTag = this.tag();
-    const iEst = this.estado();
-    const iSearch = strNormalize((this.search() ?? '') as string);
-    const iFecha = this.fecha();
-
     const tasks: TaskViewModel[] = [];
-    for (const [, task] of $tasks) {
-      if (iCat != 'all' && task.categoria.id != Number(iCat)) continue;
-      if (iTag != 'all' && !task.tags.some((t) => t.id === Number(iTag))) continue;
-      if (iEst != 'all' && task.status !== iEst) continue;
-      if (iFecha !== filterByDate(task.dueDate, task.status === 'completada')) continue;
-      if (iSearch && !strNormalize(task.title).includes(iSearch)) continue;
+    if ($tasks.ok) {
+      const iCat = this.categoria();
+      const iTag = this.tag();
+      const iEst = this.estado();
+      const iSearch = strNormalize((this.search() ?? '') as string);
+      const iFecha = this.fecha();
 
-      tasks.push(task);
+      for (const [, task] of $tasks.data) {
+        if (iCat != 'all' && task.categoria.id != Number(iCat)) continue;
+        if (iTag != 'all' && !task.tags.some((t) => t.id === Number(iTag))) continue;
+        if (iEst != 'all' && task.status !== iEst) continue;
+        if (iFecha !== filterByDate(task.dueDate, task.status === 'completada')) continue;
+        if (iSearch && !strNormalize(task.title).includes(iSearch)) continue;
+
+        tasks.push(task);
+      }
     }
 
     return tasks;

@@ -42,9 +42,9 @@ export class TaskService {
     return task;
   }
   async createTask(body: CreateTaskDTO) {
-    return await this.taskRepository.add({ ...body, status: 'pendiente' });
+    return this.taskRepository.add({ ...body, status: 'pendiente' });
   }
   async updateTaskById(id: number, body: UpdateTaskDTO) {
-    return await this.taskRepository.update(id, body);
+    return this.taskRepository.update(id, body);
   }
 }

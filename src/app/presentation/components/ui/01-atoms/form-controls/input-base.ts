@@ -10,7 +10,7 @@ export abstract class InputBase<T> implements FormValueControl<T | null> {
   errors = input<readonly ValidationError[]>([]);
   touch = output<void>();
 
-  placeholder = input<string>();
+  placeholder = input<string>('');
   label = input<string>();
 
   onBlur() {

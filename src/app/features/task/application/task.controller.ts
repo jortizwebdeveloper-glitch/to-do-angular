@@ -1,38 +1,41 @@
 import { inject, Service } from '@angular/core';
+import { ControllerException } from '@app/core/shared/utils/errors';
 
 import { createTaskSchemaDTO, idTaskSchemaDTO, updateTaskSchemaDTO } from './task.dto';
 import { TaskService } from './task.service';
 
 @Service()
-export class TaskController {
+export class TaskController extends ControllerException {
   private taskService = inject(TaskService);
   getTasks() {
-    return this.taskService.$tasks();
+    return this.validate(() => this.taskService.$tasks(), 'TaskController:getTasks');
   }
   getTask(id: number) {
-    const ID = idTaskSchemaDTO.parse({ id }).id;
-    return this.taskService.getTaskById(ID);
+    return this.validate(
+      () => this.taskService.getTaskById(idTaskSchemaDTO.parse({ id }).id),
+      'TaskController:getTask',
+    );
   }
   getTaskWithRelation(id: number) {
-    return this.taskService.getTaskByIdWithRelation(Number(id));
+    return this.validate(
+      () => this.taskService.getTaskByIdWithRelation(idTaskSchemaDTO.parse({ id }).id),
+      'TaskController:getTaskWithRelation',
+    );
   }
   async createTask(body: Record<string, unknown>) {
-    try {
-      const id = await this.taskService.createTask(createTaskSchemaDTO.parse(body));
-      console.log('Tarea creada: ', id);
-    } catch (e) {
-      console.warn('TaskController:createTask', e);
-    }
+    return this.validateAsync(
+      () => this.taskService.createTask(createTaskSchemaDTO.parse(body)),
+      'TaskController:createTask',
+    );
   }
   async updateTask(id: number, body: Record<string, unknown>) {
-    try {
-      const changes = await this.taskService.updateTaskById(
-        Number(id),
-        updateTaskSchemaDTO.parse(body),
-      );
-      console.log('Registros afectados: ', changes);
-    } catch (e) {
-      console.warn('TaskController:updateTask', e);
-    }
+    return this.validateAsync(
+      () =>
+        this.taskService.updateTaskById(
+          idTaskSchemaDTO.parse({ id }).id,
+          updateTaskSchemaDTO.parse(body),
+        ),
+      'TaskController:updateTask',
+    );
   }
 }

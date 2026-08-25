@@ -1,43 +1,48 @@
 <app-form-handle (submitHandle)="onCreateSubmit()">
-  <app-input-text label="Título" [formField]="formCreate.title"></app-input-text>
-  <app-input-select
-    label="Categoría"
-    [formField]="formCreate.categoria"
-    [options]="categoryOptions()"
-  ></app-input-select>
-  <app-input-select
-    label="Prioridad"
-    [formField]="formCreate.priority"
-    [options]="priorityOptions()"
-  ></app-input-select>
-  <app-checkbox-list
-    label="Etiquetas"
-    [formField]="formCreate.tags"
-    [options]="tagOptions()"
-  ></app-checkbox-list>
-  <button class="px-4 py-2 rounded-md bg-linear-to-t from-blue-800 to-blue-600" type="submit">
-    Enviar
-  </button>
+  <div class="flex flex-col gap-5">
+    
+    <app-input-text label="Título" [formField]="formCreate.title"></app-input-text>
+    <app-input-select
+      label="Categoría"
+      [formField]="formCreate.categoria"
+      [options]="categoryOptions()"
+    ></app-input-select>
+    <app-input-select
+      label="Prioridad"
+      [formField]="formCreate.priority"
+      [options]="priorityOptions()"
+    ></app-input-select>
+    <app-checkbox-list
+      label="Etiquetas"
+      [formField]="formCreate.tags"
+      [options]="tagOptions()"
+    ></app-checkbox-list>
+    <button class="px-4 py-2 rounded-md bg-linear-to-t from-blue-800 to-blue-600" type="submit">
+      Enviar
+    </button>
+  </div>
 </app-form-handle>
-<hr />
+<hr class="my-10"/>
 <app-form-handle (submitHandle)="onUpdateSubmit()">
-  <app-input-text label="Título" [formField]="formUpdate.title"></app-input-text>
-  <app-input-select
-    label="Categoría"
-    [formField]="formUpdate.categoria"
-    [options]="categoryOptions()"
-  ></app-input-select>
-  <app-input-select
-    label="Prioridad"
-    [formField]="formUpdate.priority"
-    [options]="priorityOptions()"
-  ></app-input-select>
-  <app-checkbox-list
-    label="Etiquetas"
-    [formField]="formUpdate.tags"
-    [options]="tagOptions()"
-  ></app-checkbox-list>
-  <button class="px-4 py-2 rounded-md bg-linear-to-t from-blue-800 to-blue-600" type="submit">
-    Enviar
-  </button>
+  <div class="flex flex-col gap-5">
+    <app-input-text label="Título" [formField]="formUpdate.title"></app-input-text>
+    <app-input-select
+      label="Categoría"
+      [formField]="formUpdate.categoria"
+      [options]="categoryOptions()"
+    ></app-input-select>
+    <app-input-select
+      label="Prioridad"
+      [formField]="formUpdate.priority"
+      [options]="priorityOptions()"
+    ></app-input-select>
+    <app-checkbox-list
+      label="Etiquetas"
+      [formField]="formUpdate.tags"
+      [options]="tagOptions()"
+    ></app-checkbox-list>
+    <button class="px-4 py-2 rounded-md bg-linear-to-t from-blue-800 to-blue-600" type="submit">
+      Enviar
+    </button>
+  </div>
 </app-form-handle>

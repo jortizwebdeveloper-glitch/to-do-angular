@@ -33,7 +33,10 @@ export class TaskPage {
   tagService = inject(TagService);
   categoryService = inject(CategoryService);
 
-  task = computed(() => this.taskController.getTaskWithRelation(this.id()));
+  task = computed(() => {
+    const res = this.taskController.getTaskWithRelation(this.id());
+    return res.ok ? res.data : undefined;
+  });
   date = computed(() => {
     const date = this.task()?.dueDate;
     const key = keyDate(date ?? '');
@@ -45,7 +48,7 @@ export class TaskPage {
     };
   });
 
-  onSubmit(event: SubmitEvent) {
+  async onSubmit(event: SubmitEvent) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const body: Record<string, any> = {};
@@ -60,6 +63,7 @@ export class TaskPage {
           body[key] = value;
       }
     }
-    this.taskController.updateTask(this.id(), body);
+    const res = await this.taskController.updateTask(this.id(), body);
+    console.log(res);
   }
 }
