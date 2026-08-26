@@ -1,14 +1,14 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Badge } from '@components/01-atoms/badge/badge';
+import { AppButton } from '@components/01-atoms/button/button.directive';
 import { Icon } from '@components/01-atoms/icon/icon';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
+import { UpdateTaskPage } from '@pages/dashboard/children/task/update-task/page/update-task-page';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
 import { DATE_COLOR, DATE_TASK, keyDate, overDue } from '@/app/core/shared/utils/date';
-import { CategoryService } from '@/app/features/category';
-import { TagService } from '@/app/features/tag';
 import { getPriority, getStatus, TaskController } from '@/app/features/task';
 
 @Component({
@@ -20,7 +20,7 @@ export class ItemList {}
 
 @Component({
   selector: 'app-tasks',
-  imports: [Icon, Badge, IconText, ItemList, Tag, RouterLink],
+  imports: [Icon, Badge, IconText, ItemList, Tag, RouterLink, AppButton, UpdateTaskPage],
   templateUrl: './task-page.html',
 })
 export class TaskPage {
@@ -30,8 +30,6 @@ export class TaskPage {
   status = getStatus;
 
   taskController = inject(TaskController);
-  tagService = inject(TagService);
-  categoryService = inject(CategoryService);
 
   task = computed(() => {
     const res = this.taskController.getTaskWithRelation(this.id());
@@ -48,22 +46,12 @@ export class TaskPage {
     };
   });
 
-  async onSubmit(event: SubmitEvent) {
-    event.preventDefault();
-    const formData = new FormData(event.target as HTMLFormElement);
-    const body: Record<string, any> = {};
-    for (const [key, value] of formData.entries()) {
-      switch (key) {
-        case 'tags':
-          if (!body['tags']) body['tags'] = [];
-
-          body['tags'] = [...body['tags'], Number(value)];
-          break;
-        default:
-          body[key] = value;
-      }
-    }
-    const res = await this.taskController.updateTask(this.id(), body);
-    console.log(res);
+  show = signal<boolean>(false);
+  onEdit() {
+    this.show.set(true);
+  }
+  onDelete() {
+    const ok = confirm('¿Desea elminar esta tarea?');
+    console.log({ ok });
   }
 }

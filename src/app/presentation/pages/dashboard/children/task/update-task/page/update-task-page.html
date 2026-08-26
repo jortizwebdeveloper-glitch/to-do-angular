@@ -1,8 +1,9 @@
-<app-modal (eventClose)="close()" >
+<app-modal (eventClose)="close()">
   <app-form-task
-    title="Crear tarea"
-    next="Crear"
+    title="Actualizar tarea"
+    next="Guardar"
     (eventSubmit)="onSubmit($event)"
     (eventClose)="close()"
+    [fields]="fields()"
   ></app-form-task>
 </app-modal>
