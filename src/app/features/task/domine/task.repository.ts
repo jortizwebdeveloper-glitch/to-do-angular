@@ -5,7 +5,9 @@ import type { CreateTaskEntity, UpdateTaskEntity } from './task.entity';
 
 export interface ITaskRepository {
   getAll(): Observable<TaskRow[]>;
-  getById(id: number): Observable<TaskRow | undefined>;
+  $getById(id: number): Observable<TaskRow | undefined>;
+  getById(id: number): Promise<TaskRow | undefined>;
   add(body: CreateTaskEntity): Promise<number>;
   update(id: number, body: UpdateTaskEntity): Promise<number>;
+  delete(id: number): Promise<void>;
 }

@@ -1,5 +1,5 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { AppButton } from '@components/01-atoms/button/button.directive';
 import { Icon } from '@components/01-atoms/icon/icon';
@@ -30,6 +30,7 @@ export class TaskPage {
   status = getStatus;
 
   taskController = inject(TaskController);
+  router = inject(Router);
 
   task = computed(() => {
     const res = this.taskController.getTaskWithRelation(this.id());
@@ -50,8 +51,15 @@ export class TaskPage {
   onEdit() {
     this.show.set(true);
   }
-  onDelete() {
+  async onDelete() {
+    console.log("")
     const ok = confirm('¿Desea elminar esta tarea?');
-    console.log({ ok });
+    if (ok) {
+      const res = await this.taskController.deleteTask(this.id());
+      alert(res.ok ? 'Tarea elminada' : res.message);
+      this.router.navigate(['dashboard'], {
+        queryParamsHandling: 'merge'
+      })
+    }
   }
 }

@@ -12,13 +12,19 @@ export class TaskRepository implements ITaskRepository {
   getAll() {
     return from(liveQuery(() => this.db!.tasks.orderBy('dueDate').reverse().toArray() ?? []));
   }
-  getById(id: number) {
+  $getById(id: number) {
     return from(liveQuery(() => this.db!.tasks.get(id)));
+  }
+  async getById(id: number) {
+    return this.db!.tasks.get(id);
   }
   async add(body: CreateTaskEntity) {
     return this.db!.tasks.add(body);
   }
   async update(id: number, body: UpdateTaskEntity) {
     return this.db!.tasks.update(id, body);
+  }
+  async delete(id: number) {
+    return this.db!.tasks.delete(id);
   }
 }

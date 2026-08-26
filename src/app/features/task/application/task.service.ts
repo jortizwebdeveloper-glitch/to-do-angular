@@ -33,7 +33,7 @@ export class TaskService {
     );
   });
   getTaskById(id: number) {
-    return this.taskRepository.getById(id);
+    return this.taskRepository.$getById(id);
   }
   getTaskByIdWithRelation(id: number) {
     const task = this.$tasks().get(id);
@@ -41,10 +41,16 @@ export class TaskService {
 
     return task;
   }
+  async hasOwnTask(id: number) {
+    return Boolean(await this.taskRepository.getById(id));
+  }
   async createTask(body: CreateTaskDTO) {
     return this.taskRepository.add({ ...body, status: 'pendiente' });
   }
   async updateTaskById(id: number, body: UpdateTaskDTO) {
     return this.taskRepository.update(id, body);
+  }
+  async deleteTaskById(id: number) {
+    return this.taskRepository.delete(id);
   }
 }

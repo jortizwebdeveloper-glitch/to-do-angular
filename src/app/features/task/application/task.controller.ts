@@ -38,4 +38,10 @@ export class TaskController extends ControllerException {
       'TaskController:updateTask',
     );
   }
+  async deleteTask(id: number) {
+    return this.validateAsync(
+      () => this.taskService.deleteTaskById(idTaskSchemaDTO.parse({ id }).id),
+      'TaskController:deleteTask',
+    );
+  }
 }

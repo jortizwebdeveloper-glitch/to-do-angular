@@ -1,5 +1,6 @@
 import type { Routes } from '@angular/router';
 
+import { taskGuard } from './core/guards/task.guard';
 import { taxonomyGuard } from './core/guards/taxonomy.guard';
 import { DashboardLayout, DashboardPage } from './presentation/pages/dashboard';
 import { CreateTaskPage } from './presentation/pages/dashboard/children/create-task/page/create-task-page';
@@ -27,6 +28,7 @@ export const routes: Routes = [
           {
             path: 'task/:id',
             component: TaskPage,
+            canActivate: [taskGuard]
           },
         ],
       },
