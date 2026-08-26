@@ -1,0 +1,55 @@
+<div class="overflow-auto bg-slate-800 rounded-lg w-screen max-w-3xl max-h-full">
+  <app-form-handle (submitHandle)="onSubmit()">
+    <div
+      class="bg-slate-800 rounded-t-lg z-10 top-0 sticky p-5 border-b border-white/15 pb-5 flex justify-between"
+    >
+      <h2 class="text-xl font-semibold">{{ title() }}</h2>
+      <button aria-label="Cerrar" type="button" class="size-6 cursor-pointer" (click)="onClose()">
+        <app-icon name="x"></app-icon>
+      </button>
+    </div>
+    <div class="p-5">
+      <div class="flex flex-wrap gap-4">
+        <div class="w-full">
+          <app-input-text [formField]="formInputs.title" placeholder="Título"></app-input-text>
+        </div>
+        <div class="w-full">
+          <app-input-textarea
+            [formField]="formInputs.description"
+            placeholder="Descripción"
+          ></app-input-textarea>
+        </div>
+        <div class="w-full">
+          <app-input-select
+            [options]="categorias()"
+            [formField]="formInputs.categoria"
+            placeholder="Título"
+          ></app-input-select>
+        </div>
+        <div class="w-full">
+          <app-checkbox-list
+            [options]="optionsService.tagOptions()"
+            [formField]="formInputs.tags"
+            label="Etiquetas"
+          ></app-checkbox-list>
+        </div>
+        <div class="w-full">
+          <app-input-select
+            [options]="prioridades()"
+            [formField]="formInputs.priority"
+            placeholder="Prioridad"
+          ></app-input-select>
+        </div>
+        <div class="w-full">
+          <app-input-date [formField]="formInputs.dueDate" placeholder="Fecha"></app-input-date>
+        </div>
+      </div>
+    </div>
+    <div
+      class="bg-slate-800 rounded-b-lg z-10 bottom-0 sticky p-5 border-t border-white/15 pb-5 flex justify-between"
+    >
+      <button type="button" appButton variant="slate" (click)="onClose()">Cerrar</button>
+      <button type="submit" appButton variant="emerald">{{ next() }}</button>
+    </div>
+  </app-form-handle>
+</div>

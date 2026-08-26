@@ -8,7 +8,7 @@ export const baseTaskSchemaDTO = z.object({
   description: z.string().nonempty(),
   categoria: z.coerce.number().min(1),
   tags: z.array(z.coerce.number()).min(1),
-  priority: z.enum(PRIORITY_TASK_VALUES).default('baja'),
+  priority: z.enum(PRIORITY_TASK_VALUES),
   status: z.enum(STATU_TASK_VALUES).default('en_curso'),
   dueDate: z
     .string()

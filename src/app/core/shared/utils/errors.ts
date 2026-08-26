@@ -6,6 +6,7 @@ interface SuccessResponse<T> {
 interface ErrorResponse {
   ok: false;
   error?: unknown;
+  message: string
 }
 
 export class ControllerException {
@@ -17,7 +18,7 @@ export class ControllerException {
     try {
       return {
         ok: true,
-        data: fn(),
+        data: fn()
       };
     } catch (e) {
       console.error(origin, e);
@@ -25,6 +26,7 @@ export class ControllerException {
       return {
         ok: false,
         error: e,
+        message: "Ocurrio un error"
       };
     }
   }
@@ -45,6 +47,7 @@ export class ControllerException {
       return {
         ok: false,
         error: e,
+        message: "Ocurrio un error"
       };
     }
   }

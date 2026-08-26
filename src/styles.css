@@ -5,9 +5,13 @@
 body {
   font-family: 'Poppins';
 }
-@layer components {
+@layer utilities {
+  label:has(:focus-visible) {
+    outline: auto;
+  }
+}
+@layer base {
   input[type='checkbox'] {
-    display: none;
     & + .ng-checkbox {
       position: relative;
       cursor: pointer;

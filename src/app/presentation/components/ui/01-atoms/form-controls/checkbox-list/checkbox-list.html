@@ -3,17 +3,20 @@
   <ul class="flex flex-wrap gap-5 px-4 py-4">
     @for (option of options(); track $index) {
       @let $id = `${name()}-${option.value}-${$index}`;
-      <li class="flex gap-2.5">
-        <input
-          [id]="$id"
-          type="checkbox"
-          (change)="onBlur()"
-          (input)="onInput($event, option.value)"
-          [value]="option.value"
-          [checked]="value()?.some((v) => option.value === v)"
-        />
-        <span class="ng-checkbox mt-1"> </span>
-        <label class="cursor-pointer" [for]="$id">{{ option.label }}</label>
+      <li>
+        <label class="flex gap-2.5 rounded-xs cursor-pointer" [for]="$id">
+          <input
+            class="sr-only"
+            [id]="$id"
+            type="checkbox"
+            (change)="onBlur()"
+            (input)="onInput($event, option.value)"
+            [value]="option.value"
+            [checked]="value()?.some((v) => option.value === v)"
+          />
+          <span class="ng-checkbox mt-1" aria-hidden="true"> </span>
+          {{ option.label }}
+        </label>
       </li>
     }
   </ul>
