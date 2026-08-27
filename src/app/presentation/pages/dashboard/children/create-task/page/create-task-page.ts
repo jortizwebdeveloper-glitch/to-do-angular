@@ -4,7 +4,7 @@ import { TaskController } from '@app/features/task';
 import type { TaskZod } from '@components/02-molecules/form-task/form-task';
 import { FormTask } from '@components/02-molecules/form-task/form-task';
 import { Modal } from '@components/02-molecules/modal/modal';
-
+import { toast } from 'vanilla-toast-js';
 @Component({
   selector: 'app-create-task',
   imports: [FormTask, Modal],
@@ -22,7 +22,17 @@ export class CreateTaskPage {
 
   async onSubmit(values: TaskZod) {
     const res = await this.taskController.createTask(values);
-    alert(res.ok ? 'Tarea creada' : res.message);
-    this.close();
+    if (res.ok) {
+      toast('Tarea creada', {
+        type: 'success',
+        position: 'top-right',
+      });
+      this.close();
+    } else {
+      toast(res.message, {
+        type: 'error',
+        position: 'top-right',
+      });
+    }
   }
 }

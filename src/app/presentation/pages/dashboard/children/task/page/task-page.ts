@@ -1,11 +1,14 @@
-import { Component, computed, inject, input, signal } from '@angular/core';
+import { Dialog } from '@angular/cdk/dialog';
+import {  Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { AppButton } from '@components/01-atoms/button/button.directive';
 import { Icon } from '@components/01-atoms/icon/icon';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
-import { UpdateTaskPage } from '@pages/dashboard/children/task/update-task/page/update-task-page';
+import { Dialog as AppDialog } from '@components/02-molecules/dialog/dialog';
+import { UpdateTaskPage } from '@pages/dashboard/children/task/children/update-task/page/update-task-page';
+import { toast } from 'vanilla-toast-js';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
 import { DATE_COLOR, DATE_TASK, keyDate, overDue } from '@/app/core/shared/utils/date';
@@ -20,7 +23,7 @@ export class ItemList {}
 
 @Component({
   selector: 'app-tasks',
-  imports: [Icon, Badge, IconText, ItemList, Tag, RouterLink, AppButton, UpdateTaskPage],
+  imports: [Icon, Badge, IconText, ItemList, Tag, RouterLink, AppButton],
   templateUrl: './task-page.html',
 })
 export class TaskPage {
@@ -47,19 +50,42 @@ export class TaskPage {
     };
   });
 
-  show = signal<boolean>(false);
-  onEdit() {
-    this.show.set(true);
+  dialog = inject(Dialog);
+  onDialogEdit() {
+    this.dialog.open(UpdateTaskPage, {
+      data: {
+        id: this.id(),
+      },
+    });
+  }
+  onDialogDelete() {
+    const dialog = this.dialog.open<boolean>(AppDialog, {
+      data: {
+        title: 'Eliminar tarea',
+        description: 'Vas a elminar la tarea ¿Esta seguro?',
+        next: { label: 'Eliminar', variant: 'rose' },
+      },
+    });
+    dialog.closed.subscribe((value) => {
+      if (value) this.onDelete();
+    });
   }
   async onDelete() {
-    console.log("")
-    const ok = confirm('¿Desea elminar esta tarea?');
-    if (ok) {
-      const res = await this.taskController.deleteTask(this.id());
-      alert(res.ok ? 'Tarea elminada' : res.message);
+    const res = await this.taskController.deleteTask(this.id());
+    if (res.ok) {
+      toast('Tarea eliminada', {
+        type: 'success',
+        closeButton: true,
+        position: 'top-right',
+      });
       this.router.navigate(['dashboard'], {
-        queryParamsHandling: 'merge'
-      })
+        queryParamsHandling: 'merge',
+      });
+    } else {
+      toast(res.message, {
+        type: 'error',
+        position: 'top-right',
+      });
     }
   }
 }

@@ -8,15 +8,17 @@
   @let third = tags_menu();
   <app-navaside aside-content [data]="third" type="tag"> </app-navaside>
 
-  <a
-    class="w-full"
-    [routerLink]="['create-task']"
-    queryParamsHandling="merge"
-    appButton
-    aside-footer
-  >
-    Crear tarea
-  </a>
+  <div aside-footer class="flex gap-4">
+    <a
+      class="w-full"
+      [routerLink]="['create-task']"
+      queryParamsHandling="merge"
+      appButton
+      
+    >
+      Crear tarea
+    </a>
+  </div>
 
   <router-outlet main-content></router-outlet>
 </app-general-layout>

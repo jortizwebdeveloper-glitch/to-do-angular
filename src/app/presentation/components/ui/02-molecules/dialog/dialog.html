@@ -1,0 +1,23 @@
+<div class="bg-slate-800 rounded-xl w-screen max-w-sm">
+  <header class="px-4 py-3 flex justify-between">
+    <div class="w-1 grow">
+      <p class="text-lg font-medium">{{ data.title }}</p>
+    </div>
+    <button class="size-5 cursor-pointer opacity-75 hover:opacity-100">
+      <app-icon name="x"></app-icon>
+    </button>
+  </header>
+  <div class="px-4 pb-2.5 pt-1 text-sm leading-loose">
+    <p>
+      {{ data.description }}
+    </p>
+  </div>
+  <footer class="flex px-4 py-3 gap-4 justify-end">
+    <button (click)="onCancel()" appButton size="sm" variant="neutral" [outline]="true">
+      Cancelar
+    </button>
+    <button (click)="onAccept()" appButton size="sm" [variant]="data.next?.variant ?? 'blue'">
+      {{ data.next?.label ?? 'Aceptar' }}
+    </button>
+  </footer>
+</div>

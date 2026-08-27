@@ -9,6 +9,28 @@ body {
   label:has(:focus-visible) {
     outline: auto;
   }
+  .vt-toast {
+    --vt-muted: var(--color-white);
+    --vt-success-color: var(--color-green-300);
+    --vt-error-color: var(--color-red-300);
+    --vt-info-color: var(--color-blue-300);
+    --vt-warning-color: var(--color-amber-300);
+    .vt-description {
+      opacity: 0.75;
+    }
+    &[data-type='success'] {
+      --vt-bg: var(--color-green-700);
+    }
+    &[data-type='error'] {
+      --vt-bg: var(--color-red-700);
+    }
+    &[data-type='info'] {
+      --vt-bg: var(--color-blue-700);
+    }
+    &[data-type='warning'] {
+      --vt-bg: var(--color-yellow-700);
+    }
+  }
 }
 @layer base {
   input[type='checkbox'] {
@@ -20,7 +42,6 @@ body {
       height: 1em;
       border-radius: var(--radius-sm);
       background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
-      transition: 0.1s ease background-color;
       &::before {
         content: '';
         position: absolute;
@@ -29,7 +50,6 @@ body {
         background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZWNrLWljb24gbHVjaWRlLWNoZWNrIj48cGF0aCBkPSJNMjAgNiA5IDE3bC01LTUiLz48L3N2Zz4=')
           center / contain;
         opacity: 0;
-        transition: 0.1s ease opacity;
       }
     }
     &:checked + .ng-checkbox {
