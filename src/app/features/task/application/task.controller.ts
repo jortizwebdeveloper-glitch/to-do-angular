@@ -1,7 +1,12 @@
 import { inject, Service } from '@angular/core';
 import { ControllerException } from '@app/core/shared/utils/errors';
 
-import { createTaskSchemaDTO, idTaskSchemaDTO, updateTaskSchemaDTO } from './task.dto';
+import {
+  createTaskSchemaDTO,
+  idTaskSchemaDTO,
+  statusTaskSchemaDTO,
+  updateTaskSchemaDTO,
+} from './task.dto';
 import { TaskService } from './task.service';
 
 @Service()
@@ -20,6 +25,16 @@ export class TaskController extends ControllerException {
     return this.validate(
       () => this.taskService.getTaskByIdWithRelation(idTaskSchemaDTO.parse({ id }).id),
       'TaskController:getTaskWithRelation',
+    );
+  }
+  async updateTaskStatus(id: number, status: string) {
+    return this.validateAsync(
+      () =>
+        this.taskService.updateStatusTaskById(
+          idTaskSchemaDTO.parse({ id }).id,
+          statusTaskSchemaDTO.parse({ status }),
+        ),
+      'TaskController:updateTaskStatus',
     );
   }
   async createTask(body: Record<string, unknown>) {

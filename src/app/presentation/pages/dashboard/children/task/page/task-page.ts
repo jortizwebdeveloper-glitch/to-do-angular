@@ -1,8 +1,9 @@
 import { Dialog } from '@angular/cdk/dialog';
-import {  Component, computed, inject, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { AppButton } from '@components/01-atoms/button/button.directive';
+import { Dropdown } from '@components/01-atoms/dropdown/dropdown';
 import { Icon } from '@components/01-atoms/icon/icon';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
@@ -12,7 +13,15 @@ import { toast } from 'vanilla-toast-js';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
 import { DATE_COLOR, DATE_TASK, keyDate, overDue } from '@/app/core/shared/utils/date';
-import { getPriority, getStatus, TaskController } from '@/app/features/task';
+import type {
+  TStatusTask} from '@/app/features/task';
+import {
+  getPriority,
+  getStatus,
+  STATU_TASK_VALUES,
+  STATUS_TASK,
+  TaskController
+} from '@/app/features/task';
 
 @Component({
   selector: 'app-item-list',
@@ -23,7 +32,7 @@ export class ItemList {}
 
 @Component({
   selector: 'app-tasks',
-  imports: [Icon, Badge, IconText, ItemList, Tag, RouterLink, AppButton],
+  imports: [Dropdown, Icon, Badge, IconText, ItemList, Tag, RouterLink, AppButton],
   templateUrl: './task-page.html',
 })
 export class TaskPage {
@@ -49,6 +58,27 @@ export class TaskPage {
       label: key ? DATE_TASK[key] : date,
     };
   });
+
+  statusOptions = STATU_TASK_VALUES.map((value) => ({ value, label: STATUS_TASK[value] }));
+  async onUpdateStatus(status: TStatusTask) {
+    const $task = this.task();
+    if($task && status === $task.status)
+      return;
+
+    const res = await this.taskController.updateTaskStatus(this.id(), status);
+    if (res.ok) {
+      toast('Estado actualizado', {
+        type: 'success',
+        closeButton: true,
+        position: 'top-right',
+      });
+    } else {
+      toast(res.message, {
+        type: 'error',
+        position: 'top-right',
+      });
+    }
+  }
 
   dialog = inject(Dialog);
   onDialogEdit() {

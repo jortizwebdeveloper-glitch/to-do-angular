@@ -2,9 +2,9 @@ import type { CategoryViewModel } from '@app/features/category';
 import type { TagViewModel } from '@app/features/tag';
 
 export enum STATUS_TASK {
-  completada = 'Completada',
-  en_curso = 'En curso',
   pendiente = 'Pendiente',
+  en_curso = 'En curso',
+  completada = 'Completada',
 }
 
 export enum STATUS_COLOR {

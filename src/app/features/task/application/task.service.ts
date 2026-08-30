@@ -4,7 +4,7 @@ import { CategoryService } from '@app/features/category';
 import { TagService } from '@app/features/tag';
 import { TaskRepository } from '@app/features/task/infraestruture/task.repository.dexie';
 
-import type { CreateTaskDTO, UpdateTaskDTO } from './task.dto';
+import type { CreateTaskDTO, StatusTaskDTO, UpdateTaskDTO } from './task.dto';
 import type { TaskViewModel } from './task.view';
 
 @Service()
@@ -48,6 +48,9 @@ export class TaskService {
     return this.taskRepository.add({ ...body, status: 'pendiente' });
   }
   async updateTaskById(id: number, body: UpdateTaskDTO) {
+    return this.taskRepository.update(id, body);
+  }
+  async updateStatusTaskById(id: number, body: StatusTaskDTO) {
     return this.taskRepository.update(id, body);
   }
   async deleteTaskById(id: number) {

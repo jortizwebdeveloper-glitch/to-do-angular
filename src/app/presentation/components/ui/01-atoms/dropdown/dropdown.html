@@ -1,0 +1,16 @@
+<div class="relative" (focusout)="onClose($event)" tabindex="-1">
+  <button (click)="onToggle()" class="cursor-pointer">
+    <ng-content></ng-content>
+  </button>
+  @if (open()) {
+    <ul class="top-full right-0 absolute mt-2 shadow-md bg-slate-800 max-w-60 rounded-lg min-w-24">
+      @for (item of options(); track `dropdown-item${item.value}-${$index}`) {
+        <li>
+          <button class="px-4 py-2 cursor-pointer" (click)="onChange(item.value)">
+            {{ item.label }}
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</div>
