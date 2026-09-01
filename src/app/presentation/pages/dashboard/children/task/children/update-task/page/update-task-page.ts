@@ -35,11 +35,13 @@ export class UpdateTaskPage {
   async onSubmit(values: TaskZod) {
     const res = await this.taskController.updateTask(this.data.id, values);
     if (res.ok) {
-      toast('Tarea actualizada', {
-        type: 'success',
-        closeButton: true,
-        position: 'top-right',
-      });
+      if (res.data)
+        toast('Tarea actualizada', {
+          type: 'success',
+          closeButton: true,
+          position: 'top-right',
+        });
+
       this.onClose();
     } else {
       toast(res.message, {

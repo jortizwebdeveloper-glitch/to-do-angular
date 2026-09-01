@@ -37,7 +37,7 @@ export class Card {
 
     const priority = getPriority($data.priority);
 
-    const dueDate = getDate($data.dueDate);
+    const dueDate = getDate($data.dueDate, $data.status);
 
     return {
       ...$data,

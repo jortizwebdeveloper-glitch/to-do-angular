@@ -13,7 +13,7 @@ import { UpdateTaskPage } from '@pages/dashboard/children/task/children/update-t
 import { toast } from 'vanilla-toast-js';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
-import {   getDate } from '@/app/core/shared/utils/date';
+import { getDate } from '@/app/core/shared/utils/date';
 import type { TStatusTask } from '@/app/features/task';
 import { getPriority, getStatus, TaskController } from '@/app/features/task';
 
@@ -49,7 +49,7 @@ export class TaskPage {
       const status = { key: $data.status, label: $status.label, color: $colorStatus };
 
       const priority = getPriority($data.priority);
-      const dueDate = getDate($data.dueDate);
+      const dueDate = getDate($data.dueDate, $data.status);
 
       return {
         ...$data,
@@ -74,6 +74,18 @@ export class TaskPage {
       },
     });
   }
+  onDialogFinished() {
+    const dialog = this.dialog.open<boolean>(AppDialog, {
+      data: {
+        title: 'Finalizar tarea',
+        description: 'Vas a finalizar la tarea ¿Esta seguro?',
+        next: { label: 'Finalizar', variant: 'emerald' },
+      },
+    });
+    dialog.closed.subscribe((value) => {
+      if (value) this.onFinished();
+    });
+  }
   onDialogDelete() {
     const dialog = this.dialog.open<boolean>(AppDialog, {
       data: {
@@ -85,6 +97,21 @@ export class TaskPage {
     dialog.closed.subscribe((value) => {
       if (value) this.onDelete();
     });
+  }
+  async onFinished() {
+    const res = await this.taskController.updateTaskFinished(this.id(), true);
+    if (res.ok) {
+      toast('Tarea finalizada', {
+        type: 'success',
+        closeButton: true,
+        position: 'top-right',
+      });
+    } else {
+      toast(res.message, {
+        type: 'error',
+        position: 'top-right',
+      });
+    }
   }
   async onDelete() {
     const res = await this.taskController.deleteTask(this.id());

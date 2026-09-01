@@ -40,7 +40,7 @@ export class DashboardPage {
         if (iCat != 'all' && task.categoria.id != Number(iCat)) continue;
         if (iTag != 'all' && !task.tags.some((t) => t.id === Number(iTag))) continue;
         if (iEst != 'all' && task.status !== iEst) continue;
-        if (iFecha !== filterByDate(task.dueDate, task.status === 'completada')) continue;
+        if (iFecha !== filterByDate(task.dueDate, task.finished)) continue;
         if (iSearch && !strNormalize(task.title).includes(iSearch)) continue;
 
         tasks.push(task);
@@ -62,6 +62,10 @@ export class DashboardPage {
     {
       label: STATUS_TASK['en_curso'],
       value: 'en_curso',
+    },
+    {
+      label: STATUS_TASK['completada'],
+      value: 'completada',
     },
   ];
 

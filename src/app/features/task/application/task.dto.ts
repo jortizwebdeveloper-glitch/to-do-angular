@@ -10,6 +10,7 @@ export const baseTaskSchemaDTO = z.object({
   tags: z.array(z.coerce.number()).min(1),
   priority: z.enum(PRIORITY_TASK_VALUES),
   status: z.enum(STATU_TASK_VALUES).default('en_curso'),
+  finished: z.boolean().default(false),
   dueDate: z
     .string()
     .nonempty()
@@ -27,3 +28,6 @@ export type IdTaskDTO = z.infer<typeof idTaskSchemaDTO>;
 
 export const statusTaskSchemaDTO = baseTaskSchemaDTO.pick({ status: true });
 export type StatusTaskDTO = z.infer<typeof statusTaskSchemaDTO>;
+
+export const finishedTaskSchemaDTO = baseTaskSchemaDTO.pick({ finished: true });
+export type FinishedTaskDTO = z.infer<typeof finishedTaskSchemaDTO>;

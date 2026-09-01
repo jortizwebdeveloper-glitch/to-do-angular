@@ -6,9 +6,9 @@ import Dexie from 'dexie';
 
 import type { CategoryRow } from './schema/category.schema';
 import { CATEGORIES_TABLE, CATEGORY_INDEXED } from './schema/category.schema';
-import type { TagRow} from './schema/tags.schema';
+import type { TagRow } from './schema/tags.schema';
 import { TAG_INDEXED, TAGS_TABLE } from './schema/tags.schema';
-import type { TaskRow} from './schema/task.schema';
+import type { TaskRow } from './schema/task.schema';
 import { TASK_INDEXED, TASKS_TABLE } from './schema/task.schema';
 
 export class AppTaskDataBase extends Dexie {
@@ -27,6 +27,18 @@ export class AppTaskDataBase extends Dexie {
     this.version(3).stores({
       [TAGS_TABLE]: TAG_INDEXED,
     });
+    this.version(4)
+      .stores({
+        [TASKS_TABLE]: TASK_INDEXED,
+      })
+      .upgrade((tx) => {
+        return tx
+          .table(TASKS_TABLE)
+          .toCollection()
+          .modify((task) => {
+            task.finished = false;
+          });
+      });
 
     this.seedTasks().then(() => {
       console.log('Seed Tasks Loaded');

@@ -53,4 +53,5 @@ export interface TaskViewModel {
   status: TStatusTask;
   dueDate: string;
   priority: TProrityTask;
+  finished: boolean;
 }

@@ -9,6 +9,7 @@ export interface TaskRow {
   status: string;
   dueDate: string;
   priority: string;
+  finished?: boolean;
 }
 
 export const TASK_INDEXED = '++id, title, description, categoria, tags, status, dueDate, priority';

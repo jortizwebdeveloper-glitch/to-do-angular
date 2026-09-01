@@ -1,4 +1,6 @@
 import { getColor } from '@app/core/shared/theme/color.registry';
+import type { TStatusTask } from '@app/features/task';
+import { STATUS_COLOR } from '@app/features/task';
 
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
@@ -27,17 +29,11 @@ function diffInDays(date: string) {
   return Math.round(($date.getTime() - $now.getTime()) / MS_PER_DAY);
 }
 
-export function filterByDate(date: string, status: boolean) {
+export function filterByDate(date: string, finished: boolean) {
   const $date = resetTime(date);
   const $now = resetTime(Date.now());
 
-  return $date > $now
-    ? 'proximas'
-    : $date < $now && !status
-      ? 'vencidas'
-      : status
-        ? 'finalizadas'
-        : 'hoy';
+  return finished ? 'finalizadas' : $date > $now ? 'proximas' : $date < $now ? 'vencidas' : 'hoy';
 }
 
 export function overDue(date: string) {
@@ -57,13 +53,20 @@ export function keyDate(date: string) {
   }
 }
 
-export function getDate(date: string) {
+export function getDate(date: string, status?: TStatusTask) {
   const key = keyDate(date ?? '');
   const over = overDue(date ?? '');
-
+  const incomplete = status !== 'completada';
   return {
-    overDue: over,
-    color: over ? getColor('red') : key ? getColor(DATE_COLOR[key]) : null,
+    overDue: over && incomplete,
+    incomplete,
+    color: !incomplete
+      ? getColor(STATUS_COLOR['completada'])
+      : over
+        ? getColor('red')
+        : key
+          ? getColor(DATE_COLOR[key])
+          : null,
     label: key ? DATE_TASK[key] : date,
   };
 }

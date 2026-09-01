@@ -3,6 +3,7 @@ import { ControllerException } from '@app/core/shared/utils/errors';
 
 import {
   createTaskSchemaDTO,
+  finishedTaskSchemaDTO,
   idTaskSchemaDTO,
   statusTaskSchemaDTO,
   updateTaskSchemaDTO,
@@ -33,6 +34,16 @@ export class TaskController extends ControllerException {
         this.taskService.updateStatusTaskById(
           idTaskSchemaDTO.parse({ id }).id,
           statusTaskSchemaDTO.parse({ status }),
+        ),
+      'TaskController:updateTaskStatus',
+    );
+  }
+  async updateTaskFinished(id: number, finished: boolean) {
+    return this.validateAsync(
+      () =>
+        this.taskService.updateFinishedTaskById(
+          idTaskSchemaDTO.parse({ id }).id,
+          finishedTaskSchemaDTO.parse({ finished }),
         ),
       'TaskController:updateTaskStatus',
     );

@@ -22,7 +22,10 @@ export class TaskRepository implements ITaskRepository {
     return this.db!.tasks.add(body);
   }
   async update(id: number, body: UpdateTaskEntity) {
-    return this.db!.tasks.update(id, body);
+    return this.db!.tasks.where('id')
+      .equals(id)
+      .and((task) => !task.finished)
+      .modify(body);
   }
   async delete(id: number) {
     return this.db!.tasks.delete(id);
