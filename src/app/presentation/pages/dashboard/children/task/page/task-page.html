@@ -1,8 +1,5 @@
-@let $task = task();
+@let $task = fields();
 @if ($task) {
-  @let $priority = priority($task.priority);
-  @let $status = status($task.status);
-  @let $date = date();
   <div
     class="max-xl:w-full w-96 max-w-96 bg-white dark:bg-slate-900 h-screen shadow-md max-xl:fixed inset-y-0 right-0 z-10"
   >
@@ -17,15 +14,20 @@
             >
               <app-icon name="chevron-left"></app-icon>
             </a>
-            <app-dropdown [options]="statusOptions" (eventChange)="onUpdateStatus($event)">
-              <span [class]="color($status.color).text" class="text-sm font-semibold">
-                {{ $status.label }}
+            <app-dropdown
+              [options]="optionsService.statusOptions"
+              (eventChange)="onUpdateStatus($event)"
+            >
+              <span [class]="$task.status.color.text" class="text-sm font-semibold">
+                {{ $task.status.label }}
               </span>
             </app-dropdown>
           </div>
           <div class="flex flex-col items-start gap-2 justify-between">
             <h3 class="text-xl font-semibold">{{ $task.title }}</h3>
-            <app-badge [color]="$priority.color"> Prioridad {{ $priority.label }} </app-badge>
+            <app-badge [color]="$task.priority.color">
+              Prioridad {{ $task.priority.label }}
+            </app-badge>
           </div>
         </div>
 
@@ -48,9 +50,9 @@
             <app-item-list>
               <app-icon-text color="red" icon="calendar"> Fecha límite </app-icon-text>
 
-              <div [class]="$date.color?.text">
-                <span>{{ $date.label }}</span>
-                @if ($date.overDue) {
+              <div [class]="$task.dueDate.color?.text">
+                <span>{{ $task.dueDate.label }}</span>
+                @if ($task.dueDate.overDue) {
                   ·
                   <span>Vencida</span>
                 }

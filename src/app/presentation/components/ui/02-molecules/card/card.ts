@@ -1,34 +1,54 @@
-import { Component, computed, input } from '@angular/core';
-import { RouterLinkActive } from '@angular/router';
+import { Component, computed, inject, input, output } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { OptionsService } from '@app/core/shared/service/options.service';
 import { Badge } from '@components/01-atoms/badge/badge';
+import { Dropdown } from '@components/01-atoms/dropdown/dropdown';
 import { Icon } from '@components/01-atoms/icon/icon';
 import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
 import { DATE_COLOR, DATE_TASK, keyDate } from '@/app/core/shared/utils/date';
-import type { TaskViewModel } from '@/app/features/task';
+import type { TaskViewModel, TStatusTask } from '@/app/features/task';
 import { getPriority, getStatus } from '@/app/features/task';
 
 @Component({
   selector: 'app-card',
-  imports: [Tag, Badge, IconText, Icon, RouterLinkActive],
+  imports: [Tag, Dropdown, Badge, IconText, Icon, RouterLinkActive, RouterLink],
   templateUrl: './card.html',
   styleUrl: './card.css',
 })
 export class Card {
   data = input.required<TaskViewModel>();
   active = input<boolean>();
-  priority = getPriority;
-  status = getStatus;
-  color = getColor;
+  eventStatusChenge = output<TStatusTask>();
 
-  date = computed(() => {
-    const date = this.data().dueDate;
+  optionsService = inject(OptionsService);
+
+  onChange(value: TStatusTask) {
+    this.eventStatusChenge.emit(value);
+  }
+
+  fields = computed(() => {
+    const $data = this.data();
+    const $status = getStatus($data.status);
+    const $colorStatus = getColor($status.color);
+    const status = { key: $data.status, label: $status.label, color: $colorStatus };
+
+    const priority = getPriority($data.priority);
+
+    const date = $data.dueDate;
     const key = keyDate(date);
-    return {
+    const dueDate = {
       color: key ? getColor(DATE_COLOR[key]) : null,
       label: key ? DATE_TASK[key] : date,
+    };
+
+    return {
+      ...$data,
+      priority,
+      status,
+      dueDate,
     };
   });
 }

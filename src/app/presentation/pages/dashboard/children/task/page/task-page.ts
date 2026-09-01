@@ -1,6 +1,7 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { OptionsService } from '@app/core/shared/service/options.service';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { AppButton } from '@components/01-atoms/button/button.directive';
 import { Dropdown } from '@components/01-atoms/dropdown/dropdown';
@@ -13,15 +14,8 @@ import { toast } from 'vanilla-toast-js';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
 import { DATE_COLOR, DATE_TASK, keyDate, overDue } from '@/app/core/shared/utils/date';
-import type {
-  TStatusTask} from '@/app/features/task';
-import {
-  getPriority,
-  getStatus,
-  STATU_TASK_VALUES,
-  STATUS_TASK,
-  TaskController
-} from '@/app/features/task';
+import type { TStatusTask } from '@/app/features/task';
+import { getPriority, getStatus, TaskController } from '@/app/features/task';
 
 @Component({
   selector: 'app-item-list',
@@ -37,47 +31,47 @@ export class ItemList {}
 })
 export class TaskPage {
   id = input.required<number>();
-  color = getColor;
-  priority = getPriority;
-  status = getStatus;
 
   taskController = inject(TaskController);
+  optionsService = inject(OptionsService);
   router = inject(Router);
 
   task = computed(() => {
     const res = this.taskController.getTaskWithRelation(this.id());
     return res.ok ? res.data : undefined;
   });
-  date = computed(() => {
-    const date = this.task()?.dueDate;
-    const key = keyDate(date ?? '');
-    const over = overDue(date ?? '');
-    return {
-      overDue: over,
-      color: over ? getColor('red') : key ? getColor(DATE_COLOR[key]) : null,
-      label: key ? DATE_TASK[key] : date,
-    };
+
+  fields = computed(() => {
+    const $data = this.task();
+    if ($data) {
+      const $status = getStatus($data.status);
+      const $colorStatus = getColor($status.color);
+      const status = { key: $data.status, label: $status.label, color: $colorStatus };
+
+      const priority = getPriority($data.priority);
+
+      const date = $data.dueDate;
+      const key = keyDate(date ?? '');
+      const over = overDue(date ?? '');
+      const dueDate = {
+        overDue: over,
+        color: over ? getColor('red') : key ? getColor(DATE_COLOR[key]) : null,
+        label: key ? DATE_TASK[key] : date,
+      };
+
+      return {
+        ...$data,
+        priority,
+        status,
+        dueDate,
+      };
+    }
+    return;
   });
 
-  statusOptions = STATU_TASK_VALUES.map((value) => ({ value, label: STATUS_TASK[value] }));
   async onUpdateStatus(status: TStatusTask) {
     const $task = this.task();
-    if($task && status === $task.status)
-      return;
-
-    const res = await this.taskController.updateTaskStatus(this.id(), status);
-    if (res.ok) {
-      toast('Estado actualizado', {
-        type: 'success',
-        closeButton: true,
-        position: 'top-right',
-      });
-    } else {
-      toast(res.message, {
-        type: 'error',
-        position: 'top-right',
-      });
-    }
+    this.optionsService.onUpdateStatus(status, $task);
   }
 
   dialog = inject(Dialog);

@@ -1,54 +1,60 @@
-@let $data = data();
-@let $status = status($data.status);
-@let $colorStatus = color($status.color);
-@let $priority = priority($data.priority);
-@let $date = date();
+@let $fields = fields();
 <article
-  [class]="$colorStatus.border"
-  [routerLinkActive]="[$colorStatus.outline, 'outline-1']"
+  [class]="[$fields.status.color.border, $fields.status.color.outline]"
+  [routerLinkActive]="['outline-1']"
   class="shadow-md rounded-xl border-l-8"
 >
   <div class="flex gap-4 px-4 py-3 bg-white dark:bg-slate-900 rounded-xl">
     <div class="self-center">
-      <span class="size-7 block">
-        @if ($data.status === 'completada') {
-          <app-icon name="circle-check" [class]="$colorStatus.text"></app-icon>
-        } @else if ($data.status === 'en_curso') {
-          <app-icon name="circle-fading-arrow-up" [class]="$colorStatus.text"></app-icon>
-        } @else {
-          <app-icon name="circle" [class]="$colorStatus.text"></app-icon>
-        }
-      </span>
+      <app-dropdown [options]="optionsService.statusOptions" (eventChange)="onChange($event)">
+        <span class="size-7 block">
+          @if ($fields.status.key === 'completada') {
+            <app-icon name="circle-check" [class]="$fields.status.color.text"></app-icon>
+          } @else if ($fields.status.key === 'en_curso') {
+            <app-icon name="circle-fading-arrow-up" [class]="$fields.status.color.text"></app-icon>
+          } @else {
+            <app-icon name="circle" [class]="$fields.status.color.text"></app-icon>
+          }
+        </span>
+      </app-dropdown>
     </div>
-    <div class="flex flex-col gap-3 w-1 grow min-w-xs">
+    <a
+      [routerLink]="['task', $fields.id]"
+      queryParamsHandling="preserve"
+      class="flex flex-col gap-3 w-1 grow min-w-xs"
+    >
       <div class="flex gap-2 items-start">
         <h2 class="w-1 grow overflow-hidden whitespace-nowrap text-ellipsis text-xl font-medium">
-          {{ $data.title }}
+          {{ $fields.title }}
         </h2>
         <div
-          [class]="$date.color ? `${$date.color.text} font-semibold` : 'opacity-75 font-medium'"
+          [class]="
+            $fields.dueDate.color
+              ? `${$fields.dueDate.color.text} font-semibold`
+              : 'opacity-75 font-medium'
+          "
           class="text-xs uppercase tracking-widest"
         >
-          {{ $date.label }}
+          {{ $fields.dueDate.label }}
         </div>
       </div>
       <div class="flex gap-4 items-end justify-between">
         <div class="items-center text-sm flex flex-wrap gap-6">
           <div class="w-16">
-            <app-badge [color]="$priority.color"> {{ $priority.label }} </app-badge>
+            <app-badge [color]="$fields.priority.color"> {{ $fields.priority.label }} </app-badge>
           </div>
-          <app-icon-text [color]="$data.categoria.color">
+          <app-icon-text [color]="$fields.categoria.color">
             <span class="opacity-85">
-              {{ $data.categoria.name }}
+              {{ $fields.categoria.name }}
             </span>
           </app-icon-text>
         </div>
         <div class="flex flex-wrap gap-3 justify-end">
-          @for (tag of $data.tags; track tag.id) {
+          @for (tag of $fields.tags; track tag.id) {
             <app-tag [color]="tag.color"> {{ tag.name }} </app-tag>
           }
         </div>
       </div>
-    </div>
+    </a>
   </div>
 </article>

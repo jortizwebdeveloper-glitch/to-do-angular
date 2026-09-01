@@ -1,5 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { OptionsService } from '@app/core/shared/service/options.service';
 import { Input } from '@components/01-atoms/input/input';
 import { Card } from '@components/02-molecules/card/card';
 import type { TTabs } from '@components/02-molecules/tabs/tabs';
@@ -7,7 +8,7 @@ import { Tabs, type TOutputOnChangeTabs } from '@components/02-molecules/tabs/ta
 
 import { filterByDate } from '@/app/core/shared/utils/date';
 import { strNormalize } from '@/app/core/shared/utils/string';
-import type { TaskViewModel } from '@/app/features/task';
+import type { TaskViewModel, TStatusTask } from '@/app/features/task';
 import { STATUS_TASK, TaskController } from '@/app/features/task';
 
 @Component({
@@ -63,6 +64,12 @@ export class DashboardPage {
       value: 'en_curso',
     },
   ];
+
+  optionsService = inject(OptionsService);
+
+  async onUpdateStatus(status: TStatusTask, task: TaskViewModel) {
+    this.optionsService.onUpdateStatus(status, task);
+  }
 
   onChangeSearch(search: string) {
     this.router.navigate([], {
