@@ -13,7 +13,7 @@ import { UpdateTaskPage } from '@pages/dashboard/children/task/children/update-t
 import { toast } from 'vanilla-toast-js';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
-import { DATE_COLOR, DATE_TASK, keyDate, overDue } from '@/app/core/shared/utils/date';
+import {   getDate } from '@/app/core/shared/utils/date';
 import type { TStatusTask } from '@/app/features/task';
 import { getPriority, getStatus, TaskController } from '@/app/features/task';
 
@@ -49,15 +49,7 @@ export class TaskPage {
       const status = { key: $data.status, label: $status.label, color: $colorStatus };
 
       const priority = getPriority($data.priority);
-
-      const date = $data.dueDate;
-      const key = keyDate(date ?? '');
-      const over = overDue(date ?? '');
-      const dueDate = {
-        overDue: over,
-        color: over ? getColor('red') : key ? getColor(DATE_COLOR[key]) : null,
-        label: key ? DATE_TASK[key] : date,
-      };
+      const dueDate = getDate($data.dueDate);
 
       return {
         ...$data,

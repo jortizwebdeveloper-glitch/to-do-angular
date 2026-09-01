@@ -8,7 +8,7 @@ import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
-import { DATE_COLOR, DATE_TASK, keyDate } from '@/app/core/shared/utils/date';
+import {   getDate } from '@/app/core/shared/utils/date';
 import type { TaskViewModel, TStatusTask } from '@/app/features/task';
 import { getPriority, getStatus } from '@/app/features/task';
 
@@ -37,12 +37,7 @@ export class Card {
 
     const priority = getPriority($data.priority);
 
-    const date = $data.dueDate;
-    const key = keyDate(date);
-    const dueDate = {
-      color: key ? getColor(DATE_COLOR[key]) : null,
-      label: key ? DATE_TASK[key] : date,
-    };
+    const dueDate = getDate($data.dueDate);
 
     return {
       ...$data,

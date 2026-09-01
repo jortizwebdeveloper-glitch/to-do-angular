@@ -1,3 +1,7 @@
+import { getColor } from '@app/core/shared/theme/color.registry';
+
+const MS_PER_DAY = 24 * 60 * 60 * 1000;
+
 export enum DATE_TASK {
   yesterday = 'Ayer',
   today = 'Hoy',
@@ -11,17 +15,16 @@ export enum DATE_COLOR {
 }
 export type TDateTask = keyof typeof DATE_TASK;
 
-export function getDate(key: TDateTask) {
-  return {
-    color: DATE_COLOR[key],
-    label: DATE_TASK[key],
-  };
-}
-
 function resetTime(date: string | number) {
   const $date = new Date(date);
   $date.setHours(0, 0, 0, 0);
   return $date;
+}
+
+function diffInDays(date: string) {
+  const $date = resetTime(date);
+  const $now = resetTime(Date.now());
+  return Math.round(($date.getTime() - $now.getTime()) / MS_PER_DAY);
 }
 
 export function filterByDate(date: string, status: boolean) {
@@ -38,22 +41,11 @@ export function filterByDate(date: string, status: boolean) {
 }
 
 export function overDue(date: string) {
-  const $date = resetTime(date);
-  const $now = resetTime(Date.now());
-
-  const msPerDay = 24 * 60 * 60 * 1000;
-  const diffInDays = Math.round(($date.getTime() - $now.getTime()) / msPerDay);
-
-  return diffInDays < 0;
+  return diffInDays(date) < 0;
 }
 
 export function keyDate(date: string) {
-  const $date = resetTime(date);
-  const $now = resetTime(Date.now());
-
-  const msPerDay = 24 * 60 * 60 * 1000;
-  const diffInDays = Math.round(($date.getTime() - $now.getTime()) / msPerDay);
-  switch (diffInDays) {
+  switch (diffInDays(date)) {
     case -1:
       return 'yesterday';
     case 0:
@@ -63,4 +55,15 @@ export function keyDate(date: string) {
     default:
       return null;
   }
+}
+
+export function getDate(date: string) {
+  const key = keyDate(date ?? '');
+  const over = overDue(date ?? '');
+
+  return {
+    overDue: over,
+    color: over ? getColor('red') : key ? getColor(DATE_COLOR[key]) : null,
+    label: key ? DATE_TASK[key] : date,
+  };
 }

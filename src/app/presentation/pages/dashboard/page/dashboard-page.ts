@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { OptionsService } from '@app/core/shared/service/options.service';
-import { Input } from '@components/01-atoms/input/input';
+import { InputSearch } from '@components/01-atoms/input/input-search';
 import { Card } from '@components/02-molecules/card/card';
 import type { TTabs } from '@components/02-molecules/tabs/tabs';
 import { Tabs, type TOutputOnChangeTabs } from '@components/02-molecules/tabs/tabs';
@@ -13,7 +13,7 @@ import { STATUS_TASK, TaskController } from '@/app/features/task';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Card, Tabs, Input, RouterOutlet, RouterLink],
+  imports: [Card, Tabs, InputSearch, RouterOutlet],
   templateUrl: './dashboard-page.html',
 })
 export class DashboardPage {

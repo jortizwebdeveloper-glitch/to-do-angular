@@ -4,7 +4,7 @@
       <h1>Todas las tareas</h1>
     </div>
     <div class="flex gap-5 justify-between">
-      <app-input (valueChange)="onChangeSearch($event)" [value]="search() ?? ''"></app-input>
+      <app-input-search (valueChange)="onChangeSearch($event)" [value]="search() ?? ''"></app-input-search>
       @if (fecha() !== 'finalizadas') {
         <app-tabs
           [items]="statusList"

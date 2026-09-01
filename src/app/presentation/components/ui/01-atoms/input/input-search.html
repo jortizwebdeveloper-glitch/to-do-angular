@@ -1,0 +1,19 @@
+<label for="search" class="relative block rounded-lg">
+  <app-icon
+    name="search"
+    class="absolute size-5 inset-y-0 my-auto left-2 text-stone-400 dark:text-slate-400"
+  ></app-icon>
+  <input
+    [value]="valueLink()"
+    (input)="onInput($event)"
+    class="px-3 py-1.5 bg-stone-200 dark:bg-slate-800 shadow-inner rounded-lg w-full pl-9"
+    type="search"
+    placeholder="Buscar"
+    id="search"
+  />
+  @if (value()) {
+    <button (click)="onClean()" class="size-5 absolute right-2 inset-y-0 my-auto">
+      <app-icon name="x"></app-icon>
+    </button>
+  }
+</label>
