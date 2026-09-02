@@ -70,3 +70,14 @@ export function getDate(date: string, status?: TStatusTask) {
     label: key ? DATE_TASK[key] : date,
   };
 }
+
+export function formatDate(date: string | number = Date.now()) {
+  return new Intl.DateTimeFormat('en-CA', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    timeZone: 'America/Bogota',
+  })
+    .format(new Date(date))
+    .replace(/-/g, '/');
+}

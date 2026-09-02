@@ -4,8 +4,8 @@
   [routerLinkActive]="['outline-1']"
   class="shadow-md rounded-xl border-l-8"
 >
-  <div class="flex gap-4 px-4 py-3 bg-white dark:bg-slate-900 rounded-xl">
-    <div class="self-center">
+  <div class="flex gap-4 bg-white dark:bg-slate-900 rounded-xl">
+    <div class="self-center py-3 pl-4">
       <app-dropdown [options]="optionsService.statusOptions" (eventChange)="onChange($event)">
         <span class="size-7 block">
           @if ($fields.status.key === 'completada') {
@@ -21,7 +21,7 @@
     <a
       [routerLink]="['task', $fields.id]"
       queryParamsHandling="preserve"
-      class="flex flex-col gap-3 w-1 grow min-w-xs"
+      class="flex flex-col gap-3 w-1 grow min-w-xs py-3 pr-4"
     >
       <div class="flex gap-2 items-start">
         <h2 class="w-1 grow overflow-hidden whitespace-nowrap text-ellipsis text-xl font-medium">

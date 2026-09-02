@@ -1,15 +1,6 @@
-import type {
-  AfterViewInit,
-  ElementRef,
-  OnDestroy} from '@angular/core';
-import {
-  Component,
-  input,
-  output,
-  signal,
-  ViewChild,
-} from '@angular/core';
-import { autoUpdate, computePosition, offset,shift } from '@floating-ui/dom';
+import type { AfterViewInit, ElementRef, OnDestroy } from '@angular/core';
+import { Component, input, output, signal, ViewChild } from '@angular/core';
+import { autoUpdate, computePosition, offset, shift } from '@floating-ui/dom';
 
 interface TOption<T> {
   label: string;

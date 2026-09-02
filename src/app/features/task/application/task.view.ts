@@ -52,6 +52,7 @@ export interface TaskViewModel {
   tags: TagViewModel[];
   status: TStatusTask;
   dueDate: string;
+  completeDate: string;
   priority: TProrityTask;
   finished: boolean;
 }

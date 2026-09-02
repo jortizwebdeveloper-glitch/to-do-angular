@@ -1,3 +1,4 @@
+import { formatDate } from '@app/core/shared/utils/date';
 import { z } from 'zod';
 
 import { PRIORITY_TASK_VALUES, STATU_TASK_VALUES } from './task.view';
@@ -14,10 +15,13 @@ export const baseTaskSchemaDTO = z.object({
   dueDate: z
     .string()
     .nonempty()
-    .transform((val) => val.replace(/-/g, '/')),
+    .transform((val) => formatDate(val)),
 });
 
-export const createTaskSchemaDTO = baseTaskSchemaDTO.omit({ id: true, status: true });
+export const createTaskSchemaDTO = baseTaskSchemaDTO.omit({
+  id: true,
+  status: true,
+});
 export type CreateTaskDTO = z.infer<typeof createTaskSchemaDTO>;
 
 export const updateTaskSchemaDTO = createTaskSchemaDTO.partial();
@@ -26,7 +30,12 @@ export type UpdateTaskDTO = z.infer<typeof updateTaskSchemaDTO>;
 export const idTaskSchemaDTO = baseTaskSchemaDTO.pick({ id: true });
 export type IdTaskDTO = z.infer<typeof idTaskSchemaDTO>;
 
-export const statusTaskSchemaDTO = baseTaskSchemaDTO.pick({ status: true });
+export const statusTaskSchemaDTO = baseTaskSchemaDTO.pick({ status: true }).transform((data) => {
+  Object.assign(data, {
+    completeDate: data.status === 'completada' ? formatDate() : '',
+  });
+  return data;
+});
 export type StatusTaskDTO = z.infer<typeof statusTaskSchemaDTO>;
 
 export const finishedTaskSchemaDTO = baseTaskSchemaDTO.pick({ finished: true });

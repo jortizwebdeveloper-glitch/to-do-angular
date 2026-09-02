@@ -17,9 +17,9 @@ export class AppTaskDataBase extends Dexie {
   tags!: EntityTable<TagRow, 'id'>;
   constructor() {
     super('AppTaskDataBase');
-
+    const v1 = TASK_INDEXED.join(', ');
     this.version(1).stores({
-      [TASKS_TABLE]: TASK_INDEXED,
+      [TASKS_TABLE]: v1,
     });
     this.version(2).stores({
       [CATEGORIES_TABLE]: CATEGORY_INDEXED,
@@ -27,9 +27,10 @@ export class AppTaskDataBase extends Dexie {
     this.version(3).stores({
       [TAGS_TABLE]: TAG_INDEXED,
     });
+    const v4 = [v1, 'finished'].join(', ');
     this.version(4)
       .stores({
-        [TASKS_TABLE]: TASK_INDEXED,
+        [TASKS_TABLE]: v4,
       })
       .upgrade((tx) => {
         return tx
@@ -39,6 +40,10 @@ export class AppTaskDataBase extends Dexie {
             task.finished = false;
           });
       });
+    const v5 = [v4, 'completeDate'].join(', ');
+    this.version(5).stores({
+      [TASKS_TABLE]: v5,
+    });
 
     this.seedTasks().then(() => {
       console.log('Seed Tasks Loaded');
