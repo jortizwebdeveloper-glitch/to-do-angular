@@ -1,5 +1,5 @@
 import { inject, Service } from '@angular/core';
-import { ControllerException } from '@app/core/shared/utils/errors';
+import { ControllerBoundary } from '@app/core/shared/utils/controller-boundary';
 
 import {
   createTaskSchemaDTO,
@@ -11,62 +11,60 @@ import {
 import { TaskService } from './task.service';
 
 @Service()
-export class TaskController extends ControllerException {
+export class TaskController extends ControllerBoundary {
   private taskService = inject(TaskService);
+
+  private parseId(id: number) {
+    return idTaskSchemaDTO.parse({ id }).id;
+  }
+
   getTasks() {
-    return this.validate(() => this.taskService.$tasks(), 'TaskController:getTasks');
+    return this.run(() => this.taskService.$tasks(), 'TaskController:getTasks');
   }
   getTask(id: number) {
-    return this.validate(
-      () => this.taskService.getTaskById(idTaskSchemaDTO.parse({ id }).id),
+    return this.runStream(
+      () => this.taskService.getTaskById(this.parseId(id)),
       'TaskController:getTask',
     );
   }
   getTaskWithRelation(id: number) {
-    return this.validate(
-      () => this.taskService.getTaskByIdWithRelation(idTaskSchemaDTO.parse({ id }).id),
+    return this.run(
+      () => this.taskService.getTaskByIdWithRelation(this.parseId(id)),
       'TaskController:getTaskWithRelation',
     );
   }
   async updateTaskStatus(id: number, status: string) {
-    return this.validateAsync(
+    return this.runAsync(
       () =>
-        this.taskService.updateStatusTaskById(
-          idTaskSchemaDTO.parse({ id }).id,
-          statusTaskSchemaDTO.parse({ status }),
-        ),
+        this.taskService.updateStatusTaskById(this.parseId(id), statusTaskSchemaDTO.parse({ status })),
       'TaskController:updateTaskStatus',
     );
   }
   async updateTaskFinished(id: number, finished: boolean) {
-    return this.validateAsync(
+    return this.runAsync(
       () =>
         this.taskService.updateFinishedTaskById(
-          idTaskSchemaDTO.parse({ id }).id,
+          this.parseId(id),
           finishedTaskSchemaDTO.parse({ finished }),
         ),
-      'TaskController:updateTaskStatus',
+      'TaskController:updateTaskFinished',
     );
   }
   async createTask(body: Record<string, unknown>) {
-    return this.validateAsync(
+    return this.runAsync(
       () => this.taskService.createTask(createTaskSchemaDTO.parse(body)),
       'TaskController:createTask',
     );
   }
   async updateTask(id: number, body: Record<string, unknown>) {
-    return this.validateAsync(
-      () =>
-        this.taskService.updateTaskById(
-          idTaskSchemaDTO.parse({ id }).id,
-          updateTaskSchemaDTO.parse(body),
-        ),
+    return this.runAsync(
+      () => this.taskService.updateTaskById(this.parseId(id), updateTaskSchemaDTO.parse(body)),
       'TaskController:updateTask',
     );
   }
   async deleteTask(id: number) {
-    return this.validateAsync(
-      () => this.taskService.deleteTaskById(idTaskSchemaDTO.parse({ id }).id),
+    return this.runAsync(
+      () => this.taskService.deleteTaskById(this.parseId(id)),
       'TaskController:deleteTask',
     );
   }
