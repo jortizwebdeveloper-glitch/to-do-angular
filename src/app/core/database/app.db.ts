@@ -9,7 +9,7 @@ import { CATEGORIES_TABLE, CATEGORY_INDEXED } from './schema/category.schema';
 import type { TagRow } from './schema/tags.schema';
 import { TAG_INDEXED, TAGS_TABLE } from './schema/tags.schema';
 import type { TaskRow } from './schema/task.schema';
-import { TASK_INDEXED, TASKS_TABLE } from './schema/task.schema';
+import { TASK_INDEXED, TASK_INDEXED_V6, TASKS_TABLE } from './schema/task.schema';
 
 export class AppTaskDataBase extends Dexie {
   tasks!: EntityTable<TaskRow, 'id'>;
@@ -45,6 +45,22 @@ export class AppTaskDataBase extends Dexie {
       [TASKS_TABLE]: v5,
     });
 
+    this.version(6)
+      .stores({
+        [TASKS_TABLE]: TASK_INDEXED_V6,
+      })
+      .upgrade((tx) => {
+        return tx
+          .table(TASKS_TABLE)
+          .toCollection()
+          .modify((task) => {
+            task.categoriaId = task.categoria;
+            delete task.categoria;
+            task.tagIds = task.tags;
+            delete task.tags;
+          });
+      });
+
     this.seedTasks().then(() => {
       console.log('Seed Tasks Loaded');
     });
@@ -64,7 +80,7 @@ export class AppTaskDataBase extends Dexie {
       const count = await this.tasks.count();
       if (count > 0) return;
     }
-    await this.tasks.bulkPut(tasks);
+    await this.tasks.bulkPut(tasks as TaskRow[]);
   }
 
   private async seedCategories(force = false) {

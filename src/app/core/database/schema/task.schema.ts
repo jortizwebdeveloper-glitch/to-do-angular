@@ -4,13 +4,13 @@ export interface TaskRow {
   id: number;
   title: string;
   description: string;
-  categoria: number;
-  tags: number[];
-  status: string;
+  categoriaId: number;
+  tagIds: number[];
+  status: 'en_curso' | 'pendiente' | 'completada';
   dueDate: string;
-  completedDate?: string;
-  priority: string;
-  finished?: boolean;
+  completeDate?: string;
+  priority: 'baja' | 'media' | 'alta';
+  finished: boolean;
 }
 
 export const TASK_INDEXED = [
@@ -23,3 +23,15 @@ export const TASK_INDEXED = [
   'dueDate',
   'priority',
 ];
+
+/** Índice corregido: sin campos de texto libre, con *tagIds multi-entry. */
+export const TASK_INDEXED_V6 = [
+  '++id',
+  'status',
+  'dueDate',
+  'priority',
+  'categoriaId',
+  '*tagIds',
+  'finished',
+  'completeDate',
+].join(', ');

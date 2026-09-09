@@ -28,7 +28,7 @@ export class TaskService {
           ...task,
           categoria: categories.get(task.categoria),
           tags: task.tags.map((t) => tags.get(t)),
-        }! as TaskViewModel,
+        } as TaskViewModel,
       ]),
     );
   });
