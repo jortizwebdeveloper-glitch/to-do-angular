@@ -1,59 +1,97 @@
-# ToDo
+# To-Do App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.4.
+![Angular](https://img.shields.io/badge/Angular-22-DD0031?logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
+![Dexie](https://img.shields.io/badge/Dexie-IndexedDB-FFCA28)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## Development server
+Aplicación de gestión de tareas construida como proyecto de práctica para portafolio, con foco en
+arquitectura limpia en el frontend y persistencia local real (sin backend).
 
-To start a local development server, run:
+## Idea de negocio
 
-```bash
-ng serve
+Una libreta digital de tareas: un CRUD simple donde cada tarea se clasifica con una categoría y
+etiquetas predefinidas, y se le da seguimiento por estado (pendiente, en curso, completada),
+prioridad y fecha límite. Sin cuentas de usuario ni backend — todo vive en el navegador. El
+objetivo no es competir con un gestor de tareas real, sino servir de pieza de portafolio que
+muestre una arquitectura de frontend bien separada por capas sobre un caso de uso sencillo y
+conocido.
+
+## Características
+
+- Crear, editar y eliminar tareas
+- Organización por categorías y etiquetas (tags)
+- Estados de tarea: pendiente, en curso, completada
+- Prioridades: baja, media, alta
+- Fecha de vencimiento (`dueDate`) y fecha de finalización (`completeDate`)
+- Persistencia local con IndexedDB (los datos sobreviven al recargar el navegador)
+- Renderizado del lado del servidor (SSR)
+
+## Stack tecnológico
+
+- **Framework:** Angular 22 (standalone components, Signals)
+- **Persistencia:** Dexie (IndexedDB)
+- **Validación:** Zod
+- **Estilos:** Tailwind CSS 4
+- **Testing:** Vitest
+- **Documentación de componentes:** Storybook
+- **SSR:** Angular Universal + Express
+
+## Arquitectura
+
+El código sigue una separación por capas inspirada en arquitectura hexagonal:
+
+```
+core/           configuración transversal: base de datos, guards, utilidades
+features/       lógica de negocio por dominio (task, category, tag)
+  domine/       entidades y contratos de repositorio
+  application/  servicios, DTOs, orquestación
+  infraestructure/  implementación concreta (Dexie)
+presentation/   UI: componentes (atomic design) y páginas
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Más detalle sobre el diseño de persistencia en [`docs/dexie-arquitectura.md`](docs/dexie-arquitectura.md).
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalación
 
 ```bash
-ng generate component component-name
+pnpm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Desarrollo
 
 ```bash
-ng generate --help
+pnpm start
 ```
 
-## Building
+Abre `http://localhost:4200/`.
 
-To build the project run:
+## Testing
 
 ```bash
-ng build
+pnpm test
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Storybook
 
 ```bash
-ng test
+pnpm storybook
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+## Build
 
 ```bash
-ng e2e
+pnpm build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Build y ejecución SSR
 
-## Additional Resources
+```bash
+pnpm build
+pnpm serve:ssr:to-do
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Licencia
+
+Este proyecto está bajo la licencia [MIT](LICENSE).
