@@ -4,8 +4,7 @@ import { getColor, type TColor } from '@app/core/shared/theme/color.registry';
 @Component({
   selector: 'app-badge',
   imports: [],
-  templateUrl: './badge.html',
-  styleUrl: './badge.css',
+  templateUrl: './badge.html'
 })
 export class Badge {
   color = input<TColor>('neutral');
