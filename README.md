@@ -45,9 +45,9 @@ El código sigue una separación por capas inspirada en arquitectura hexagonal:
 ```
 core/           configuración transversal: base de datos, guards, utilidades
 features/       lógica de negocio por dominio (task, category, tag)
-  domine/       entidades y contratos de repositorio
+  domain/       entidades y contratos de repositorio
   application/  servicios, DTOs, orquestación
-  infraestructure/  implementación concreta (Dexie)
+  infrastructure/  implementación concreta (Dexie)
 presentation/   UI: componentes (atomic design) y páginas
 ```
 

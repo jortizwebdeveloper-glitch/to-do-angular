@@ -4,8 +4,8 @@ import type {
   CreateTaskEntity,
   TaskEntity,
   UpdateTaskEntity,
-} from '@app/features/task/domine/task.entity';
-import type { ITaskRepository } from '@app/features/task/domine/task.repository';
+} from '@app/features/task/domain/task.entity';
+import type { ITaskRepository } from '@app/features/task/domain/task.repository';
 import { liveQuery } from 'dexie';
 import { from } from 'rxjs';
 

@@ -10,17 +10,17 @@ Cada dominio de negocio (`task`, `category`, `tag`) es una **feature** independi
 
 | Capa | Carpeta | Responsabilidad |
 |---|---|---|
-| Dominio | `domine/` | Entidad (forma de los datos) y el contrato del repository (`ITaskRepository`, interfaz) |
+| Dominio | `domain/` | Entidad (forma de los datos) y el contrato del repository (`ITaskRepository`, interfaz) |
 | Aplicación | `application/` | Controller (validación + errores), service (estado reactivo), DTOs |
-| Infraestructura | `infraestruture/` | Implementación concreta del repository (Dexie) |
+| Infraestructura | `infrastructure/` | Implementación concreta del repository (Dexie) |
 
 La regla de dependencia va en una sola dirección:
 
 ```
-presentation/  →  application/ (controller → service)  →  domine/  ←  infraestruture/
+presentation/  →  application/ (controller → service)  →  domain/  ←  infrastructure/
 ```
 
-`domine/` no importa nada de las otras dos capas — define el contrato, y `infraestruture/` lo
+`domain/` no importa nada de las otras dos capas — define el contrato, y `infrastructure/` lo
 implementa. `presentation/` solo conoce `application/`; nunca importa Dexie ni un repository
 directamente.
 

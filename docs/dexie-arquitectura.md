@@ -29,8 +29,8 @@ flowchart LR
 - **Dexie** — `AppTaskDataBase`, con tablas `tasks`, `categories`, `tags`.
 
 Cada feature (`task`, `category`, `tag`) repite esta misma estructura en
-`src/app/features/<nombre>/`: `domine/` (entidad + contrato del repository), `application/`
-(controller, service, DTOs), `infraestruture/` (implementación Dexie). `category` y `tag` no tienen
+`src/app/features/<nombre>/`: `domain/` (entidad + contrato del repository), `application/`
+(controller, service, DTOs), `infrastructure/` (implementación Dexie). `category` y `tag` no tienen
 controller propio porque solo exponen `getAll()` — sin validación de entrada que centralizar.
 
 ## Principios de diseño
@@ -59,7 +59,7 @@ el formulario— habla de `categoria`/`tags`; a ese nivel también son solo ids,
 existe únicamente en `TaskViewModel`, después de pasar por el service.
 
 La traducción entre ambos nombres vive en un solo punto,
-[task.repository.dexie.ts](../src/app/features/task/infraestruture/task.repository.dexie.ts):
+[task.repository.dexie.ts](../src/app/features/task/infrastructure/task.repository.dexie.ts):
 
 ```ts
 function rowToEntity(row: TaskRow): TaskEntity {

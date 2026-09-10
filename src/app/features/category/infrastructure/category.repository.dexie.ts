@@ -1,6 +1,6 @@
 import { inject, Service } from '@angular/core';
-import type { CategoryEntity } from '@app/features/category/domine/category.entity';
-import type { ICategoryRepository } from '@app/features/category/domine/category.repository';
+import type { CategoryEntity } from '@app/features/category/domain/category.entity';
+import type { ICategoryRepository } from '@app/features/category/domain/category.repository';
 import { liveQuery } from 'dexie';
 import { from, type Observable } from 'rxjs';
 

@@ -2,7 +2,7 @@ import { computed, inject, Service, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CategoryService } from '@app/features/category';
 import { TagService } from '@app/features/tag';
-import { TaskRepository } from '@app/features/task/infraestruture/task.repository.dexie';
+import { TaskRepository } from '@app/features/task/infrastructure/task.repository.dexie';
 import { of } from 'rxjs';
 
 import type { CreateTaskDTO, FinishedTaskDTO, StatusTaskDTO, UpdateTaskDTO } from './task.dto';

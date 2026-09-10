@@ -1,5 +1,5 @@
 import { inject, Service } from '@angular/core';
-import type { ITagRepository } from '@app/features/tag/domine/tag.repository';
+import type { ITagRepository } from '@app/features/tag/domain/tag.repository';
 import { liveQuery } from 'dexie';
 import { from } from 'rxjs';
 
