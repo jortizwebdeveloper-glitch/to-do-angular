@@ -8,7 +8,7 @@ export const COLORS_THEME = {
     text: 'text-blue-500',
     btn: 'text-white transition-color duration-500 bg-blue-600 hover:bg-blue-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-blue-600/50 hover:bg-blue-600/100 border border-blue-600',
+      'text-blue-600 dark:text-white transition-color duration-500 bg-blue-600/15 hover:bg-blue-600/100 hover:text-white border border-blue-600',
   },
   orange: {
     key: 'orange',
@@ -19,7 +19,7 @@ export const COLORS_THEME = {
     text: 'text-orange-500',
     btn: 'text-white transition-color duration-500 bg-orange-600 hover:bg-orange-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-orange-600/50 hover:bg-orange-600/100 border border-orange-600',
+      'text-orange-600 dark:text-white transition-color duration-500 bg-orange-600/15 hover:bg-orange-600/100 hover:text-white border border-orange-600',
   },
   red: {
     key: 'red',
@@ -30,7 +30,7 @@ export const COLORS_THEME = {
     text: 'text-red-500',
     btn: 'text-white transition-color duration-500 bg-red-600 hover:bg-red-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-red-500/15 hover:bg-red-500/100 border border-red-500',
+      'text-red-600 dark:text-white transition-color duration-500 bg-red-600/15 hover:bg-red-600/100 hover:text-white border border-red-600',
   },
   green: {
     key: 'green',
@@ -41,7 +41,7 @@ export const COLORS_THEME = {
     text: 'text-green-500',
     btn: 'text-white transition-color duration-500 bg-green-600 hover:bg-green-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-green-600/50 hover:bg-green-600/100 border border-green-600',
+      'text-green-600 dark:text-white transition-color duration-500 bg-green-600/15 hover:bg-green-600/100 hover:text-white border border-green-600',
   },
   emerald: {
     key: 'emerald',
@@ -52,7 +52,7 @@ export const COLORS_THEME = {
     text: 'text-emerald-500',
     btn: 'text-white transition-color duration-500 bg-emerald-600 hover:bg-emerald-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-emerald-600/50 hover:bg-emerald-600/100 border border-emerald-600',
+      'text-emerald-600 dark:text-white transition-color duration-500 bg-emerald-600/15 hover:bg-emerald-600/100 hover:text-white border border-emerald-600',
   },
   yellow: {
     key: 'yellow',
@@ -63,7 +63,7 @@ export const COLORS_THEME = {
     text: 'text-yellow-500',
     btn: 'text-white transition-color duration-500 bg-yellow-600 hover:bg-yellow-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-yellow-600/50 hover:bg-yellow-600/100 border border-yellow-600',
+      'text-yellow-600 dark:text-white transition-color duration-500 bg-yellow-600/15 hover:bg-yellow-600/100 hover:text-white border border-yellow-600',
   },
   amber: {
     key: 'amber',
@@ -74,7 +74,7 @@ export const COLORS_THEME = {
     text: 'text-amber-500',
     btn: 'text-white transition-color duration-500 bg-amber-600 hover:bg-amber-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-amber-600/50 hover:bg-amber-600/100 border border-amber-600',
+      'text-amber-600 dark:text-white transition-color duration-500 bg-amber-600/15 hover:bg-amber-600/100 hover:text-white border border-amber-600',
   },
   pink: {
     key: 'pink',
@@ -85,7 +85,7 @@ export const COLORS_THEME = {
     text: 'text-pink-500',
     btn: 'text-white transition-color duration-500 bg-pink-600 hover:bg-pink-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-pink-600/50 hover:bg-pink-600/100 border border-pink-600',
+      'text-pink-600 dark:text-white transition-color duration-500 bg-pink-600/15 hover:bg-pink-600/100 hover:text-white border border-pink-600',
   },
   rose: {
     key: 'rose',
@@ -96,7 +96,7 @@ export const COLORS_THEME = {
     text: 'text-rose-500',
     btn: 'text-white transition-color duration-500 bg-rose-600 hover:bg-rose-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-rose-600/50 hover:bg-rose-600/100 border border-rose-600',
+      'text-rose-600 dark:text-white transition-color duration-500 bg-rose-600/15 hover:bg-rose-600/100 hover:text-white border border-rose-600',
   },
   neutral: {
     key: 'neutral',
@@ -107,7 +107,7 @@ export const COLORS_THEME = {
     text: 'text-neutral-500',
     btn: 'text-white transition-color duration-500 bg-neutral-600 hover:bg-neutral-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-neutral-600/50 hover:bg-neutral-600/100 border border-neutral-600',
+      'text-neutral-600 dark:text-white transition-color duration-500 bg-neutral-600/15 hover:bg-neutral-600/100 hover:text-white border border-neutral-600',
   },
   slate: {
     key: 'slate',
@@ -118,7 +118,7 @@ export const COLORS_THEME = {
     text: 'text-slate-500',
     btn: 'text-white transition-color duration-500 bg-slate-600 hover:bg-slate-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-slate-600/50 hover:bg-slate-600/100 border border-slate-600',
+      'text-slate-600 dark:text-white transition-color duration-500 bg-slate-600/15 hover:bg-slate-600/100 hover:text-white border border-slate-600',
   },
   purple: {
     key: 'purple',
@@ -129,7 +129,7 @@ export const COLORS_THEME = {
     text: 'text-purple-500',
     btn: 'text-white transition-color duration-500 bg-purple-600 hover:bg-purple-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-purple-600/50 hover:bg-purple-600/100 border border-purple-600',
+      'text-purple-600 dark:text-white transition-color duration-500 bg-purple-600/15 hover:bg-purple-600/100 hover:text-white border border-purple-600',
   },
   indigo: {
     key: 'indigo',
@@ -140,7 +140,7 @@ export const COLORS_THEME = {
     text: 'text-indigo-500',
     btn: 'text-white transition-color duration-500 bg-indigo-600 hover:bg-indigo-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-indigo-600/50 hover:bg-indigo-600/100 border border-indigo-600',
+      'text-indigo-600 dark:text-white transition-color duration-500 bg-indigo-600/15 hover:bg-indigo-600/100 hover:text-white border border-indigo-600',
   },
   violet: {
     key: 'violet',
@@ -151,7 +151,7 @@ export const COLORS_THEME = {
     text: 'text-violet-500',
     btn: 'text-white transition-color duration-500 bg-violet-600 hover:bg-violet-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-violet-600/50 hover:bg-violet-600/100 border border-violet-600',
+      'text-violet-600 dark:text-white transition-color duration-500 bg-violet-600/15 hover:bg-violet-600/100 hover:text-white border border-violet-600',
   },
   sky: {
     key: 'sky',
@@ -162,7 +162,7 @@ export const COLORS_THEME = {
     text: 'text-sky-500',
     btn: 'text-white transition-color duration-500 bg-sky-600 hover:bg-sky-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-sky-600/50 hover:bg-sky-600/100 border border-sky-600',
+      'text-sky-600 dark:text-white transition-color duration-500 bg-sky-600/15 hover:bg-sky-600/100 hover:text-white border border-sky-600',
   },
   cyan: {
     key: 'cyan',
@@ -173,7 +173,7 @@ export const COLORS_THEME = {
     text: 'text-cyan-500',
     btn: 'text-white transition-color duration-500 bg-cyan-600 hover:bg-cyan-700',
     'btn-outline':
-      'text-white transition-color duration-500 bg-cyan-600/50 hover:bg-cyan-600/100 border border-cyan-600',
+      'text-cyan-600 dark:text-white transition-color duration-500 bg-cyan-600/15 hover:bg-cyan-600/100 hover:text-white border border-cyan-600',
   },
 } as const;
 

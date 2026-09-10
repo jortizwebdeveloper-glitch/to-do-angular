@@ -81,9 +81,11 @@ describe('AppButton', () => {
     fixture.detectChanges();
 
     const classes = buttonClasses();
-    expect(classes).toContain('bg-blue-600/50');
+    // el borde y el relleno translúcido sólo existen en el set "btn-outline"
     expect(classes).toContain('border-blue-600');
-    expect(classes).not.toContain('bg-blue-600');
+    expect(classes).toContain('bg-blue-600/15');
+    // y no aparece el hover del set sólido
+    expect(classes).not.toContain('hover:bg-blue-700');
   });
 
   it('con size "sm" aplica el set compacto', () => {

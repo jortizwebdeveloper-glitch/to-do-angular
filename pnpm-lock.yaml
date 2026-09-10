@@ -93,6 +93,9 @@ importers:
       '@storybook/addon-docs':
         specifier: ^10.4.6
         version: 10.4.6(@types/react@19.2.17)(esbuild@0.28.1)(rollup@4.62.2)(storybook@10.4.6(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(vite@7.3.5(@types/node@20.19.43)(jiti@2.7.0)(less@4.6.4)(lightningcss@1.32.0)(sass@1.99.0)(terser@5.46.2))(webpack@5.106.2(esbuild@0.28.1)(lightningcss@1.32.0)(postcss@8.5.15))
+      '@storybook/addon-themes':
+        specifier: ^10.6.0
+        version: 10.6.0(storybook@10.4.6(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))
       '@storybook/angular':
         specifier: ^10.4.6
         version: 10.4.6(5c6b363af84628c4d344fc740eae201b)
@@ -2718,6 +2721,11 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  '@storybook/addon-themes@10.6.0':
+    resolution: {integrity: sha512-PJtRtaCzKCAcouEqkHevMwv0aeQNsYWab4K/qszNGuSyFXxdcPQguKwmbB6Ajd/FxW+Of/mLXjRgpjrGVSgm1g==}
+    peerDependencies:
+      storybook: ^10.6.0
 
   '@storybook/angular@10.4.6':
     resolution: {integrity: sha512-52P9XJMNlF0tZgJHxrcVMtxDNdjVZXLPMN0JclLQq6sOXVQpbl6fMy20Bwx1Jy0feR7JObsL/+iCmTv/hZ4LlQ==}
@@ -8959,6 +8967,11 @@ snapshots:
       - rollup
       - vite
       - webpack
+
+  '@storybook/addon-themes@10.6.0(storybook@10.4.6(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))':
+    dependencies:
+      storybook: 10.4.6(@testing-library/dom@10.4.1)(@types/react@19.2.17)(prettier@3.8.4)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      ts-dedent: 2.3.0
 
   '@storybook/angular@10.4.6(5c6b363af84628c4d344fc740eae201b)':
     dependencies:
