@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import type { TaskViewModel } from '@app/features/task/application/task.view';
 
-import { createTaskSchemaDTO } from './task.dto';
 import { TaskController } from './task.controller';
+import { createTaskSchemaDTO } from './task.dto';
 import { TaskService } from './task.service';
+import type { TaskViewModel } from './task.view';
 
 describe('TaskController', () => {
   let controller: TaskController;

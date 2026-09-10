@@ -21,11 +21,14 @@ export class TaskController extends ControllerBoundary {
   getTasks() {
     return this.run(() => this.taskService.$tasks(), 'TaskController:getTasks');
   }
-  getTask(id: number) {
-    return this.runStream(
-      () => this.taskService.getTaskById(this.parseId(id)),
-      'TaskController:getTask',
+  selectTask(id: number) {
+    return this.run(
+      () => this.taskService.selectTask(this.parseId(id)),
+      'TaskController:selectTask',
     );
+  }
+  getTask() {
+    return this.run(() => this.taskService.$task(), 'TaskController:getTask');
   }
   getTaskWithRelation(id: number) {
     return this.run(
@@ -36,7 +39,10 @@ export class TaskController extends ControllerBoundary {
   async updateTaskStatus(id: number, status: string) {
     return this.runAsync(
       () =>
-        this.taskService.updateStatusTaskById(this.parseId(id), statusTaskSchemaDTO.parse({ status })),
+        this.taskService.updateStatusTaskById(
+          this.parseId(id),
+          statusTaskSchemaDTO.parse({ status }),
+        ),
       'TaskController:updateTaskStatus',
     );
   }

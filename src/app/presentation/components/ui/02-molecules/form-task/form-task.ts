@@ -11,18 +11,9 @@ import {
 import { InputDate } from '@components/01-atoms/form-controls/input-date/input-date';
 import { InputTextarea } from '@components/01-atoms/form-controls/input-textarea/input-textarea';
 import { Icon } from '@components/01-atoms/icon/icon';
-import z from 'zod';
 
-const taskSchema = z.object({
-  title: z.string().min(5, 'EL título debe ser minimo de 5 caracteres'),
-  description: z.string().nonempty('Descripcion obligatoria'),
-  categoria: z.number().min(1, 'Debes selccionar una categoría'),
-  tags: z.array(z.number()).min(1, 'Debes elegir como minimo 1 etiqueta'),
-  priority: z.string().nonempty('Debes elegir una prioridad'),
-  dueDate: z.string().nonempty('Debe asignar una fecha'),
-});
-
-export type TaskZod = z.infer<typeof taskSchema>;
+import type { TaskZod } from './form.type';
+import { taskSchema } from './form.type';
 
 @Component({
   selector: 'app-form-task',

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskController } from '@app/features/task';
-import type { TaskZod } from '@components/02-molecules/form-task/form-task';
+import type { TaskZod } from '@components/02-molecules/form-task/form.type';
 import { FormTask } from '@components/02-molecules/form-task/form-task';
 import { Modal } from '@components/02-molecules/modal/modal';
 import { toast } from 'vanilla-toast-js';

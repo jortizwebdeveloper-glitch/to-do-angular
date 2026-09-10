@@ -1,10 +1,9 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Component, inject, linkedSignal } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
 import { TaskController } from '@app/features/task';
-import type { TaskZod } from '@components/02-molecules/form-task/form-task';
+import type { TaskZod } from '@components/02-molecules/form-task/form.type';
+import { taskSchema } from '@components/02-molecules/form-task/form.type';
 import { FormTask } from '@components/02-molecules/form-task/form-task';
-import { of } from 'rxjs';
 import { toast } from 'vanilla-toast-js';
 
 interface TData {
@@ -21,13 +20,15 @@ export class UpdateTaskPage {
   data = inject<TData>(DIALOG_DATA);
 
   taskController = inject(TaskController);
-  task = rxResource({
-    stream: () => {
-      const res = this.taskController.getTask(this.data.id);
-      return res.ok ? res.data : of(undefined);
-    },
+
+  constructor() {
+    this.taskController.selectTask(this.data.id);
+  }
+
+  fields = linkedSignal(() => {
+    const task = this.taskController.getTask();
+    return task.ok && task.data ? taskSchema.parse(task.data) : null;
   });
-  fields = linkedSignal(() => this.task.value() ?? null);
 
   onClose() {
     this.dialogRef.close();

@@ -1,5 +1,5 @@
-import type { TaskRow } from '@app/core/database/schema/task.schema';
 import { inject, Service } from '@angular/core';
+import type { TaskRow } from '@app/core/database/schema/task.schema';
 import type {
   CreateTaskEntity,
   TaskEntity,

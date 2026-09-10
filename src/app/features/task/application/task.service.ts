@@ -1,8 +1,9 @@
-import { computed, inject, Service } from '@angular/core';
+import { computed, inject, Service, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CategoryService } from '@app/features/category';
 import { TagService } from '@app/features/tag';
 import { TaskRepository } from '@app/features/task/infraestruture/task.repository.dexie';
+import { of } from 'rxjs';
 
 import type { CreateTaskDTO, FinishedTaskDTO, StatusTaskDTO, UpdateTaskDTO } from './task.dto';
 import type { TaskViewModel } from './task.view';
@@ -14,7 +15,7 @@ export class TaskService {
   private categoryService = inject(CategoryService);
   private tagService = inject(TagService);
 
-  private taskResource = rxResource({
+  private tasksResource = rxResource({
     stream: () => this.taskRepository.getAll(),
   });
 
@@ -22,7 +23,7 @@ export class TaskService {
     const categories = this.categoryService.$categories();
     const tags = this.tagService.$tags();
     return new Map(
-      (this.taskResource.value() ?? []).map((task) => [
+      (this.tasksResource.value() ?? []).map((task) => [
         task!.id,
         {
           ...task,
@@ -32,9 +33,20 @@ export class TaskService {
       ]),
     );
   });
-  getTaskById(id: number) {
-    return this.taskRepository.$getById(id);
+
+  private taskId = signal<number | null>(null);
+  selectTask(id: number) {
+    this.taskId.set(id);
   }
+
+  taskResource = rxResource({
+    params: () => this.taskId(),
+    stream: ({ params: id }) => (id === null ? of(undefined) : this.taskRepository.$getById(id)),
+  });
+  $task = computed(() => {
+    return this.taskResource.value();
+  });
+
   getTaskByIdWithRelation(id: number) {
     const task = this.$tasks().get(id);
     if (!task) return;
