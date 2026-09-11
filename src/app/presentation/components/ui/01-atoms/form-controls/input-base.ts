@@ -1,8 +1,10 @@
-import { Directive, input, model, output } from '@angular/core';
+import { computed, Directive, inject, input, model, output } from '@angular/core';
 import type { FormValueControl, ValidationError } from '@angular/forms/signals';
+import { _IdGenerator } from '@angular/cdk/a11y';
 
 @Directive()
 export abstract class InputBase<T> implements FormValueControl<T | null> {
+  protected readonly key = inject(_IdGenerator).getId('ng-input-');
   readonly value = model<T | null>(null);
   name = input.required<string>();
   touched = input<boolean>(false);
@@ -13,9 +15,11 @@ export abstract class InputBase<T> implements FormValueControl<T | null> {
   placeholder = input<string>('');
   label = input<string>();
 
+  ngName = computed(() => `${this.key}-${this.name()}`);
+
   onBlur() {
     this.touch.emit();
   }
 
-  abstract onInput(event: Event, value?:unknown): void;
+  abstract onInput(event: Event, value?: unknown): void;
 }

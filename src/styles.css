@@ -47,7 +47,7 @@ body {
     }
   }
 }
-@layer base {
+@layer utilities {
   input[type='checkbox'] {
     & + .ng-checkbox {
       position: relative;
@@ -56,7 +56,6 @@ body {
       width: 1em;
       height: 1em;
       border-radius: var(--radius-sm);
-      background-color: color-mix(in oklab, var(--color-white) 20%, transparent);
       &::before {
         content: '';
         position: absolute;
@@ -69,6 +68,7 @@ body {
     }
     &:checked + .ng-checkbox {
       background-color: var(--color-blue-500);
+      border-color: transparent;
       &::before {
         opacity: 1;
       }

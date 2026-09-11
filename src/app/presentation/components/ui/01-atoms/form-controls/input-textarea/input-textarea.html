@@ -2,9 +2,10 @@
 <app-input-label [label]="label()" [invalid]="$invalid" [errors]="errors()">
   <textarea
     rows="8"
-    class="px-4 py-1.5 w-full min-h-40 max-h-80"
+    class="px-4 py-1.5 w-full min-h-40 max-h-80 rounded-lg"
     [placeholder]="placeholder()"
-    [name]="name()"
+    [id]="ngName()"
+    [name]="ngName()"
     [value]="value()"
     (input)="onInput($event)"
     (blur)="onBlur()"

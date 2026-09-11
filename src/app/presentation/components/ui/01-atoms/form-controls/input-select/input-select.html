@@ -5,7 +5,7 @@
   [invalid]="$invalid"
   [errors]="errors()"
 >
-  <select class="px-4 py-1.5 w-full" [name]="name()" [value]="value()" (blur)="onBlur()">
+  <select class="px-4 py-1.5 w-full rounded-lg" [id]="ngName()" [name]="ngName()" [value]="value()" (blur)="onBlur()">
     @for (option of options(); track $index) {
       <option
         class="text-white"
