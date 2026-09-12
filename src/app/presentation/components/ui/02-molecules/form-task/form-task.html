@@ -1,7 +1,7 @@
-<div class="overflow-auto bg-slate-800 rounded-lg w-screen max-w-3xl max-h-screen">
+<div class="overflow-auto border border-stone-200/75 dark:border-transparent shadow-md bg-white dark:bg-slate-800 rounded-lg w-screen max-w-3xl max-h-screen">
   <app-form-handle (submitHandle)="onSubmit()">
     <div
-      class="bg-slate-800 rounded-t-lg z-10 top-0 sticky p-5 border-b border-white/15 pb-5 flex justify-between"
+      class="bg-white dark:bg-slate-800 rounded-t-lg z-10 top-0 sticky p-5 border-b border-black/15 dark:border-white/15 pb-5 flex justify-between"
     >
       <h2 class="text-xl font-semibold">{{ title() }}</h2>
       <button aria-label="Cerrar" type="button" class="size-6 cursor-pointer" (click)="onClose()">
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div
-      class="bg-slate-800 rounded-b-lg z-10 bottom-0 sticky p-5 border-t border-white/15 pb-5 flex justify-between"
+      class="bg-white dark:bg-slate-800 rounded-b-lg z-10 bottom-0 sticky p-5 border-t border-black/15 dark:border-white/15 pb-5 flex justify-between"
     >
       <button type="button" appButton variant="slate" (click)="onClose()">Cerrar</button>
       <button type="submit" appButton variant="emerald">{{ next() }}</button>

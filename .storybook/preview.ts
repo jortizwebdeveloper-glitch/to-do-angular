@@ -8,7 +8,7 @@ const preview = definePreview({
   decorators: [
     withThemeByClassName<AngularRenderer>({
       themes: {
-        light: 'light',
+        light: 'light bg-zinc-100/50',
         dark: 'dark bg-slate-950 text-white',
       },
       defaultTheme: 'light',
@@ -19,6 +19,7 @@ const preview = definePreview({
       document.querySelectorAll('.docs-story').forEach((item) => {
         item.classList.toggle('bg-slate-950', isDark);
         item.classList.toggle('text-white', isDark);
+        item.classList.toggle('bg-zinc-100/50', !isDark);
       });
       return storyFn();
     },
