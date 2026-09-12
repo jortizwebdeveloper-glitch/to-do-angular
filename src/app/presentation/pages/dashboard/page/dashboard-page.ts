@@ -1,7 +1,7 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { OptionsService } from '@app/core/shared/service/options.service';
-import { InputSearch } from '@components/01-atoms/input/input-search';
+import { InputSearch } from '@components/01-atoms/input-search/input-search';
 import { Card } from '@components/02-molecules/card/card';
 import type { TTabs } from '@components/02-molecules/tabs/tabs';
 import { Tabs, type TOutputOnChangeTabs } from '@components/02-molecules/tabs/tabs';

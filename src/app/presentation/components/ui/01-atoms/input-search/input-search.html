@@ -6,13 +6,13 @@
   <input
     [value]="valueLink()"
     (input)="onInput($event)"
-    class="px-3 py-1.5 bg-stone-200 dark:bg-slate-800 shadow-inner rounded-lg w-full pl-9"
+    class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-stone-200 dark:border-transparent  shadow-inner rounded-lg w-full pl-9"
     type="search"
     placeholder="Buscar"
     id="search"
   />
-  @if (value()) {
-    <button (click)="onClean()" class="size-5 absolute right-2 inset-y-0 my-auto">
+  @if (valueLink()) {
+    <button (click)="onClean()" class="size-5 absolute right-2 inset-y-0 my-auto cursor-pointer opacity-50 hover:opacity-100">
       <app-icon name="x"></app-icon>
     </button>
   }
