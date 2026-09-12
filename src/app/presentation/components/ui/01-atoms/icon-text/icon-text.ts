@@ -7,15 +7,13 @@ import type { IconName } from '@components/01-atoms/icon/icon.registry';
   selector: 'app-icon-text',
   imports: [Icon],
   templateUrl: './icon-text.html',
-  styleUrl: './icon-text.css',
 })
 export class IconText {
   icon = input<IconName>();
   textColor = input<boolean>(false);
   color = input<TColor>('neutral');
-  setColor = computed(() => getColor(this.color()));
-  setTextColor = computed(() => {
-    const key = getColor(this.color()).text;
-    return {[key]: this.textColor()}
+  setColor = computed(() => {
+    const color = getColor(this.color());
+    return { color, textColor: { [color.text]: this.textColor() } };
   });
 }
