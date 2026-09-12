@@ -5,7 +5,6 @@ import { getColor, type TColor } from '@app/core/shared/theme/color.registry';
   selector: 'app-tag',
   imports: [],
   templateUrl: './tag.html',
-  styleUrl: './tag.css',
 })
 export class Tag {
   color = input<TColor>('neutral');
