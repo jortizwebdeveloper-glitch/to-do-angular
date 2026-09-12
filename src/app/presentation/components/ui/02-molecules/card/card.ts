@@ -16,11 +16,9 @@ import { getPriority, getStatus } from '@/app/features/task';
   selector: 'app-card',
   imports: [Tag, Dropdown, Badge, IconText, Icon, RouterLinkActive, RouterLink],
   templateUrl: './card.html',
-  styleUrl: './card.css',
 })
 export class Card {
   data = input.required<TaskViewModel>();
-  active = input<boolean>();
   eventStatusChenge = output<TStatusTask>();
 
   optionsService = inject(OptionsService);
