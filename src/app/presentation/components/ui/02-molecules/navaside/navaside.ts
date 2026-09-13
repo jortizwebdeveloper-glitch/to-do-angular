@@ -28,7 +28,6 @@ export interface TNavaside {
   selector: 'app-navaside',
   imports: [Icon, RouterLink, RouterLinkActive, Tag],
   templateUrl: './navaside.html',
-  styleUrl: './navaside.css',
 })
 export class Navaside {
   data = input.required<TNavaside>();
