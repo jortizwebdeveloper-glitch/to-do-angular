@@ -1,4 +1,4 @@
-# To-Do App
+# TaskFlow
 
 ![Angular](https://img.shields.io/badge/Angular-22-DD0031?logo=angular&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
@@ -51,7 +51,8 @@ features/       lógica de negocio por dominio (task, category, tag)
 presentation/   UI: componentes (atomic design) y páginas
 ```
 
-Más detalle sobre el diseño de persistencia en [`docs/dexie-arquitectura.md`](docs/dexie-arquitectura.md).
+Más detalle del patrón de capas en [`docs/arquitectura.md`](docs/arquitectura.md) y del diseño
+de persistencia en [`docs/dexie-arquitectura.md`](docs/dexie-arquitectura.md).
 
 ## Instalación
 
@@ -71,6 +72,18 @@ Abre `http://localhost:4200/`.
 
 ```bash
 pnpm test
+```
+
+La suite (Vitest) cubre comportamiento real de componentes, no solo scaffolds — y cada componente
+de UI (`01-atoms`/`02-molecules`/`04-layout`) tiene además su story de Storybook, que sirve como
+documentación viva y catálogo visual.
+
+## Calidad de código
+
+```bash
+pnpm lint       # ESLint
+pnpm lint:fix   # ESLint con autofix
+pnpm typecheck  # tsc --noEmit (app + specs)
 ```
 
 ## Storybook
