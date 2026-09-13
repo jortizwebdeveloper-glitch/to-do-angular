@@ -1,6 +1,6 @@
+import { _IdGenerator } from '@angular/cdk/a11y';
 import { computed, Directive, inject, input, model, output } from '@angular/core';
 import type { FormValueControl, ValidationError } from '@angular/forms/signals';
-import { _IdGenerator } from '@angular/cdk/a11y';
 
 @Directive()
 export abstract class InputBase<T> implements FormValueControl<T | null> {

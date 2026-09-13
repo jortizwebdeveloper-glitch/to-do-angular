@@ -5,8 +5,8 @@ import { By } from '@angular/platform-browser';
 import { OptionsService } from '@app/core/shared/service/options.service';
 import { CheckboxList, InputSelect } from '@components/01-atoms/form-controls';
 
-import { FormTask } from './form-task';
 import type { TaskZod } from './form.type';
+import { FormTask } from './form-task';
 
 const fakeOptionsService = {
   categoryOptions: () => [
