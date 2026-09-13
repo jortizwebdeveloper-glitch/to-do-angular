@@ -14,7 +14,6 @@ export interface TOutputOnChangeTabs {
   selector: 'app-tabs',
   imports: [],
   templateUrl: './tabs.html',
-  styleUrl: './tabs.css',
 })
 export class Tabs {
   items = input.required<TTabs[]>();

@@ -9,12 +9,15 @@
   >
   </span>
   @for (item of $items; track `tab-${$index}-${item.value}`) {
-    <li [class]="{ active: key() === item.value }" class="group/active">
+    <li [class]="{ active: key() === item.value }" class="group/active flex">
       <button
+        [title]="item.label"
         (click)="onSetCurrent({ index: $index, value: item.value })"
-        class="whitespace-nowrap h-full text-ellipsis overflow-hidden transition-color duration-500 ease-in-out cursor-pointer group-[.active]/active:opacity-100 opacity-50 group-[.active]/active:font-medium block content-center w-full leading-none px-4 py-2 text-center"
+        class="grow w-1 h-full transition-color duration-500 ease-in-out cursor-pointer group-[.active]/active:opacity-100 opacity-50 group-[.active]/active:font-medium block content-center leading-none px-4 py-2 text-center"
       >
-        {{ item.label }}
+        <div class="overflow-hidden text-ellipsis whitespace-nowrap">
+          {{ item.label }}
+        </div>
       </button>
     </li>
   }
