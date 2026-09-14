@@ -1,6 +1,7 @@
 import { Component, computed, inject, input, linkedSignal, output } from '@angular/core';
 import { form, FormField, submit, validateStandardSchema } from '@angular/forms/signals';
 import { OptionsService } from '@app/core/shared/service/options.service';
+import { PRIORITY_OPTIONS } from '@app/features/task';
 import { AppButton } from '@components/01-atoms/button/button.directive';
 import {
   CheckboxList,
@@ -39,10 +40,7 @@ export class FormTask {
     { label: 'Elige una categoría', value: 0 },
     ...this.optionsService.categoryOptions(),
   ]);
-  prioridades = computed(() => [
-    { label: 'Elige una prioridad', value: '' },
-    ...this.optionsService.priorityOptions(),
-  ]);
+  prioridades = [{ label: 'Elige una prioridad', value: '' }, ...PRIORITY_OPTIONS];
 
   fields = input<TaskZod | null>(null);
   inputs = linkedSignal(

@@ -3,7 +3,6 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { provideRouter, RouterLink } from '@angular/router';
-import { OptionsService } from '@app/core/shared/service/options.service';
 import type { TaskViewModel, TStatusTask } from '@app/features/task';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { Icon } from '@components/01-atoms/icon/icon';
@@ -40,14 +39,6 @@ function buildTask(overrides: Partial<TaskViewModel> = {}): TaskViewModel {
   };
 }
 
-const fakeOptionsService = {
-  statusOptions: [
-    { value: 'pendiente', label: 'Pendiente' },
-    { value: 'en_curso', label: 'En curso' },
-    { value: 'completada', label: 'Completada' },
-  ],
-};
-
 @Component({
   imports: [Card],
   template: `<app-card [data]="data()" (eventStatusChange)="onChange($event)"></app-card>`,
@@ -64,7 +55,7 @@ describe('Card', () => {
   it('should create', async () => {
     await TestBed.configureTestingModule({
       imports: [Card],
-      providers: [provideRouter([]), { provide: OptionsService, useValue: fakeOptionsService }],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     const fixture = TestBed.createComponent(Card);
@@ -89,7 +80,7 @@ describe('Card', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         imports: [CardHost],
-        providers: [provideRouter([]), { provide: OptionsService, useValue: fakeOptionsService }],
+        providers: [provideRouter([])],
       }).compileComponents();
 
       fixture = TestBed.createComponent(CardHost);

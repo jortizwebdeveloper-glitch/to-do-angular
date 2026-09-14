@@ -15,7 +15,7 @@ import { toast } from 'vanilla-toast-js';
 import { getColor } from '@/app/core/shared/theme/color.registry';
 import { getDate } from '@/app/core/shared/utils/date';
 import type { TStatusTask } from '@/app/features/task';
-import { getPriority, getStatus, TaskController } from '@/app/features/task';
+import { getPriority, getStatus, STATUS_OPTIONS, TaskController } from '@/app/features/task';
 
 @Component({
   selector: 'app-item-list',
@@ -35,6 +35,8 @@ export class TaskPage {
   taskController = inject(TaskController);
   optionsService = inject(OptionsService);
   router = inject(Router);
+
+  protected readonly statusOptions = STATUS_OPTIONS;
 
   task = computed(() => {
     const res = this.taskController.getTaskWithRelation(this.id());

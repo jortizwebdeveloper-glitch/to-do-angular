@@ -22,7 +22,7 @@
               </div>
             } @else {
               <app-dropdown
-                [options]="optionsService.statusOptions"
+                [options]="statusOptions"
                 (eventChange)="onUpdateStatus($event)"
               >
                 <span [class]="$task.status.color.text" class="text-sm font-semibold">

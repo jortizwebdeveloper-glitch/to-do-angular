@@ -6,7 +6,7 @@
 >
   <div class="flex gap-4 bg-white dark:bg-slate-900 rounded-xl">
     <div class="self-center py-3 pl-4">
-      <app-dropdown [options]="optionsService.statusOptions" (eventChange)="onChange($event)">
+      <app-dropdown [options]="statusOptions" (eventChange)="onChange($event)">
         <span class="size-7 block">
           @if ($fields.status.key === 'completada') {
             <app-icon name="circle-check" [class]="$fields.status.color.text"></app-icon>

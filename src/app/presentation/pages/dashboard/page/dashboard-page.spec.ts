@@ -72,7 +72,7 @@ describe('DashboardPage', () => {
       providers: [
         provideRouter([]),
         { provide: TaskController, useValue: taskController },
-        { provide: OptionsService, useValue: { statusOptions: [] } },
+        { provide: OptionsService, useValue: { onUpdateStatus: vi.fn() } },
       ],
     });
 

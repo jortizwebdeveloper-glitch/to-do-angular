@@ -3,6 +3,7 @@ import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { OptionsService } from '@app/core/shared/service/options.service';
+import { PRIORITY_OPTIONS } from '@app/features/task';
 import { CheckboxList, InputSelect } from '@components/01-atoms/form-controls';
 
 import type { TaskZod } from './form.type';
@@ -16,10 +17,6 @@ const fakeOptionsService = {
   tagOptions: () => [
     { label: 'Urgente', value: 1 },
     { label: 'Compras', value: 2 },
-  ],
-  priorityOptions: () => [
-    { label: 'Alta', value: 'alta' },
-    { label: 'Media', value: 'media' },
   ],
 };
 
@@ -117,7 +114,7 @@ describe('FormTask', () => {
     it('el select de prioridad antepone "Elige una prioridad" (value \'\') a las opciones del servicio', () => {
       const options = selects()[1].componentInstance.options();
       expect(options[0]).toEqual({ label: 'Elige una prioridad', value: '' });
-      expect(options.slice(1)).toEqual(fakeOptionsService.priorityOptions());
+      expect(options.slice(1)).toEqual(PRIORITY_OPTIONS);
     });
 
     it('la lista de etiquetas usa tagOptions() del servicio directamente, sin opción default', () => {

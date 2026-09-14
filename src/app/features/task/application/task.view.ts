@@ -22,6 +22,12 @@ export function getStatus(key: TStatusTask) {
   };
 }
 
+/** Opciones de estado para selects y dropdowns. Deriva del enum, no depende de nada externo. */
+export const STATUS_OPTIONS = STATU_TASK_VALUES.map((value) => ({
+  value,
+  label: STATUS_TASK[value],
+}));
+
 export enum PRIORITY_TASK {
   alta = 'Alta',
   media = 'Media',
@@ -43,6 +49,12 @@ export function getPriority(key: TProrityTask) {
     color: PRIORITY_COLOR[key],
   };
 }
+
+/** Opciones de prioridad para selects. Deriva del enum, no depende de nada externo. */
+export const PRIORITY_OPTIONS = PRIORITY_TASK_VALUES.map((value) => ({
+  value,
+  label: PRIORITY_TASK[value],
+}));
 
 export interface TaskViewModel {
   id: number;

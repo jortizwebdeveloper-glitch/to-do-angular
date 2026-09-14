@@ -14,11 +14,6 @@ const fakeOptionsService = {
     { label: 'Urgente', value: 1 },
     { label: 'Compras', value: 2 },
   ],
-  priorityOptions: () => [
-    { label: 'Alta', value: 'alta' },
-    { label: 'Media', value: 'media' },
-    { label: 'Baja', value: 'baja' },
-  ],
 };
 
 type FormTaskArgs = FormTask;
