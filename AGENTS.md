@@ -31,6 +31,11 @@ Prettier.
 - **Regla de dependencia, en una sola dirección**:
   `presentation → application → domain ← infrastructure`. `presentation/` nunca importa Dexie ni un
   repository directo: siempre pasa por `application/`.
+- **Las páginas hablan con un store, no con el controller.** `TaskController` es el adaptador
+  de borde (valida, ejecuta y **devuelve** un `ControllerResult`); no sabe nada de UI y así debe
+  quedar. `presentation/shared/task.store.ts` es quien traduce ese resultado en feedback: es el
+  único lugar del proyecto donde se dispara un `toast`. El store **no guarda estado** — el estado
+  vive en los services de cada feature.
 - **Estilos solo con Tailwind 4 inline** en el template. El proyecto no usa `.css` por componente.
 - **Colores del theme** vía `getColor(key)` de `core/shared/theme/color.registry.ts` (cae a
   `'neutral'` si la key no existe). No hardcodear clases de color sueltas.
