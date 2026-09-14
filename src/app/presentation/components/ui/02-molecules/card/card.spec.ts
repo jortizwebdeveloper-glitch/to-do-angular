@@ -50,7 +50,7 @@ const fakeOptionsService = {
 
 @Component({
   imports: [Card],
-  template: `<app-card [data]="data()" (eventStatusChenge)="onChange($event)"></app-card>`,
+  template: `<app-card [data]="data()" (eventStatusChange)="onChange($event)"></app-card>`,
 })
 class CardHost {
   data = signal<TaskViewModel>(buildTask());
@@ -145,7 +145,7 @@ describe('Card', () => {
       expect(statusIcon().name()).toBe('circle-check');
     });
 
-    it('elegir un estado en el dropdown emite eventStatusChenge con ese valor', () => {
+    it('elegir un estado en el dropdown emite eventStatusChange con ese valor', () => {
       const trigger = fixture.debugElement.query(By.css('app-dropdown button')).nativeElement as HTMLElement;
       trigger.click();
       fixture.detectChanges();

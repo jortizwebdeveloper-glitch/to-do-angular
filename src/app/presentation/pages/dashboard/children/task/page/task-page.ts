@@ -78,7 +78,7 @@ export class TaskPage {
     const dialog = this.dialog.open<boolean>(AppDialog, {
       data: {
         title: 'Finalizar tarea',
-        description: 'Vas a finalizar la tarea ¿Esta seguro?',
+        description: 'Vas a finalizar la tarea ¿Estás seguro?',
         next: { label: 'Finalizar', variant: 'emerald' },
       },
     });
@@ -90,7 +90,7 @@ export class TaskPage {
     const dialog = this.dialog.open<boolean>(AppDialog, {
       data: {
         title: 'Eliminar tarea',
-        description: 'Vas a elminar la tarea ¿Esta seguro?',
+        description: 'Vas a eliminar la tarea ¿Estás seguro?',
         next: { label: 'Eliminar', variant: 'rose' },
       },
     });

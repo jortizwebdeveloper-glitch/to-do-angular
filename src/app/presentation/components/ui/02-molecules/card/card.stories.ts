@@ -63,7 +63,7 @@ const meta: Meta<CardArgs> = {
     }),
   ],
   render: (args) => ({
-    props: { ...args, eventStatusChenge: fn() },
+    props: { ...args, eventStatusChange: fn() },
     template: `<div style="max-width:640px"><app-card ${argsToTemplate(args)} /></div>`,
   }),
   args: {

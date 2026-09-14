@@ -19,12 +19,12 @@ import { getPriority, getStatus } from '@/app/features/task';
 })
 export class Card {
   data = input.required<TaskViewModel>();
-  eventStatusChenge = output<TStatusTask>();
+  eventStatusChange = output<TStatusTask>();
 
   optionsService = inject(OptionsService);
 
   onChange(value: TStatusTask) {
-    this.eventStatusChenge.emit(value);
+    this.eventStatusChange.emit(value);
   }
 
   fields = computed(() => {

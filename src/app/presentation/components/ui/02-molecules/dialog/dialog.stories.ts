@@ -105,7 +105,7 @@ class DialogTrigger {
     const dialogRef = this.dialog.open<boolean>(Dialog, {
       data: {
         title: 'Finalizar tarea',
-        description: 'Vas a finalizar la tarea ¿Esta seguro?',
+        description: 'Vas a finalizar la tarea ¿Estás seguro?',
         next: { label: 'Finalizar', variant: 'emerald' },
       },
     });

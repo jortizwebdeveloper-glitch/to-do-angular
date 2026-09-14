@@ -12,8 +12,8 @@ export interface TNavasideItem {
   icon?: IconName;
   name: string;
   color: TColor;
+  /** El link siempre es relativo a la ruta actual: solo cambia los query params. */
   link?: {
-    path?: string;
     query?: Record<string, string> | null;
   };
   count?: number;
