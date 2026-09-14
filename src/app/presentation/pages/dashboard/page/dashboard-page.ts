@@ -1,6 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { OptionsService } from '@app/core/shared/service/options.service';
 import { InputSearch } from '@components/01-atoms/input-search/input-search';
 import { Card } from '@components/02-molecules/card/card';
 import type { TTabs } from '@components/02-molecules/tabs/tabs';
@@ -9,7 +8,8 @@ import { Tabs, type TOutputOnChangeTabs } from '@components/02-molecules/tabs/ta
 import { filterByDate } from '@/app/core/shared/utils/date';
 import { strNormalize } from '@/app/core/shared/utils/string';
 import type { TaskViewModel, TStatusTask } from '@/app/features/task';
-import { STATUS_TASK, TaskController } from '@/app/features/task';
+import { STATUS_TASK } from '@/app/features/task';
+import { TaskStore } from '@/app/presentation/shared/task.store';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +17,7 @@ import { STATUS_TASK, TaskController } from '@/app/features/task';
   templateUrl: './dashboard-page.html',
 })
 export class DashboardPage {
-  private taskController = inject(TaskController);
+  private taskStore = inject(TaskStore);
   private router = inject(Router);
 
   categoria = input<string>();
@@ -27,7 +27,7 @@ export class DashboardPage {
   fecha = input<string>();
 
   tasks = computed(() => {
-    const $tasks = this.taskController.getTasks();
+    const $tasks = this.taskStore.getTasks();
     const tasks: TaskViewModel[] = [];
     if ($tasks.ok) {
       const iCat = this.categoria();
@@ -69,10 +69,8 @@ export class DashboardPage {
     },
   ];
 
-  optionsService = inject(OptionsService);
-
   async onUpdateStatus(status: TStatusTask, task: TaskViewModel) {
-    this.optionsService.onUpdateStatus(status, task);
+    await this.taskStore.updateStatus(status, task);
   }
 
   onChangeSearch(search: string) {

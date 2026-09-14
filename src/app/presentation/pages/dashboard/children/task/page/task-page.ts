@@ -1,7 +1,6 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Component, computed, inject, input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { OptionsService } from '@app/core/shared/service/options.service';
 import { Badge } from '@components/01-atoms/badge/badge';
 import { AppButton } from '@components/01-atoms/button/button.directive';
 import { Dropdown } from '@components/01-atoms/dropdown/dropdown';
@@ -10,12 +9,12 @@ import { IconText } from '@components/01-atoms/icon-text/icon-text';
 import { Tag } from '@components/01-atoms/tag/tag';
 import { Dialog as AppDialog } from '@components/02-molecules/dialog/dialog';
 import { UpdateTaskPage } from '@pages/dashboard/children/task/children/update-task/page/update-task-page';
-import { toast } from 'vanilla-toast-js';
 
 import { getColor } from '@/app/core/shared/theme/color.registry';
 import { getDate } from '@/app/core/shared/utils/date';
 import type { TStatusTask } from '@/app/features/task';
-import { getPriority, getStatus, STATUS_OPTIONS, TaskController } from '@/app/features/task';
+import { getPriority, getStatus, STATUS_OPTIONS } from '@/app/features/task';
+import { TaskStore } from '@/app/presentation/shared/task.store';
 
 @Component({
   selector: 'app-item-list',
@@ -32,14 +31,13 @@ export class ItemList {}
 export class TaskPage {
   id = input.required<number>();
 
-  taskController = inject(TaskController);
-  optionsService = inject(OptionsService);
+  private taskStore = inject(TaskStore);
   router = inject(Router);
 
   protected readonly statusOptions = STATUS_OPTIONS;
 
   task = computed(() => {
-    const res = this.taskController.getTaskWithRelation(this.id());
+    const res = this.taskStore.getTaskWithRelation(this.id());
     return res.ok ? res.data : undefined;
   });
 
@@ -64,8 +62,7 @@ export class TaskPage {
   });
 
   async onUpdateStatus(status: TStatusTask) {
-    const $task = this.task();
-    this.optionsService.onUpdateStatus(status, $task);
+    await this.taskStore.updateStatus(status, this.task());
   }
 
   dialog = inject(Dialog);
@@ -101,36 +98,11 @@ export class TaskPage {
     });
   }
   async onFinished() {
-    const res = await this.taskController.updateTaskFinished(this.id(), true);
-    if (res.ok) {
-      toast('Tarea finalizada', {
-        type: 'success',
-        closeButton: true,
-        position: 'top-right',
-      });
-    } else {
-      toast(res.message, {
-        type: 'error',
-        position: 'top-right',
-      });
-    }
+    await this.taskStore.finishTask(this.id());
   }
   async onDelete() {
-    const res = await this.taskController.deleteTask(this.id());
-    if (res.ok) {
-      toast('Tarea eliminada', {
-        type: 'success',
-        closeButton: true,
-        position: 'top-right',
-      });
-      this.router.navigate(['dashboard'], {
-        queryParamsHandling: 'merge',
-      });
-    } else {
-      toast(res.message, {
-        type: 'error',
-        position: 'top-right',
-      });
+    if (await this.taskStore.deleteTask(this.id())) {
+      this.router.navigate(['dashboard'], { queryParamsHandling: 'merge' });
     }
   }
 }

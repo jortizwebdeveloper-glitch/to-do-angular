@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { TaskController } from '@app/features/task';
 import type { TaskZod } from '@components/02-molecules/form-task/form.type';
 import { FormTask } from '@components/02-molecules/form-task/form-task';
 import { Modal } from '@components/02-molecules/modal/modal';
-import { toast } from 'vanilla-toast-js';
+
+import { TaskStore } from '@/app/presentation/shared/task.store';
+
 @Component({
   selector: 'app-create-task',
   imports: [FormTask, Modal],
@@ -12,7 +13,7 @@ import { toast } from 'vanilla-toast-js';
 })
 export class CreateTaskPage {
   private router = inject(Router);
-  taskController = inject(TaskController);
+  private taskStore = inject(TaskStore);
 
   close() {
     this.router.navigate(['dashboard'], {
@@ -21,18 +22,8 @@ export class CreateTaskPage {
   }
 
   async onSubmit(values: TaskZod) {
-    const res = await this.taskController.createTask(values);
-    if (res.ok) {
-      toast('Tarea creada', {
-        type: 'success',
-        position: 'top-right',
-      });
+    if (await this.taskStore.createTask(values)) {
       this.close();
-    } else {
-      toast(res.message, {
-        type: 'error',
-        position: 'top-right',
-      });
     }
   }
 }

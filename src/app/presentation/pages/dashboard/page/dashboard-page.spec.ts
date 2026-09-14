@@ -1,9 +1,9 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
-import { OptionsService } from '@app/core/shared/service/options.service';
 import type { TaskViewModel } from '@app/features/task';
-import { TaskController } from '@app/features/task';
+
+import { TaskStore } from '@/app/presentation/shared/task.store';
 
 import { DashboardPage } from './dashboard-page';
 
@@ -39,19 +39,19 @@ function buildTask(overrides: Partial<TaskViewModel> = {}): TaskViewModel {
  *
  * Se prueba el computed **sin renderizar el template**: nunca se llama a `detectChanges()`, así
  * que los hijos (`Card`, `Tabs`, `InputSearch`) no se montan y el test queda sobre la lógica de
- * filtrado, no sobre el DOM. `TaskController` y `OptionsService` se stubean porque los reales
- * están respaldados por IndexedDB.
+ * filtrado, no sobre el DOM. Solo hace falta stubear `TaskStore`, el único seam entre la
+ * página y los datos.
  */
 describe('DashboardPage', () => {
   let fixture: ComponentFixture<DashboardPage>;
   let page: DashboardPage;
-  let taskController: { getTasks: ReturnType<typeof vi.fn> };
+  let taskStore: { getTasks: ReturnType<typeof vi.fn>; updateStatus: ReturnType<typeof vi.fn> };
 
   /** Títulos de las tareas que sobreviven al filtrado, en orden. */
   const titulos = () => page.tasks().map((task) => task.title);
 
   const setTasks = (tasks: TaskViewModel[]) =>
-    taskController.getTasks.mockReturnValue({
+    taskStore.getTasks.mockReturnValue({
       ok: true,
       data: new Map(tasks.map((task) => [task.id, task])),
     });
@@ -66,14 +66,10 @@ describe('DashboardPage', () => {
   }
 
   beforeEach(() => {
-    taskController = { getTasks: vi.fn() };
+    taskStore = { getTasks: vi.fn(), updateStatus: vi.fn() };
 
     TestBed.configureTestingModule({
-      providers: [
-        provideRouter([]),
-        { provide: TaskController, useValue: taskController },
-        { provide: OptionsService, useValue: { onUpdateStatus: vi.fn() } },
-      ],
+      providers: [provideRouter([]), { provide: TaskStore, useValue: taskStore }],
     });
 
     fixture = TestBed.createComponent(DashboardPage);
@@ -100,8 +96,8 @@ describe('DashboardPage', () => {
       expect(titulos()).toEqual([]);
     });
 
-    it('si el controller falla, devuelve una lista vacía en vez de explotar', () => {
-      taskController.getTasks.mockReturnValue({ ok: false, message: 'Dexie caída' });
+    it('si el store falla, devuelve una lista vacía en vez de explotar', () => {
+      taskStore.getTasks.mockReturnValue({ ok: false, message: 'Dexie caída' });
       setFilters();
 
       expect(titulos()).toEqual([]);
