@@ -17,23 +17,34 @@ export enum DATE_COLOR {
 }
 export type TDateTask = keyof typeof DATE_TASK;
 
-function resetTime(date: string | number) {
-  const $date = new Date(date);
-  $date.setHours(0, 0, 0, 0);
-  return $date;
+/**
+ * Parsea un día del calendario ("YYYY/MM/DD", también acepta "-") como medianoche **local**.
+ *
+ * No usar `new Date(string)`: el motor lo interpreta como medianoche UTC si el string trae
+ * guiones y como local si trae barras, así que la fecha se corría un día entero en cualquier
+ * zona con offset negativo.
+ */
+function parseDay(date: string) {
+  const [year, month, day] = date.split(/[/-]/).map(Number);
+  return new Date(year, month - 1, day);
+}
+
+/** Medianoche local de hoy, el punto de referencia contra el que se comparan las fechas. */
+function startOfToday() {
+  const now = new Date();
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
 }
 
 function diffInDays(date: string) {
-  const $date = resetTime(date);
-  const $now = resetTime(Date.now());
-  return Math.round(($date.getTime() - $now.getTime()) / MS_PER_DAY);
+  // Math.round absorbe los días de 23 y 25 horas de los cambios de horario de verano.
+  return Math.round((parseDay(date).getTime() - startOfToday().getTime()) / MS_PER_DAY);
 }
 
 export function filterByDate(date: string, finished: boolean) {
-  const $date = resetTime(date);
-  const $now = resetTime(Date.now());
+  if (finished) return 'finalizadas';
 
-  return finished ? 'finalizadas' : $date > $now ? 'proximas' : $date < $now ? 'vencidas' : 'hoy';
+  const diff = diffInDays(date);
+  return diff > 0 ? 'proximas' : diff < 0 ? 'vencidas' : 'hoy';
 }
 
 export function overDue(date: string) {
@@ -71,13 +82,23 @@ export function getDate(date: string, status?: TStatusTask) {
   };
 }
 
+/**
+ * Normaliza una fecha al formato con el que se persiste todo `dueDate`/`completeDate`:
+ * "YYYY/MM/DD", en el día del calendario **local del usuario**.
+ *
+ * Antes formateaba con `timeZone: 'America/Bogota'` fijo, mientras que las comparaciones
+ * usaban la medianoche local del navegador: fuera de Bogotá los dos relojes no coincidían y
+ * una tarea creada para hoy se guardaba como la de ayer, y se mostraba vencida.
+ */
 export function formatDate(date: string | number = Date.now()) {
-  return new Intl.DateTimeFormat('en-CA', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    timeZone: 'America/Bogota',
-  })
-    .format(new Date(date))
-    .replace(/-/g, '/');
+  const $date = typeof date === 'string' ? parseDay(date) : new Date(date);
+
+  if (Number.isNaN($date.getTime())) {
+    throw new RangeError(`formatDate: fecha inválida (${date})`);
+  }
+
+  const year = $date.getFullYear();
+  const month = String($date.getMonth() + 1).padStart(2, '0');
+  const day = String($date.getDate()).padStart(2, '0');
+  return `${year}/${month}/${day}`;
 }
